@@ -13,6 +13,6 @@ How To Publish a Trial Website
    $ git push
    ```
    in `TheDocu6_Playground`
-7. Wait for 1-5 minutes and refresh the following link: ``
+7. Wait for 1-5 minutes and refresh the following link: https://pmackenz.github.io/TheDocu6_Playground/
 
 You can test your setup locally before step 6. by opening `TheDocu6_Playground/docs/index.html`-file in your browser.

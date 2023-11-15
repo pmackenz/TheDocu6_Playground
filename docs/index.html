@@ -1,0 +1,23 @@
+<h1>How To Publish a Trial Website</h1>
+
+<ol>
+<li>Get write permission from pmackenz. If you don't know how to contact them, you are most likely not part of our team.  </li>
+<li>Clone this repository in a folder parallel to your source repository. Clone the
+<code>pmackenz/TheDocu6_Playground</code>, do not use a fork!  </li>
+<li>Build your website using make html or make TOOL html. This will generate the <code>./build/html</code> or
+<code>./build/TOOL/html</code> folder and files.  </li>
+<li>Copy the entire contents of your <code>./build/html</code> or <code>./build/TOOL/html</code> folder to
+<code>TheDocu6_Playground/docs/.</code>. If that folder contains any files, delete the old ones first such that only your new files are in that folder.  </li>
+<li>Add an empty file named TheDocu6_Playground/docs/.nojekyll (no extension, no contents).  </li>
+<li>Execute
+<div><code>
+$ git add . <br>
+$ git commit -m "your helpful comment" <br>
+$ git push
+<code></div>
+in TheDocu6_Playground
+</li>
+<li>Wait for 1-5 minutes and refresh the following link: `` </li>
+</ol>
+
+You can test your setup locally before step 6. by opening <em>TheDocu6_Playground/docs/index.html</em>-file in your browser.

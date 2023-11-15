@@ -1,0 +1,473 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>3.1.3.2. Global Sensitivity Analysis &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/js/lightbox-plus-jquery.min.js"></script>
+        <script src="../../../../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="3.1.3.3. Gaussian Process (GP) Surrogate Modeling" href="SimCenterUQSurrogate.html" />
+    <link rel="prev" title="3.1.3.1. Forward Propagation" href="SimCenterUQSampling.html" />
+<script src="https://cdn.jsdelivr.net/npm/vega@5.12.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@4.13.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.8.0"></script>
+<style media="screen">.vega-actions a {margin-right: 5px;}</style>
+<link href="../../../../_static/css/bootstrap.css" rel="stylesheet">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #F2F2F2" >
+          
+<a href="https://simcenter.designsafe-ci.org/" style="margin-bottom: 0px;">
+  <img src="../../../../_static/img/SimCenter-Only.png" class="logo" alt="Org-Logo" />
+</a>
+<hr style="margin: 0px;">
+
+  <a href="../../../../index.html">
+
+
+
+  
+  <img src="../../../../_static/quoFEM-Logo.png" class="logo" alt="Logo"/>
+
+</a>
+
+
+  
+  
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about/quoFEM/about.html">1. About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/desktop/ack.html">2. Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/license.html">3. Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/cite.html">4. How To Cite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases/quoCapabilities.html">5. Capabilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases/quoReleaseNotes.html">6. Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases/quoPlans.html">7. Release Plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/glossary.html">8. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/abbreviations.html">9. Abbreviations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Manual</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation/desktop/installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/quoFEM/quoFEMtutorial.html">2. Getting Started Tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="usage.html">3. User Interface</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="UQ.html">3.1. UQ: Uncertainty Quantification</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="UQ.html#uq-features-at-a-glance">3.1.1. UQ Features At-a-Glance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UQ.html#dakota-uq-engine">3.1.2. Dakota UQ Engine</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="UQ.html#simcenter-uq-engine">3.1.3. SimCenter UQ Engine</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="SimCenterUQSampling.html">3.1.3.1. Forward Propagation</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">3.1.3.2. Global Sensitivity Analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SimCenterUQSurrogate.html">3.1.3.3. Gaussian Process (GP) Surrogate Modeling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SimCenterUQPLoM.html">3.1.3.4. Probabilistic Learning on Manifolds (PLoM)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="UQ.html#ucsd-uq-engine">3.1.4. UCSD UQ Engine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UQ.html#custom-uq-engine">3.1.5. Custom UQ Engine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UQ.html#video-resources">3.1.6. Video Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="quoFEM/FEM.html">3.2. FEM: Finite Element Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RV.html">3.3. RV: Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quoFEM/QuantitiesOfInterest.html">3.4. QoI: Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quoFEM/resQUO.html">3.5. RES: Results</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/desktop/examples.html">4. Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/desktop/troubleshooting.html">5. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reqments/reqQUOFE.html">6. Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bugs.html">7. Bugs &amp; Feature Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dcv/quoFEM/quoFEM.html">8. Running in Your Browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quoFEM/usage_video.html">9. Video Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_inputs_documentation/User_Input_Documentation_Tables.html">10. User Inputs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Technical Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../technical_manual/desktop/technical_manual.html">1. Technical Manual</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/how_to_build/desktop/how_to_build.html">1. How to Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/architecture/desktop/architecture.html">2. Software Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/verification/desktop/verification.html">4. Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/coding_style/desktop/coding_style.html">5. Coding Style</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Quantified Uncertainty with Optimization for the FEM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="usage.html"><span class="section-number">3. </span>User Interface</a> &raquo;</li>
+        
+          <li><a href="UQ.html"><span class="section-number">3.1. </span>UQ: Uncertainty Quantification</a> &raquo;</li>
+        
+      <li><span class="section-number">3.1.3.2. </span>Global Sensitivity Analysis</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../../_sources/common/user_manual/usage/desktop/SimCenterUQSensitivity.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="global-sensitivity-analysis">
+<span id="lblsimsensitivity"></span><h1><span class="section-number">3.1.3.2. </span>Global Sensitivity Analysis<a class="headerlink" href="#global-sensitivity-analysis" title="Permalink to this heading">¶</a></h1>
+<p>Global sensitivity analysis is used to quantify the contribution of each input variable to the uncertainty in the quantities of interest (QoI). Using the global sensitivity indices, users can set preferences between random variables considering both inherent randomness and its propagation through the model. Global sensitivity analysis helps users to understand the overall impact of different sources of uncertainties and their intersections, as well as to accelerate UQ computations by focusing on dominant dimensions or screening out trivial input variables. This can also be useful in identifying the input variables for which extra experimentation/research may be useful in reducing the uncertainty in the initial specification.</p>
+<p><strong>Sobol indices</strong> are widely used variance-based global sensitivity measures which have two types: main effect and total effect sensitivity indices. The <strong>main effect index</strong> quantifies the fraction of variance in QoI that can be attributed to specific input random variable(s) but without considering the interaction effect with other input variables. The <strong>total effect index</strong>, on the other hand, additionally takes the interactions into account. <strong>Please read</strong> <a class="reference internal" href="../../../technical_manual/desktop/SimCenterUQTechnical.html#lbluqsimtechnical"><span class="std std-ref">HERE</span></a> <strong>for more details on the equations and implemented algorithms</strong>.</p>
+<div class="section" id="algorithm">
+<h2>Algorithm<a class="headerlink" href="#algorithm" title="Permalink to this heading">¶</a></h2>
+<p>In the SimCenterUQ engine, sensitivity indices are estimated by <strong>Gaussian mixture model-based probability distribution approximation</strong> method presented in Hu and Mahadevan (2019) <a class="reference internal" href="#hu19" id="id1"><span>[Hu19]</span></a>. To run this sensitivity analysis, the user has to specify the number of samples and a random seed. The method can handle correlated random variables as well.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>When a constant variable is defined, the sensitivity analysis algorithm will ignore the variable.</p></li>
+<li><p>If “NaN” is written in the FEM output script (<cite>results.out</cite>) instead of a number SimCenterUQ engine will exclude these samples from the sensitivity analysis. This may be useful when one wants to get ‘conditional’ sensitivity indices, i.e. conditional to non-NaN cases.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="sample-generation">
+<h2>Sample Generation<a class="headerlink" href="#sample-generation" title="Permalink to this heading">¶</a></h2>
+<p>Performing sensitivity analysis requires Monte Carlo Samples. This can be either generated by quoFEM or imported from separate data files.</p>
+<blockquote>
+<div><ul>
+<li><p><strong>Monte Carlo</strong>: quoFEM app will randomly generate the samples of RVs, evaluate the model to get the samples of QoIs, and perform sensitivity analysis</p>
+<blockquote>
+<div><div class="align-center figure" id="id4">
+<span id="figsimsensitivity"></span><a class="reference internal image-reference" href="../../../../_images/Sensitivity1.png"><img alt="../../../../_images/Sensitivity1.png" src="../../../../_images/Sensitivity1.png" style="width: 1200px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.1.3.2.1 </span><span class="caption-text">Sensitivity analysis input panel (MCS).</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<ul class="simple">
+<li><p>Two input parameters need to be specified: (1) the number of samples of the output to be produced, which is equal to the number of times the model is evaluated, and (2) the seed for the pseudo-random number generator.</p></li>
+<li><p><strong>Resample RVs from correlated dataset</strong> is explained <a class="reference internal" href="SimCenterUQSampling.html#lblsimforward"><span class="std std-ref">HERE</span></a></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Import Data Files</strong>: quoFEM app will directly import sample pairs of RVs-QoIs and perform sensitivity analysis.</p>
+<blockquote>
+<div><div class="align-center figure" id="id5">
+<span id="figsimsensitivity1-data"></span><a class="reference internal image-reference" href="../../../../_images/Sensitivity1_data.png"><img alt="../../../../_images/Sensitivity1_data.png" src="../../../../_images/Sensitivity1_data.png" style="width: 1200px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.1.3.2.2 </span><span class="caption-text">Sensitivity analysis input panel (Import Dataset).</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<ul>
+<li><p>The directory to input and output dataset needs to be provided. The dataset can either be comma/tab-separated file or binary file.</p></li>
+<li><p><strong>Comma- or tab-separated file (.csv or .txt)</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Each text file is a numeric table with columns separated by a tab, space, or comma. Multiple headers can be presented following the symbol %.</p></li>
+<li><p>The number of rows corresponds to the number of training data samples.</p></li>
+<li><p>Train Points (Input): The number of columns should match the number of RVs presented in the <strong>RV tab</strong> and also match the required inputs of the simulation model provided in the <strong>FEM tab</strong>. <strong>The order of the columns should match those of the random variables presented in the RV tab</strong></p></li>
+<li><p>System Responses (Output): The number of columns and the order of columns should match the QoI quantities presented in <strong>QoI tab</strong>.</p></li>
+<li><p>Both files need to be provided, and the number of columns for the two files should be the same.</p></li>
+<li><p>See <a class="reference internal" href="SimCenterUQSurrogate.html#figsim4"><span class="std std-numref">Fig. 3.1.3.3.5</span></a> for example input data sheets.</p></li>
+</ul>
+<div class="align-center figure" id="id6">
+<span id="figsim4"></span><a class="reference internal image-reference" href="../../../../_images/Surrogate4_SimUQ.jpg"><img alt="../../../../_images/Surrogate4_SimUQ.jpg" src="../../../../_images/Surrogate4_SimUQ.jpg" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.1.3.2.3 </span><span class="caption-text">Example of data input files</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>Binary (.bin)</strong>: quoFEM app accepts binary <strong>floating-point</strong> numeric matrix in a <strong>row major order</strong>. Below is an example Matlab script that can be used to create proper binary input files from [number of samples] x [input or output dimension] matlab matrix</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-number">Listing 3.1.3.2.1 </span><span class="caption-text">Creating binary dataset (row-major, float point) using Matlab</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% RV and QoI are matrices with size of (nsamp x ndim) </span>
+<span class="c">% nsamp: number of samples</span>
+<span class="c">% ndim : number of RVs or QoIs</span>
+
+<span class="n">fileID</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">fopen</span><span class="p">(</span><span class="s">&#39;RV.bin&#39;</span><span class="p">,</span><span class="s">&#39;w&#39;</span><span class="p">);</span>
+<span class="nb">fwrite</span><span class="p">(</span><span class="n">fileID</span><span class="p">,</span><span class="n">RV</span><span class="o">&#39;</span><span class="p">,</span><span class="s">&#39;float&#39;</span><span class="p">);</span><span class="w"> </span><span class="c">% RV matrix is transposed because Matlab uses column-major binary</span>
+<span class="nb">fclose</span><span class="p">(</span><span class="n">fileID</span><span class="p">);</span>
+
+<span class="n">fileID</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">fopen</span><span class="p">(</span><span class="s">&#39;QoI.bin&#39;</span><span class="p">,</span><span class="s">&#39;w&#39;</span><span class="p">);</span>
+<span class="nb">fwrite</span><span class="p">(</span><span class="n">fileID</span><span class="p">,</span><span class="n">QoI</span><span class="o">&#39;</span><span class="p">,</span><span class="s">&#39;float&#39;</span><span class="p">);</span><span class="w"> </span><span class="c">% QoI matrix is transposed because Matlab uses column-major binary</span>
+<span class="nb">fclose</span><span class="p">(</span><span class="n">fileID</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="group-wise-sobol-indices">
+<h2>Group-wise Sobol Indices<a class="headerlink" href="#group-wise-sobol-indices" title="Permalink to this heading">¶</a></h2>
+<p>By default, the analysis results are first-order sensitivity indices of each random variable. In order to also account for the higher-order interaction effect, the user may activate the option to specify advanced outputs at the bottom of the <strong>QoI</strong> tab. Using this option, the user can manually provide groups of relevant random variables to get so-called group-wise Sobol indices.</p>
+<div class="align-center figure" id="id8">
+<span id="figsimsensitivity2"></span><a class="reference internal image-reference" href="../../../../_images/Sensitivity2.png"><img alt="../../../../_images/Sensitivity2.png" src="../../../../_images/Sensitivity2.png" style="width: 1200px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.1.3.2.4 </span><span class="caption-text">Group-wise Sobol indicies</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+<p>The group-wise Sobol indices are useful when the user wants to obtain a sensitivity measure corresponding to a categorical group of input variables, for example, to compare the relative sensitivity between structural parameters and excitation parameters. In particular, when there are non-causal correlations between some random variables or when the user expects interactive contributions of the random variables that are in nature inseparable, one can introduce the group index. The group-wise Sobol index for joint variables <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(x_j\)</span> is defined as</p>
+<div class="math notranslate nohighlight" id="equation-groupsij">
+<span class="eqno">(3.1.3.2.1)<a class="headerlink" href="#equation-groupsij" title="Permalink to this equation">¶</a></span>\[S_{ij}^G=\frac{\text{Var}_{x_i,x_j}[\text{E}_{\boldsymbol{x}\sim ij}[y|x_i,x_j]]}{\text{Var}[y]},  \qquad  i,j=1, \cdots ,d\]</div>
+<p>In order to associate more input variables, the set {<span class="math notranslate nohighlight">\(x_i,x_j\)</span>} can be simply replaced by a larger set, e.g. {<span class="math notranslate nohighlight">\(x_i,x_j,x_k\)</span>}. Results of Eq. <a class="reference internal" href="#equation-groupsij">(3.1.3.2.1)</a> can be post-processed to obtain higher-order Sobol indices presented in Eq. <a class="reference internal" href="../../../technical_manual/desktop/SimCenterUQTechnical.html#equation-sij">(1.2.3)</a>, i.e. it is obtained by subtracting the lower-order interaction terms from the group index.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>When multiple outputs are considered, global sensitivity analysis is performed separately for each QoI, but the base Monte Carlo samples are can be re-used for different QoIs.</p></li>
+<li><p>When random variables defined in <strong>RV</strong> tab are not exhaustive, i.e. if the model contains <em>unexplained</em> randomness, the total Sobol index value may be underestimated by omitting the interaction with the missing variables.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="principal-component-analysis-pca-with-qoi">
+<h2>Principal Component Analysis (PCA) with QoI<a class="headerlink" href="#principal-component-analysis-pca-with-qoi" title="Permalink to this heading">¶</a></h2>
+<p>When the number of the quantity of interests (QoI) exceeds 15, quoFEM, by default, performs <strong>principal component analysis and probability model-based global sensitivity analysis (PCA-PSA)</strong>. The user can otherwise manually specify the option by selecting either <code class="docutils literal notranslate"><span class="pre">Yes</span></code> or <code class="docutils literal notranslate"><span class="pre">No</span></code>. If <code class="docutils literal notranslate"><span class="pre">Yes</span></code> is selected, the user can also provide the <code class="docutils literal notranslate"><span class="pre">potion</span> <span class="pre">of</span> <span class="pre">variance</span> <span class="pre">explained</span></code> in the range of 0 and 1.0. As this value gets close to 1, the accuracy of the approximation improves while the computational demand also increases. Note that when 1.0 is selected, the dimension will not be reduced. The default value is 0.99. We do not recommend using a value lower than 0.99 unless the user thoroughly understands its consequences.</p>
+<div class="align-center figure" id="id9">
+<span id="figsimsensitivity4"></span><a class="reference internal image-reference" href="../../../../_images/Sensitivity3.png"><img alt="../../../../_images/Sensitivity3.png" src="../../../../_images/Sensitivity3.png" style="width: 1200px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.1.3.2.5 </span><span class="caption-text">Principal Component Analysis</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="results-display">
+<h2>Results Display<a class="headerlink" href="#results-display" title="Permalink to this heading">¶</a></h2>
+<p>The main and total effect indices are displayed for each random variable (or group of random variables if the user specifies the group in the UQ tab) and quantity of interest (QoI) pair.</p>
+<div class="align-center figure" id="id10">
+<span id="id2"></span><a class="reference internal image-reference" href="../../../../_images/Sensitivity4.png"><img alt="../../../../_images/Sensitivity4.png" src="../../../../_images/Sensitivity4.png" style="width: 1200px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.1.3.2.6 </span><span class="caption-text">Results from <a class="reference internal" href="../../examples/desktop/qfem-0009/README.html#qfem-0009"><span class="std std-ref">an example</span></a></span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</div>
+<p>Only when the quantities of interest (QoI) are defined as a <strong>field variable</strong>, i.e. by setting a length greater than 1 in the EDP tab, the aggregated sensitivity indices will also be displayed.</p>
+<div class="align-center figure" id="id11">
+<span id="id3"></span><a class="reference internal image-reference" href="../../../../_images/Sensitivity5.png"><img alt="../../../../_images/Sensitivity5.png" src="../../../../_images/Sensitivity5.png" style="width: 1200px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.1.3.2.7 </span><span class="caption-text">Aggregated results from <a class="reference internal" href="../../examples/desktop/qfem-0023/README.html#qfem-0023"><span class="std std-ref">an example</span></a></span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+</div>
+<dl class="citation">
+<dt class="label" id="hu19"><span class="brackets"><a class="fn-backref" href="#id1">Hu19</a></span></dt>
+<dd><p>Hu, Z. and Mahadevan, S. (2019). Probability models for data-driven global sensitivity analysis. <em>Reliability Engineering &amp; System Safety</em>, 187, 40-57.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2018-2023, The Regents of the University of California.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-158130480-4', 'auto');
+    
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+         .wy-nav-content { max-width: none; }
+  </style>
+
+<script>
+    /*
+    let selectedFilters = [];
+    const images  = document.getElementsByClassName("gallery-item");
+    const filters = [...document.querySelectorAll('.filter select')];
+    const toggles = [...document.querySelectorAll('.filter input')];
+
+    var show = function (elem) {
+        elem.style.display = 'block';
+    };
+    var hide = function (elem) {
+        elem.style.display = 'none';
+    };
+    var toggleFilter =  function(el,elid) {
+        const filter = document.getElementById(elid);
+        filter.disabled = !el.checked;
+       
+        if ("createEvent" in document) {
+            var evt = document.createEvent("HTMLEvents");
+            evt.initEvent("change", false, true);
+            filter.dispatchEvent(evt);
+        }
+        else
+            filter.fireEvent("change");
+    };
+    
+    for (const filter of filters) {
+        filter.addEventListener('change', function(event) {
+            selectedFilters = filters.map(filter => filter.disabled ? '' : filter.value).filter(Boolean);
+            console.log(selectedFilters);
+            for (const image of images) {
+                if (selectedFilters.every(filter => image.classList.contains(filter))) {
+                    show(image);
+                }
+                else {hide(image)};
+            };
+        })
+    };
+    */
+</script>
+
+
+</body>
+</html>

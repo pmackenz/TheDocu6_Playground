@@ -1,0 +1,532 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>4.6. Steel Frame: Bayesian Calibration using TMCMC &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/js/lightbox-plus-jquery.min.js"></script>
+        <script src="../../../../../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="4.7. Surrogate Modeling for One Story Building Earthquake Response" href="../qfem-0015/README.html" />
+    <link rel="prev" title="4.5. Two-Dimensional Truss: Global Sensitivity Analysis using SimCenterUQ Engine" href="../qfem-0009/README.html" />
+<script src="https://cdn.jsdelivr.net/npm/vega@5.12.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@4.13.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.8.0"></script>
+<style media="screen">.vega-actions a {margin-right: 5px;}</style>
+<link href="../../../../../_static/css/bootstrap.css" rel="stylesheet">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #F2F2F2" >
+          
+<a href="https://simcenter.designsafe-ci.org/" style="margin-bottom: 0px;">
+  <img src="../../../../../_static/img/SimCenter-Only.png" class="logo" alt="Org-Logo" />
+</a>
+<hr style="margin: 0px;">
+
+  <a href="../../../../../index.html">
+
+
+
+  
+  <img src="../../../../../_static/quoFEM-Logo.png" class="logo" alt="Logo"/>
+
+</a>
+
+
+  
+  
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about/quoFEM/about.html">1. About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../front-matter/desktop/ack.html">2. Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../front-matter/license.html">3. Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../front-matter/cite.html">4. How To Cite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../releases/quoCapabilities.html">5. Capabilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../releases/quoReleaseNotes.html">6. Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../releases/quoPlans.html">7. Release Plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../front-matter/glossary.html">8. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../front-matter/abbreviations.html">9. Abbreviations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Manual</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../installation/desktop/installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about/quoFEM/quoFEMtutorial.html">2. Getting Started Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/desktop/usage.html">3. User Interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">4. Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0001/README.html">4.1. Two-Dimensional Truss: Sampling, Reliability and Sensitivity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0002/README.html">4.2. Forward Propagation - OpenSeesPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0005/README.html">4.3. Basic modeling with Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0007/README.html">4.4. Steel Frame: Conventional Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0009/README.html">4.5. Two-Dimensional Truss: Global Sensitivity Analysis using SimCenterUQ Engine</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4.6. Steel Frame: Bayesian Calibration using TMCMC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#outline">4.6.1. Outline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-description">4.6.2. Problem description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#structural-system">4.6.2.1. Structural system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#finite-element-model">4.6.2.2. Finite element model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#natural-vibration-frequencies-and-mode-shapes">4.6.2.3. Natural vibration frequencies and mode shapes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters-to-be-estimated">4.6.2.4. Parameters to be estimated</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#synthetic-data-generation">4.6.2.5. Synthetic data generation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameter-estimation-setup">4.6.2.6. Parameter estimation setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#files-required">4.6.2.7. Files required</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#uq-workflow">4.6.3. UQ workflow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0015/README.html">4.7. Surrogate Modeling for One Story Building Earthquake Response</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0016/README.html">4.8. Surrogate Modeling to Predict Mean and Variance of Earthquake Response</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0017/README.html">4.9. Custom UQ for UQpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0019/README.html">4.10. Bayesian Calibration of Material Model Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0022/README.html">4.11. Two-Dimensional Truss: PLoM Modeling and Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0023/README.html">4.12. Global Sensitivity Analysis for Field QoI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0025/README.html">4.13. Heteroscedastic Gaussian Process modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0027/README.html">4.14. Forward propagation of uncertainty with multiple simulation models</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting/desktop/troubleshooting.html">5. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../reqments/reqQUOFE.html">6. Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bugs.html">7. Bugs &amp; Feature Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dcv/quoFEM/quoFEM.html">8. Running in Your Browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/desktop/quoFEM/usage_video.html">9. Video Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_inputs_documentation/User_Input_Documentation_Tables.html">10. User Inputs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Technical Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../technical_manual/desktop/technical_manual.html">1. Technical Manual</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/how_to_build/desktop/how_to_build.html">1. How to Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/architecture/desktop/architecture.html">2. Software Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/verification/desktop/verification.html">4. Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/coding_style/desktop/coding_style.html">5. Coding Style</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">Quantified Uncertainty with Optimization for the FEM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../examples.html"><span class="section-number">4. </span>Examples</a> &raquo;</li>
+        
+      <li><span class="section-number">4.6. </span>Steel Frame: Bayesian Calibration using TMCMC</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../../../_sources/common/user_manual/examples/desktop/qfem-0014/README.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="steel-frame-bayesian-calibration-using-tmcmc">
+<span id="qfem-0014"></span><h1><span class="section-number">4.6. </span>Steel Frame: Bayesian Calibration using TMCMC<a class="headerlink" href="#steel-frame-bayesian-calibration-using-tmcmc" title="Permalink to this heading">¶</a></h1>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 41%" />
+<col style="width: 59%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Problem files</p></td>
+<td><p><a class="reference external" href="https://github.com/NHERI-SimCenter/quoFEM/tree/master/Examples//qfem-0014//">qfem-0014/</a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="outline">
+<h2><span class="section-number">4.6.1. </span>Outline<a class="headerlink" href="#outline" title="Permalink to this heading">¶</a></h2>
+<p>In this example, Bayesian estimation is used to estimate the lateral story
+stiffnesses of the two stories of a simple steel frame, given data about
+its mode shapes and frequencies. The transitional Markov chain Monte Carlo
+algorithm is used to obtain samples from the posterior probability distribution
+of the lateral story stiffnesses.</p>
+</div>
+<div class="section" id="problem-description">
+<h2><span class="section-number">4.6.2. </span>Problem description<a class="headerlink" href="#problem-description" title="Permalink to this heading">¶</a></h2>
+<p>This example is provided by Professor Joel Conte and his doctoral students Maitreya Kurumbhati and Mukesh Ramancha from UC San Diego.</p>
+<div class="section" id="structural-system">
+<h3><span class="section-number">4.6.2.1. </span>Structural system<a class="headerlink" href="#structural-system" title="Permalink to this heading">¶</a></h3>
+<p>Consider the two-story building structure shown in <a class="reference internal" href="#figsteelstructuralsystembayes"><span class="std std-numref">Fig. 4.6.2.1.1</span></a>. Each floor slab is made of a composite metal deck and is supported on the steel columns. These four columns are fixed at the base. The story height is <span class="math notranslate nohighlight">\(h = 10'\)</span>, length of each slab is <span class="math notranslate nohighlight">\(33'4''\)</span> and <span class="math notranslate nohighlight">\(30'\)</span> along the X and Y direction, respectively. <span class="math notranslate nohighlight">\(m_1 = 0.52 \ \ kips-s^2/in\)</span> and <span class="math notranslate nohighlight">\(m_2 = 0.26 \ \ kips-s^2/in\)</span> are the total mass of floor 1 and floor 2, respectively. For the steel columns, Young’s modulus is <span class="math notranslate nohighlight">\(E_s^{col} = 29000 \ \ ksi\)</span> and the moment of inertia <span class="math notranslate nohighlight">\(I_{yy}^{col} = 1190 \ \ in^4\)</span>.</p>
+<div class="align-center figure" id="id1">
+<span id="figsteelstructuralsystembayes"></span><a class="reference internal image-reference" href="../../../../../_images/qfem-0014-SteelStructuralSystem.png"><img alt="../../../../../_images/qfem-0014-SteelStructuralSystem.png" src="../../../../../_images/qfem-0014-SteelStructuralSystem.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 4.6.2.1.1 </span><span class="caption-text">Steel structural system being studied in this example.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="finite-element-model">
+<h3><span class="section-number">4.6.2.2. </span>Finite element model<a class="headerlink" href="#finite-element-model" title="Permalink to this heading">¶</a></h3>
+<p>In this example, only the response of the system along the X direction is considered. For modeling purposes, the floor diaphragms are assumed rigid both in plane and in flexure, and the columns are assumed axially rigid. The structure is modeled as a two-story 2D shear building model as shown in <a class="reference internal" href="#figsteelframemodelbayes"><span class="std std-numref">Fig. 4.6.2.2.1</span></a>. The finite element (FE) software framework <strong>OpenSees</strong> is utilized for modeling and analysis of the considered structural system. The developed FE model consists of 6 nodes and 6 elastic beam-column elements. To simulate the flexural rigidity of the floors, the moment of inertia <span class="math notranslate nohighlight">\(I_{yy}\)</span> of the horizontal elements is set to a very large number. The horizontal degrees of freedom of node 3 and node 4 are constrained to be equal throughout the analysis to mimic the axial rigidity of floor 1. Similar modeling is performed for floor 2. The vertical displacements of nodes 3, 4, 5, and 6 are constrained to be zero to model the axial rigidity of the columns (see roller supports in <a class="reference internal" href="#figsteelframemodelbayes"><span class="std std-numref">Fig. 4.6.2.2.1</span></a>). After making these modeling assumptions, the only active degrees of freedom of the FE model are the horizontal displacements (translations) of floors 1 and 2, <span class="math notranslate nohighlight">\(u_1\)</span> and <span class="math notranslate nohighlight">\(u_2\)</span>, respectively, as shown in <a class="reference internal" href="#figsteelframemodelbayes"><span class="std std-numref">Fig. 4.6.2.2.1</span></a>.</p>
+<p>A translational mass <span class="math notranslate nohighlight">\(m_1/2\)</span> and <span class="math notranslate nohighlight">\(m_2/2\)</span> is lumped at the nodes of floor 1 and 2, respectively, along the X direction. The lateral story stiffnesses <span class="math notranslate nohighlight">\(k_1\)</span> and <span class="math notranslate nohighlight">\(k_2\)</span> of story 1 and 2, respectively, are equal to <span class="math notranslate nohighlight">\(48 E_s^{col} I_{yy}^{col}/{h^3}\)</span>. Hence, <strong>the story stiffnesses</strong>
+<span class="math notranslate nohighlight">\(k_1\)</span> and <span class="math notranslate nohighlight">\(k_2\)</span> <strong>are both equal to 958.61 kips/in</strong>.</p>
+<div class="align-center figure" id="id2">
+<span id="figsteelframemodelbayes"></span><a class="reference internal image-reference" href="../../../../../_images/qfem-0014.png"><img alt="../../../../../_images/qfem-0014.png" src="../../../../../_images/qfem-0014.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 4.6.2.2.1 </span><span class="caption-text">Model of the structural system used in finite element analysis.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="natural-vibration-frequencies-and-mode-shapes">
+<h3><span class="section-number">4.6.2.3. </span>Natural vibration frequencies and mode shapes<a class="headerlink" href="#natural-vibration-frequencies-and-mode-shapes" title="Permalink to this heading">¶</a></h3>
+<p>Since the shear building model shown in <a class="reference internal" href="#figsteelframemodelbayes"><span class="std std-numref">Fig. 4.6.2.2.1</span></a> has only two degrees of freedom, it has two natural modes of vibration. Let <span class="math notranslate nohighlight">\(\lambda_i\)</span> and <span class="math notranslate nohighlight">\(\phi_i\)</span> be the <span class="math notranslate nohighlight">\(i^{th}\)</span> eigenvalue and its corresponding eigenvector, respectively. The two eigenvalues and eigenvectors are obtained by solving the generalized eigenvalue problem of the considered system in OpenSees. The following two eigenvalues are obtained:</p>
+<div class="math notranslate nohighlight" id="equation-eqneigenvaluesbayes">
+<span class="eqno">(4.6.2.3.1)<a class="headerlink" href="#equation-eqneigenvaluesbayes" title="Permalink to this equation">¶</a></span>\[\begin{array}{l}
+        \lambda_1 = 1084.06 (rad/s)^2, \quad \lambda_2 = 6318.34 (rad/s)^2
+\end{array}\]</div>
+<p>The corresponding eigenvectors (see degrees of freedom u1 and u2 in <a class="reference internal" href="#figsteelframemodelbayes"><span class="std std-numref">Fig. 4.6.2.2.1</span></a>) are given by:</p>
+<div class="math notranslate nohighlight" id="equation-eqneigenvectorsbayes">
+<span class="eqno">(4.6.2.3.2)<a class="headerlink" href="#equation-eqneigenvectorsbayes" title="Permalink to this equation">¶</a></span>\[\begin{split}\phi_1 = \begin{pmatrix}\phi_{11} \\ \phi_{12}\end{pmatrix} = \begin{pmatrix}1.00 \\ 1.41\end{pmatrix} in, \qquad \phi_2 = \begin{pmatrix}\phi_{21} \\ \phi_{22}\end{pmatrix} = \begin{pmatrix}1.00 \\ -1.41\end{pmatrix} in\end{split}\]</div>
+<p>The eigenvectors in <a class="reference internal" href="#equation-eqneigenvectorsbayes">(4.6.2.3.2)</a> are normalized such that the first component is 1.0. The two vibration mode shapes are shown in <a class="reference internal" href="#fignaturalmodeshapesbayes"><span class="std std-numref">Fig. 4.6.2.3.1</span></a>.</p>
+<div class="align-center figure" id="id3">
+<span id="fignaturalmodeshapesbayes"></span><a class="reference internal image-reference" href="../../../../../_images/qfem-0014-NaturalModeShapes.png"><img alt="../../../../../_images/qfem-0014-NaturalModeShapes.png" src="../../../../../_images/qfem-0014-NaturalModeShapes.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 4.6.2.3.1 </span><span class="caption-text">Natural vibration mode shapes: (a) Mode 1 (b) Mode 2.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="parameters-to-be-estimated">
+<h3><span class="section-number">4.6.2.4. </span>Parameters to be estimated<a class="headerlink" href="#parameters-to-be-estimated" title="Permalink to this heading">¶</a></h3>
+<p>The FE model of a real structural system often consists of parameters that are unknown to some degree. For example, the parameters related to the mass or stiffness or damping of the system might be unknown. The goal of parameter estimation is to estimate such unknown parameters using some measurement data. The measurement data is obtained by using sensors deployed on the real system. To demonstrate the parameter estimation concept/framework on the considered two-story building system, the first and second story story stiffnesses, <span class="math notranslate nohighlight">\(k_{1}\)</span> and <span class="math notranslate nohighlight">\(k_{2}\)</span>, are assumed to be unknown while the mass parameters are assumed to be known. In this illustration example, the unknown parameter vector <span class="math notranslate nohighlight">\(\mathbf{\theta}=(k_{1}, k_{2})^T\)</span> is estimated using the first eigenvalue and the first eigenvector data.</p>
+</div>
+<div class="section" id="synthetic-data-generation">
+<h3><span class="section-number">4.6.2.5. </span>Synthetic data generation<a class="headerlink" href="#synthetic-data-generation" title="Permalink to this heading">¶</a></h3>
+<p>In a real-world application, data on the first eigenvalue and the first eigenvector would consist of system identification results obtained from sensor measurement data. Note that the considered two-story building structure (see <a class="reference internal" href="#figsteelstructuralsystembayes"><span class="std std-numref">Fig. 4.6.2.1.1</span></a>) is used here as a conceptual/pedagogical example and does not exist in the real world. Therefore, sensor measurement data cannot be collected from the system. As a substitute, measurement data (in the form of estimated first eigenvalue and first eigenvector) are artificially simulated for the purpose of this example, i.e., system identification results for <span class="math notranslate nohighlight">\(\lambda_i\)</span> and <span class="math notranslate nohighlight">\(\phi_i\)</span> from multiple ambient vibration datasets are simulated. To simulate these system identification results (i.e., measurement data), an eigenvalue analysis of the system is performed assuming the following true principal moment of inertia of the columns:</p>
+<div class="math notranslate nohighlight" id="equation-common-user-manual-examples-desktop-qfem-0014-readme-0">
+<span class="eqno">(4.6.2.5.1)<a class="headerlink" href="#equation-common-user-manual-examples-desktop-qfem-0014-readme-0" title="Permalink to this equation">¶</a></span>\[\mathbf{\theta}^{true} = \left(k_{1}^{true}, k_{2}^{true}\right)^T; \quad k_{1}^{true} = k_{2}^{true} = 958.61 \ \ kips/in.\]</div>
+<p>The corresponding first eigenvalue and first eigenvector are:</p>
+<div class="math notranslate nohighlight" id="equation-common-user-manual-examples-desktop-qfem-0014-readme-1">
+<span class="eqno">(4.6.2.5.2)<a class="headerlink" href="#equation-common-user-manual-examples-desktop-qfem-0014-readme-1" title="Permalink to this equation">¶</a></span>\[\mathbf{y}^{true} = \left(\lambda_1^{true} = 1084.06 (rad/s)^2, \phi_{12}^{true} = 1.41 in\right)^T\]</div>
+<p>To simulate system identification results (measurement data), random estimation errors are added to <span class="math notranslate nohighlight">\(\lambda_1^{true}\)</span> and <span class="math notranslate nohighlight">\(\phi_{12}^{true}\)</span>. The random estimation errors for <span class="math notranslate nohighlight">\(\lambda_1^{true}\)</span> and <span class="math notranslate nohighlight">\(\phi_{12}^{true}\)</span> are assumed to be statistically independent, zero-mean Gaussian with 5% coefficient of variation (relative to <span class="math notranslate nohighlight">\(\lambda_1^{true}\)</span> and <span class="math notranslate nohighlight">\(\phi_{12}^{true}\)</span>). Thus, the standard deviation of the system identification errors for <span class="math notranslate nohighlight">\(\lambda_1^{true}\)</span> and <span class="math notranslate nohighlight">\(\phi_{12}^{true}\)</span> are</p>
+<div class="math notranslate nohighlight" id="equation-common-user-manual-examples-desktop-qfem-0014-readme-2">
+<span class="eqno">(4.6.2.5.3)<a class="headerlink" href="#equation-common-user-manual-examples-desktop-qfem-0014-readme-2" title="Permalink to this equation">¶</a></span>\[\sigma_{\lambda_1}^{true} = 0.05*\lambda_1^{true} = 54.203; \quad \sigma_{\phi_{12}}^{true} = 0.05*\phi_{12}^{true} = 0.0705\]</div>
+<p>Now five independent sets of system identification results (measurement data sets) are simulated as:</p>
+<div class="math notranslate nohighlight" id="equation-eqndatabayes">
+<span class="eqno">(4.6.2.5.4)<a class="headerlink" href="#equation-eqndatabayes" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{array}{l}
+\lambda_{1}^{(1)}=1025.21, \quad \lambda_{1}^{(2)}=1138.11, \quad \lambda_{1}^{(3)}=1099.39, \quad \lambda_{1}^{(4)}=1002.41, \quad \lambda_{1}^{(5)}=1052.69 \\
+\phi_{12}^{(1)}=1.53, \quad \phi_{12}^{(2)}=1.24, \quad \phi_{12}^{(3)}=1.38, \quad \phi_{12}^{(4)}=1.50, \quad \phi_{12}^{(5)}=1.35
+\end{array}\end{split}\]</div>
+</div>
+<div class="section" id="parameter-estimation-setup">
+<h3><span class="section-number">4.6.2.6. </span>Parameter estimation setup<a class="headerlink" href="#parameter-estimation-setup" title="Permalink to this heading">¶</a></h3>
+<p>In this example, it is assumed that the story stiffnesses for the first and second story (<span class="math notranslate nohighlight">\(k_{1}\)</span> and <span class="math notranslate nohighlight">\(k_{2}\)</span> respectively) are unknown. The goal is to use the simulated data of eigenvalue and eigenvector measurements to obtain the posterior probability distribution of the story stiffnesses by Bayesian calibration. We will employ the Transitional Markov Chain Monte Carlo (TMCMC) algorithm, to sample from the posterior joint probability distribution of <span class="math notranslate nohighlight">\(k_{1}\)</span> and <span class="math notranslate nohighlight">\(k_{2}\)</span>.</p>
+<p>We define the following prior probability distributions for the unknown quantities of interest:</p>
+<ol class="arabic simple">
+<li><p>First story stiffness, <code class="docutils literal notranslate"><span class="pre">k1</span></code>: <strong>Uniform</strong>
+distribution with a lower bound <span class="math notranslate nohighlight">\((L_B)\)</span> of <span class="math notranslate nohighlight">\(766.89 \ \mathrm{kips/in}\)</span>, and an upper bound <span class="math notranslate nohighlight">\((U_B)\)</span>
+of <span class="math notranslate nohighlight">\(2108.94 \ \mathrm{kips/in}\)</span>,</p></li>
+<li><p>Second story stiffness, <code class="docutils literal notranslate"><span class="pre">k2</span></code>: <strong>Uniform</strong>
+distribution with a lower bound <span class="math notranslate nohighlight">\((L_B)\)</span> of <span class="math notranslate nohighlight">\(383.44 \ \mathrm{kips/in}\)</span>, and an upper bound <span class="math notranslate nohighlight">\((U_B)\)</span>
+of <span class="math notranslate nohighlight">\(1150.33 \ \mathrm{kips/in}\)</span>.</p></li>
+</ol>
+<p>A Gaussian (a.k.a. Normal) likelihood model is employed by default in quoFEM. This is done by assuming that the errors (i.e. the differences between the finite element prediction of the modal properties and the simulated measurement data) follow a zero-mean Gaussian distribution. The components of the error vector are assumed to be statistically independent. The errors in the prediction of a particular response quantity are assumed to be identically distributed across experiments. Under these assumptions, the standard deviations of the error for each response quantity are the only unknown parameters of the Gaussian distribution employed in the likelihood model, and their values are also estimated from the data. Therefore, in this problem, there are two additional parameters <span class="math notranslate nohighlight">\(\sigma_{\lambda_{1}}\)</span> and <span class="math notranslate nohighlight">\(\sigma_{\phi_{12}}\)</span>, which are also estimated. The prior probability distributions for these additional parameters are automatically set by quoFEM.</p>
+</div>
+<div class="section" id="files-required">
+<h3><span class="section-number">4.6.2.7. </span>Files required<a class="headerlink" href="#files-required" title="Permalink to this heading">¶</a></h3>
+<p>The exercise requires two script files. The user should download these files and place them in a <strong>new</strong> folder.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not place the files in your root, downloads, or desktop folder as when the application runs it will copy the contents on the directories and subdirectories containing these files multiple times. If you are like us, your root, Downloads or Documents folders contains a lot of files.</p>
+</div>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://github.com/NHERI-SimCenter/quoFEM/tree/master/Examples//qfem-0014/src/model.tcl">model.tcl</a> - This is an OpenSees script written in tcl which builds the finite element model and conducts the analysis. This script creates a file called <code class="docutils literal notranslate"><span class="pre">results.out</span></code> when it runs. This file contains the first eigenvalue and the second component of the first eigenvector obtained from finite element analysis of the structure.</p></li>
+<li><p><a class="reference external" href="https://github.com/NHERI-SimCenter/quoFEM/tree/master/Examples//qfem-0014/src/eigData.csv">eigData.csv</a> - This is the calibration data file, which contains the synthetically generated data in five rows and two columns, the contents of which are shown below.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1025.21</span><span class="p">,</span> <span class="mf">1.53</span>
+<span class="mf">1138.11</span><span class="p">,</span> <span class="mf">1.24</span>
+<span class="mf">1099.39</span><span class="p">,</span> <span class="mf">1.38</span> 
+<span class="mf">1002.41</span><span class="p">,</span> <span class="mf">1.50</span>				
+<span class="mf">1052.69</span><span class="p">,</span> <span class="mf">1.35</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since the tcl script creates a <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file when it runs, no postprocessing script is needed.</p>
+</div>
+</div>
+</div>
+<div class="section" id="uq-workflow">
+<h2><span class="section-number">4.6.3. </span>UQ workflow<a class="headerlink" href="#uq-workflow" title="Permalink to this heading">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Selecting the <code class="docutils literal notranslate"><span class="pre">Steel</span> <span class="pre">Frame:</span> <span class="pre">Bayesian</span> <span class="pre">Calibration</span> <span class="pre">using</span> <span class="pre">TMCMC</span></code> example in the quoFEM Examples menu will autopopulate all the input fields required to run this example.
+The procedure outlined below demonstrates how to manually set up this problem in quoFEM.</p>
+</div>
+<p>The steps involved are as follows:</p>
+<ol class="arabic simple">
+<li><p>Start the application and the <strong>UQ</strong> panel will be highlighted. In the <strong>UQ Engine</strong> drop down menu, select the <strong>UCSD_UQ</strong> engine. In the <strong>Method</strong> category drop down menu the <strong>Transitional Markov chain Monte Carlo</strong> option will be highlighted. Enter the values in this panel as shown in the figure below. If manually setting up this problem, choose the path to the file containing the calibration data on your system.</p></li>
+</ol>
+<div class="align-center figure">
+<a class="reference internal image-reference" href="../../../../../_images/qfem-0014-UQ.png"><img alt="../../../../../_images/qfem-0014-UQ.png" src="../../../../../_images/qfem-0014-UQ.png" style="width: 600px;" /></a>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Next select the <strong>FEM</strong> panel from the input panel selection. This will default to the <strong>OpenSees</strong> FEM engine. In the <strong>Input Script</strong> field, enter the path to the <code class="docutils literal notranslate"><span class="pre">model.tcl</span></code> file or select <strong>Choose</strong> and navigate to the file.</p></li>
+</ol>
+<div class="align-center figure">
+<a class="reference internal image-reference" href="../../../../../_images/qfem-0014-FEM.png"><img alt="../../../../../_images/qfem-0014-FEM.png" src="../../../../../_images/qfem-0014-FEM.png" style="width: 600px;" /></a>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Next select the <strong>RV</strong> tab from the input panel. This panel should be pre-populated with two random variables named <code class="docutils literal notranslate"><span class="pre">k1</span></code> and <code class="docutils literal notranslate"><span class="pre">k2</span></code>. If not, press the <strong>Add</strong> button twice to create two fields to define the input random variables. Enter the same variable names (<code class="docutils literal notranslate"><span class="pre">k1</span></code> and <code class="docutils literal notranslate"><span class="pre">k2</span></code>), as required in the <code class="docutils literal notranslate"><span class="pre">model.tcl</span></code> script.</p></li>
+</ol>
+<p>For each variable, specify the prior probability distribution - from the <strong>Distribution</strong> drop down menu, select <strong>Uniform</strong> and then provide the lower bounds and upper bounds shown in the figure below.</p>
+<div class="align-center figure">
+<a class="reference internal image-reference" href="../../../../../_images/qfem-0014-RV.png"><img alt="../../../../../_images/qfem-0014-RV.png" src="../../../../../_images/qfem-0014-RV.png" style="width: 600px;" /></a>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>In the <strong>QoI</strong> panel, enter <strong>2</strong> variable names for the two quantities output from the model.</p></li>
+</ol>
+<div class="align-center figure">
+<a class="reference internal image-reference" href="../../../../../_images/qfem-0014-QoI.png"><img alt="../../../../../_images/qfem-0014-QoI.png" src="../../../../../_images/qfem-0014-QoI.png" style="width: 600px;" /></a>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For this particular problem setup in which the user is not using a postprocessing script, the user may specify any names for the QoI variables. They are only being used by the UCSD_UQ engine to return information on the results.</p>
+</div>
+<p>5. Next click on the <strong>Run</strong> button. This will cause the backend application to launch the <strong>UCSD_UQ</strong> engine, which performs Bayesian calibration using the TMCMC algorithm. When done, the <strong>RES</strong> tab will be selected and the results will be displayed as shown in the figure below. The results show the first four moments of the posterior marginal probability distribution of <span class="math notranslate nohighlight">\(k_1\)</span> and <span class="math notranslate nohighlight">\(k_2\)</span>. The true value of both <span class="math notranslate nohighlight">\(k_1\)</span> and <span class="math notranslate nohighlight">\(k_2\)</span> is <strong>958.61  kips/in</strong>.
+Also shown are the moments of the estimated aditional error parameters per response quantity and finally, the moments of the outputs corresponding to the samples from the posterior probability distribution of the parameters.</p>
+<div class="align-center figure">
+<a class="reference internal image-reference" href="../../../../../_images/qfem-0014-RES1.png"><img alt="../../../../../_images/qfem-0014-RES1.png" src="../../../../../_images/qfem-0014-RES1.png" style="width: 600px;" /></a>
+</div>
+<p>If the user selects the <strong>Data Values</strong> tab in the results panel, they will be presented with both a graphical plot and a tabular listing of the data.</p>
+<div class="align-center figure">
+<a class="reference internal image-reference" href="../../../../../_images/qfem-0014-RES2.png"><img alt="../../../../../_images/qfem-0014-RES2.png" src="../../../../../_images/qfem-0014-RES2.png" style="width: 600px;" /></a>
+</div>
+<p>Various views of the graphical display can be obtained by left and right clicking in the columns of the tabular data.</p>
+<div class="align-center figure">
+<a class="reference internal image-reference" href="../../../../../_images/qfem-0014-RES3.png"><img alt="../../../../../_images/qfem-0014-RES3.png" src="../../../../../_images/qfem-0014-RES3.png" style="width: 600px;" /></a>
+</div>
+<div class="align-center figure">
+<a class="reference internal image-reference" href="../../../../../_images/qfem-0014-RES6.png"><img alt="../../../../../_images/qfem-0014-RES6.png" src="../../../../../_images/qfem-0014-RES6.png" style="width: 600px;" /></a>
+</div>
+<p>If a single column of the tabular data is pressed with both right and left buttons a histogram and CDF will be displayed, as shown in the figures below.</p>
+<div class="align-center figure">
+<a class="reference internal image-reference" href="../../../../../_images/qfem-0014-RES4.png"><img alt="../../../../../_images/qfem-0014-RES4.png" src="../../../../../_images/qfem-0014-RES4.png" style="width: 600px;" /></a>
+</div>
+<div class="align-center figure">
+<a class="reference internal image-reference" href="../../../../../_images/qfem-0014-RES5.png"><img alt="../../../../../_images/qfem-0014-RES5.png" src="../../../../../_images/qfem-0014-RES5.png" style="width: 600px;" /></a>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2018-2023, The Regents of the University of California.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-158130480-4', 'auto');
+    
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+         .wy-nav-content { max-width: none; }
+  </style>
+
+<script>
+    /*
+    let selectedFilters = [];
+    const images  = document.getElementsByClassName("gallery-item");
+    const filters = [...document.querySelectorAll('.filter select')];
+    const toggles = [...document.querySelectorAll('.filter input')];
+
+    var show = function (elem) {
+        elem.style.display = 'block';
+    };
+    var hide = function (elem) {
+        elem.style.display = 'none';
+    };
+    var toggleFilter =  function(el,elid) {
+        const filter = document.getElementById(elid);
+        filter.disabled = !el.checked;
+       
+        if ("createEvent" in document) {
+            var evt = document.createEvent("HTMLEvents");
+            evt.initEvent("change", false, true);
+            filter.dispatchEvent(evt);
+        }
+        else
+            filter.fireEvent("change");
+    };
+    
+    for (const filter of filters) {
+        filter.addEventListener('change', function(event) {
+            selectedFilters = filters.map(filter => filter.disabled ? '' : filter.value).filter(Boolean);
+            console.log(selectedFilters);
+            for (const image of images) {
+                if (selectedFilters.every(filter => image.classList.contains(filter))) {
+                    show(image);
+                }
+                else {hide(image)};
+            };
+        })
+    };
+    */
+</script>
+
+
+</body>
+</html>

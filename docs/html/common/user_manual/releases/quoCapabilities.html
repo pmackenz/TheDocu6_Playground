@@ -1,0 +1,570 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>5. Capabilities &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/js/lightbox-plus-jquery.min.js"></script>
+        <script src="../../../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="6. Release Notes" href="quoReleaseNotes.html" />
+    <link rel="prev" title="4. How To Cite" href="../../front-matter/cite.html" />
+<script src="https://cdn.jsdelivr.net/npm/vega@5.12.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@4.13.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.8.0"></script>
+<style media="screen">.vega-actions a {margin-right: 5px;}</style>
+<link href="../../../_static/css/bootstrap.css" rel="stylesheet">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #F2F2F2" >
+          
+<a href="https://simcenter.designsafe-ci.org/" style="margin-bottom: 0px;">
+  <img src="../../../_static/img/SimCenter-Only.png" class="logo" alt="Org-Logo" />
+</a>
+<hr style="margin: 0px;">
+
+  <a href="../../../index.html">
+
+
+
+  
+  <img src="../../../_static/quoFEM-Logo.png" class="logo" alt="Logo"/>
+
+</a>
+
+
+  
+  
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about/quoFEM/about.html">1. About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../front-matter/desktop/ack.html">2. Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../front-matter/license.html">3. Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../front-matter/cite.html">4. How To Cite</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Capabilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#uq-uncertainty-quantification-and-optimization-options">5.1. UQ (Uncertainty Quantification and Optimization Options)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fem-computational-model-specification">5.2. FEM (Computational Model Specification)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rv-random-variable-options">5.3. RV (Random Variable Options)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#edp-outputs-from-computational-models">5.4. EDP (Outputs from Computational Models)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#res-summary-and-visualization-of-uq-analysis-results">5.5. RES (Summary and Visualization of UQ Analysis Results)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="quoReleaseNotes.html">6. Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quoPlans.html">7. Release Plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../front-matter/glossary.html">8. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../front-matter/abbreviations.html">9. Abbreviations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation/desktop/installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/quoFEM/quoFEMtutorial.html">2. Getting Started Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/desktop/usage.html">3. User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/desktop/examples.html">4. Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/desktop/troubleshooting.html">5. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reqments/reqQUOFE.html">6. Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bugs.html">7. Bugs &amp; Feature Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dcv/quoFEM/quoFEM.html">8. Running in Your Browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/desktop/quoFEM/usage_video.html">9. Video Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_inputs_documentation/User_Input_Documentation_Tables.html">10. User Inputs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Technical Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../technical_manual/desktop/technical_manual.html">1. Technical Manual</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../developer_manual/how_to_build/desktop/how_to_build.html">1. How to Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer_manual/architecture/desktop/architecture.html">2. Software Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer_manual/how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer_manual/verification/desktop/verification.html">4. Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer_manual/coding_style/desktop/coding_style.html">5. Coding Style</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Quantified Uncertainty with Optimization for the FEM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><span class="section-number">5. </span>Capabilities</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../_sources/common/user_manual/releases/quoCapabilities.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="capabilities">
+<span id="lbl-capabilities-quofem"></span><h1><span class="section-number">5. </span>Capabilities<a class="headerlink" href="#capabilities" title="Permalink to this heading">¶</a></h1>
+<p>Version 3.4 of the quoFEM app was released on <strong>October 2, 2023</strong>. The following lists the functionality available in this current version. (Note: New features and fixes in this release are marked <span class="blue">blue</span> in the following list of features.)</p>
+<div class="section" id="uq-uncertainty-quantification-and-optimization-options">
+<h2><span class="section-number">5.1. </span>UQ (Uncertainty Quantification and Optimization Options)<a class="headerlink" href="#uq-uncertainty-quantification-and-optimization-options" title="Permalink to this heading">¶</a></h2>
+<ol class="arabic">
+<li><p>Forward Uncertainty Propagation</p>
+<blockquote>
+<div><ol class="upperalpha simple">
+<li><p><a class="reference internal" href="../usage/desktop/DakotaSampling.html#lbldakotaforward"><span class="std std-ref">Dakota</span></a></p>
+<ol class="arabic simple">
+<li><p>Monte Carlo Sampling (MCS)</p></li>
+<li><p>Latin Hypercube Sampling (LHS)</p></li>
+<li><p>Gaussian Process Regression</p></li>
+<li><p>Polynomial Chaos Expansion</p></li>
+</ol>
+</li>
+<li><p><a class="reference internal" href="../usage/desktop/SimCenterUQSampling.html#lblsimforward"><span class="std std-ref">SimCenterUQ</span></a></p>
+<ol class="arabic simple">
+<li><p>Monte Carlo Sampling (MCS)</p>
+<ol class="loweralpha simple">
+<li><p>Resample from the existing correlated dataset of samples</p></li>
+</ol>
+</li>
+<li><p><span class="blue">Multi-fidelity Monte Calro</span></p></li>
+</ol>
+</li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Global Sensitivity Analysis</p>
+<blockquote>
+<div><ol class="upperalpha simple">
+<li><p><a class="reference internal" href="../usage/desktop/DakotaSensitivity.html#lbldakotasensitivity"><span class="std std-ref">Dakota</span></a></p>
+<ol class="arabic simple">
+<li><p>MCS</p></li>
+<li><p>LHS</p></li>
+</ol>
+</li>
+<li><p><a class="reference internal" href="../usage/desktop/SimCenterUQSensitivity.html#lblsimsensitivity"><span class="std std-ref">SimCenterUQ</span></a></p>
+<ol class="arabic simple">
+<li><p>Probability Model-based Global Sensitivity Analysis (PM-GSA)</p>
+<ol class="loweralpha simple">
+<li><p>First-order Sobol indices</p></li>
+<li><p>Total-effect Sobol indices</p></li>
+<li><p>Group-wise Sobol indices</p></li>
+<li><p>Principal component analysis and probabilistic model-based GSA (PCA-PSA) for high-dimensional QoIs</p></li>
+<li><p>Aggregated Sobol indices for field QoIs</p></li>
+<li><p>Import input/output samples from data files</p></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Reliability Analysis</p>
+<blockquote>
+<div><ol class="upperalpha simple">
+<li><p><a class="reference internal" href="../usage/desktop/DakotaReliability.html#lbldakotareliability"><span class="std std-ref">Dakota</span></a></p>
+<ol class="arabic simple">
+<li><p>Local Reliability</p></li>
+<li><p>Global Reliability</p></li>
+<li><p>Importance Sampling</p></li>
+</ol>
+</li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Bayesian Calibration</p>
+<blockquote>
+<div><ol class="upperalpha simple">
+<li><p><a class="reference internal" href="../usage/desktop/DakotaBayesianCalibration.html#lbldakotabayesiancalibration"><span class="std std-ref">Dakota</span></a></p>
+<ol class="arabic simple">
+<li><p>DREAM</p></li>
+</ol>
+</li>
+<li><p><a class="reference internal" href="../usage/desktop/UCSD_UQ_TMCMC.html#lblucsdtmcmc"><span class="std std-ref">UCSD_UQ</span></a></p>
+<ol class="arabic simple">
+<li><p>Transitional Markov Chain Monte Carlo (TMCMC) for Bayesian estimation</p>
+<ol class="loweralpha simple">
+<li><p>Override default log-likelihood function</p></li>
+<li><p>Override default error covariance structure</p></li>
+<li><p>Calibrate multipliers on error covariance structure</p></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Deterministic Calibration</p>
+<blockquote>
+<div><ol class="upperalpha simple">
+<li><p><a class="reference internal" href="../usage/desktop/DakotaDeterministicCalibration.html#lbldakotadeterministiccalibration"><span class="std std-ref">Dakota</span></a></p>
+<ol class="arabic simple">
+<li><p>NL2SOL</p></li>
+<li><p>OPT++GaussNewton</p></li>
+<li><p>Gradient-free optimization</p></li>
+</ol>
+</li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Surrogate Modeling</p>
+<blockquote>
+<div><ol class="upperalpha simple">
+<li><p>SimCenterUQ</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="../usage/desktop/SimCenterUQSurrogate.html#lblsimsurrogate"><span class="std std-ref">Train Gaussian Process (GP) Surrogate Model</span></a></p>
+<ol class="loweralpha simple">
+<li><p>Multifidelity surrogate modeling</p></li>
+<li><p>Adaptive design of experiment options for surrogate modeling</p></li>
+<li><p>Nugget optimization options for surrogate modeling</p></li>
+<li><p>Stochastic Kriging</p></li>
+</ol>
+</li>
+<li><p><a class="reference internal" href="../usage/desktop/SimCenterUQPLoM.html#lblsimcenteruqplom"><span class="std std-ref">Surrogate modeling using Probabilistic Learning on Manifolds (PLoM)</span></a> *</p></li>
+</ol>
+</li>
+</ol>
+</div></blockquote>
+</li>
+<li><p><a class="reference internal" href="../usage/desktop/Configuring_CustomUQ.html#lblcustomuq"><span class="std std-ref">CustomUQ</span></a></p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Configure UQ analysis using JSON file</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Support for the running computation to be preformed on TACC’s high performance computer, Frontera, is provided through DesignSafe for all but the methods indicated with a star (*).</p>
+</div>
+</div>
+<div class="section" id="fem-computational-model-specification">
+<h2><span class="section-number">5.2. </span>FEM (Computational Model Specification)<a class="headerlink" href="#fem-computational-model-specification" title="Permalink to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>OpenSees</p></li>
+<li><p>FEAPpv</p></li>
+<li><p>Python</p></li>
+<li><p>Custom</p></li>
+<li><p>SurrogateGP</p></li>
+<li><p>None</p></li>
+<li><p>Multiple models</p></li>
+</ol>
+</div>
+<div class="section" id="rv-random-variable-options">
+<h2><span class="section-number">5.3. </span>RV (Random Variable Options)<a class="headerlink" href="#rv-random-variable-options" title="Permalink to this heading">¶</a></h2>
+<ol class="arabic">
+<li><p>Inspect PDF of RV</p></li>
+<li><p>Distributions available: <sup>1</sup></p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Normal</p></li>
+<li><p>Lognormal</p></li>
+<li><p>Beta</p></li>
+<li><p>Uniform</p></li>
+<li><p>Weibull</p></li>
+<li><p>Gumbel</p></li>
+<li><p>Continuous <sup>2</sup></p></li>
+<li><p>Exponential <sup>3</sup></p></li>
+<li><p>Discrete <sup>3</sup></p></li>
+<li><p>Gamma <sup>3</sup></p></li>
+<li><p>Chi-squared <sup>3</sup></p></li>
+<li><p>Truncated exponential <sup>3</sup></p></li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><sup>1</sup>: For SimCentreUQ and UCSD algorithms only, the RVs can be defined by any of parameters, moments, or a dataset.
+<sup>2</sup>: Available for Optimization routines in Dakota only.
+<sup>3</sup>: Available in SimCenterUQ and UCSD only.</p>
+</div>
+</div>
+<div class="section" id="edp-outputs-from-computational-models">
+<h2><span class="section-number">5.4. </span>EDP (Outputs from Computational Models)<a class="headerlink" href="#edp-outputs-from-computational-models" title="Permalink to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Scalar quantities of interest</p></li>
+<li><p>Vector quantities of interest</p></li>
+</ol>
+</div>
+<div class="section" id="res-summary-and-visualization-of-uq-analysis-results">
+<h2><span class="section-number">5.5. </span>RES (Summary and Visualization of UQ Analysis Results)<a class="headerlink" href="#res-summary-and-visualization-of-uq-analysis-results" title="Permalink to this heading">¶</a></h2>
+<ol class="arabic">
+<li><p>Summary statistics of outputs displayed</p>
+<blockquote>
+<div><ol class="upperalpha simple">
+<li><p>Mean</p></li>
+<li><p>Standard deviation</p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>All output values presented in spreadsheet</p>
+<blockquote>
+<div><ol class="upperalpha simple">
+<li><p>Update the chart by clicking on spreadsheet columns</p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Output values visualized in the interactive chart</p>
+<blockquote>
+<div><ol class="upperalpha simple">
+<li><p>Scatter plot</p></li>
+<li><p>Histogram</p></li>
+<li><p>Cumulative distribution</p></li>
+<li><p>Inspect points on chart</p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Spreadsheet save options</p>
+<blockquote>
+<div><ol class="upperalpha simple">
+<li><p>Save Table</p></li>
+<li><p>Save Columns Separately (Useful after Bayesian updating, the posterior samples can later be directly loaded in quoFEM)</p></li>
+<li><p>Save RVs (Useful for surrogate model training)</p></li>
+<li><p>Save QoIs (Useful for surrogate model training)</p></li>
+<li><p>Save Surrogate Predictions (Only for the surrogate model results)</p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Visualization of surrogate modeling (GP) results</p>
+<blockquote>
+<div><ol class="upperalpha simple">
+<li><p>Goodness-of-fit measures</p></li>
+<li><p>90% confidence interval and prediction interval</p></li>
+<li><p>Save GP model</p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Visualization of PLoM training results</p>
+<blockquote>
+<div><ol class="upperalpha simple">
+<li><p>PCA representation error plot</p></li>
+<li><p>Diffusion maps eigenvalue plot</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2018-2023, The Regents of the University of California.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-158130480-4', 'auto');
+    
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+         .wy-nav-content { max-width: none; }
+  </style>
+
+<script>
+    /*
+    let selectedFilters = [];
+    const images  = document.getElementsByClassName("gallery-item");
+    const filters = [...document.querySelectorAll('.filter select')];
+    const toggles = [...document.querySelectorAll('.filter input')];
+
+    var show = function (elem) {
+        elem.style.display = 'block';
+    };
+    var hide = function (elem) {
+        elem.style.display = 'none';
+    };
+    var toggleFilter =  function(el,elid) {
+        const filter = document.getElementById(elid);
+        filter.disabled = !el.checked;
+       
+        if ("createEvent" in document) {
+            var evt = document.createEvent("HTMLEvents");
+            evt.initEvent("change", false, true);
+            filter.dispatchEvent(evt);
+        }
+        else
+            filter.fireEvent("change");
+    };
+    
+    for (const filter of filters) {
+        filter.addEventListener('change', function(event) {
+            selectedFilters = filters.map(filter => filter.disabled ? '' : filter.value).filter(Boolean);
+            console.log(selectedFilters);
+            for (const image of images) {
+                if (selectedFilters.every(filter => image.classList.contains(filter))) {
+                    show(image);
+                }
+                else {hide(image)};
+            };
+        })
+    };
+    */
+</script>
+
+
+</body>
+</html>

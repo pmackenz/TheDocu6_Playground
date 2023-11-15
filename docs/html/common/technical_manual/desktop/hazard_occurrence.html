@@ -1,0 +1,462 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Hazard Occurrence &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/js/lightbox-plus-jquery.min.js"></script>
+        <script src="../../../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+<script src="https://cdn.jsdelivr.net/npm/vega@5.12.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@4.13.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.8.0"></script>
+<style media="screen">.vega-actions a {margin-right: 5px;}</style>
+<link href="../../../_static/css/bootstrap.css" rel="stylesheet">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #F2F2F2" >
+          
+<a href="https://simcenter.designsafe-ci.org/" style="margin-bottom: 0px;">
+  <img src="../../../_static/img/SimCenter-Only.png" class="logo" alt="Org-Logo" />
+</a>
+<hr style="margin: 0px;">
+
+  <a href="../../../index.html">
+
+
+
+  
+  <img src="../../../_static/quoFEM-Logo.png" class="logo" alt="Logo"/>
+
+</a>
+
+
+  
+  
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/about/quoFEM/about.html">1. About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../front-matter/desktop/ack.html">2. Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../front-matter/license.html">3. Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../front-matter/cite.html">4. How To Cite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/releases/quoCapabilities.html">5. Capabilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/releases/quoReleaseNotes.html">6. Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/releases/quoPlans.html">7. Release Plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../front-matter/glossary.html">8. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../front-matter/abbreviations.html">9. Abbreviations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/installation/desktop/installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/about/quoFEM/quoFEMtutorial.html">2. Getting Started Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/usage/desktop/usage.html">3. User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/examples/desktop/examples.html">4. Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/troubleshooting/desktop/troubleshooting.html">5. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reqments/reqQUOFE.html">6. Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/bugs.html">7. Bugs &amp; Feature Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/dcv/quoFEM/quoFEM.html">8. Running in Your Browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/usage/desktop/quoFEM/usage_video.html">9. Video Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/user_inputs_documentation/User_Input_Documentation_Tables.html">10. User Inputs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Technical Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="technical_manual.html">1. Technical Manual</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../developer_manual/how_to_build/desktop/how_to_build.html">1. How to Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer_manual/architecture/desktop/architecture.html">2. Software Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer_manual/how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer_manual/verification/desktop/verification.html">4. Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer_manual/coding_style/desktop/coding_style.html">5. Coding Style</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Quantified Uncertainty with Optimization for the FEM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Hazard Occurrence</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../_sources/common/technical_manual/desktop/hazard_occurrence.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="hazard-occurrence">
+<span id="lblhazardoccurrence"></span><h1>Hazard Occurrence<a class="headerlink" href="#hazard-occurrence" title="Permalink to this heading">¶</a></h1>
+<p>A regional seismic risk ananlysis consists pf three elements: (1) an exposure time over which the risk is evaluated,
+(2) a loss or quantification to be evaluated, and (3) a specification of the probability of incurring the loss during the specified
+exposure time. These three elements can be formulated into different workflows and one of the possible workflows can include:
+(1) hazard analysis (understanding the possible seismic sources in the studied region), (2) ground motion characterization
+(representing the possible seismicity by earthquake ground motions at each site, e.g., time history records, intensity measures),
+(3) inventory identification (collecting the basic information of the buildings and infrastructures to be analyzed), and (4)
+response/damage/loss assessment (mapping the ground motion characteristics and building inventory to the response, damage and loss in the region).</p>
+<p>Different than the seismic risk analysis of a single structure, the spatial correlation between different site locations usually needs to be
+considered in estimating the total damage and loss of a portfolio of buildings or infrastructures.  This consideration is naturally fulfilled if
+physics-based earthquake simulation is involved.  If empirical ground motion models are used, then spatial correlation models (please see more
+details in <a class="reference internal" href="spatial_correlation.html#lblcorrelation"><span class="std std-ref">Ground Motion Intensity Spatial Correlation Model Options</span></a>) need to be evaluated and used in sampling the ground motion maps explicitly. The simulated ground motions are
+then used as the input for assessing the regional seismic risk of the portfolio.</p>
+<p>To propagate the uncertainty in the seismic hazard, ground motion characteristics, and structural damage and loss fragility, the risk analysis
+typically needs a sufficient number of samples (realizations) to reliably estimate the mean and variation of possible damage and loss. For instance,
+if applying the conventional Monte Carlo method (e.g., <a class="reference internal" href="#bazzurro07" id="id1"><span>[Bazzurro07]</span></a>), for each of the considered earthquake scenario (with a specific magnitude and location),
+a number of ground motion intensity maps are first simulated. Then, for each of the ground motion maps, a number of damage and loss assessments are
+conducted to propagate the uncertainty in the inventory, response analysis model, and/or fragility functions. The process is repeated for
+all considered earthquake scenarios which leads to a tremendous number of realizations and an excessive computational demand.</p>
+<p>To alleviate the computational cost of regional seismic risk analysis, a concept of <em>probabilistic earthquake scenarios</em> was proposed and developed by
+many researchers (e.g., <a class="reference internal" href="#chang00" id="id2"><span>[Chang00]</span></a>, <a class="reference internal" href="#jayaram10" id="id3"><span>[Jayaram10]</span></a>, <a class="reference internal" href="#vaziri12" id="id4"><span>[Vaziri12]</span></a>). The key idea is to first reduce the full set of possible earthquake scenarios that affect the studied
+region to a select subset of earthquakes each of which is used to evaluate the building and infrastructure performance, and then aggregate the results with
+modified hazard-consistent probabilities for individual selected earthquakes.  The modified probabilities of selected earthquakes are optimized
+so that the original hazard curves of individual sites can be recovered as much as possible (<a class="reference internal" href="#han12" id="id5"><span>[Han12]</span></a>). Different optimization algorithms are implemented
+(e.g., <a class="reference internal" href="#wang20" id="id6"><span>[Wang20]</span></a>), different target functions beyond the error in hazard curve (e.g., <a class="reference internal" href="#miller14" id="id7"><span>[Miller14]</span></a>) are considered, and multiple intensity measures (e.g., <a class="reference internal" href="#ma22" id="id8"><span>[Ma22]</span></a>)
+are included in the optimization to improve the accuracy of regional seismic risk analysis based on the subset earthquakes.</p>
+<div class="align-center figure" id="id15">
+<a class="reference internal image-reference" href="../../../_images/hazard_occurrence_concept.png"><img alt="../../../_images/hazard_occurrence_concept.png" src="../../../_images/hazard_occurrence_concept.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-text">Hazard curve of reduced earthquake subset with modified occurrence rates versus reference hazard curve (<a class="reference internal" href="#han12" id="id9"><span>[Han12]</span></a>).</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+</div>
+<p>Currently, the hazard occurrence sampling method developed by <a class="reference internal" href="#han12" id="id10"><span>[Han12]</span></a> and <a class="reference internal" href="#manzour16" id="id11"><span>[Manzour16]</span></a> is implemented in R2D. The following section
+provides a brief overview of its framework and major steps.</p>
+<div class="section" id="manzour-and-davidson-2016">
+<h2>Manzour and Davidson (2016)<a class="headerlink" href="#manzour-and-davidson-2016" title="Permalink to this heading">¶</a></h2>
+<p>Han and Davidson (<a class="reference internal" href="#han12" id="id12"><span>[Han12]</span></a>) proposed an <em>Optimization-based probabilistic scenario method</em> (OPS) to select a subset of earthquakes from the entire candidate set along with
+new optimized occurrence rates. The method adapts the <a class="reference external" href="https://www.sciencedirect.com/topics/engineering/mixed-integer-linear-programming">mixed-integer linear programming</a>
+to minimize the different between the recovered hazard curve (using the new occurrence rates) and the “true” (reference) hazard curve with the constraint on the total number
+of earthquakes that can be selected for the reduced set.</p>
+<p>Specifically, the objective of the optimization is to minimize the sum of the errors over all sites <span class="math notranslate nohighlight">\(i\)</span> and return periods <span class="math notranslate nohighlight">\(r\)</span>,
+between points on the reference hazard curves and the corresponding points on hazard curves developed with the reduced set of earthquakes and new occurrence rate:</p>
+<div class="math notranslate nohighlight" id="equation-common-technical-manual-desktop-hazard-occurrence-0">
+<span class="eqno">()<a class="headerlink" href="#equation-common-technical-manual-desktop-hazard-occurrence-0" title="Permalink to this equation">¶</a></span>\[min \Sigma_{i=1}^{I} \Sigma_{r=1}^{R} w_{ir} (e_{ir}^{+}+e_{ir}^{-})\]</div>
+<p>where <span class="math notranslate nohighlight">\(e_{ir}^{+}\)</span> and <span class="math notranslate nohighlight">\(e_{ir}^{-}\)</span> are the errors resulting from overestimating and underestimating, respectively, the reference hazard curve for the site <span class="math notranslate nohighlight">\(i\)</span>
+at the return period <cite>r</cite>. The weight <span class="math notranslate nohighlight">\(w_{ir}\)</span> is taken as the return period so that the error occurs at a longer return period (i.e., higher intensity level) can be
+scaled relatively more than the error occurs at shorter return period. This typically helps the final fitting given the nonlinear shape of a hazard curve.</p>
+<p>Assuming we have overall <span class="math notranslate nohighlight">\(J\)</span> candidate earthquakes, for any earthquake scenario <span class="math notranslate nohighlight">\(j\)</span>, we can use empirical ground motion model(s) to compute its resulting ground motion intensity
+(i.e., the mean and standard deviation) for each individual site <span class="math notranslate nohighlight">\(i\)</span>: <span class="math notranslate nohighlight">\(m_{lnSa}\)</span> and <span class="math notranslate nohighlight">\(\sigma_{lnSa}\)</span>.  Suppose that for the site <span class="math notranslate nohighlight">\(i\)</span> and return period <span class="math notranslate nohighlight">\(r\)</span>,
+<span class="math notranslate nohighlight">\(Sa_{ir}\)</span> is the intensity level from the reference hazard curve, then with <span class="math notranslate nohighlight">\(m_{lnSa}\)</span> and <span class="math notranslate nohighlight">\(\sigma_{lnSa}\)</span> we could estimate the exceeding probability of <span class="math notranslate nohighlight">\(Sa_{ir}\)</span> for
+the earthquake scenario <span class="math notranslate nohighlight">\(j\)</span>: <span class="math notranslate nohighlight">\(P(y \geq Sa_{ir})\)</span>. Now assuming the modified occurrence rate is <span class="math notranslate nohighlight">\(P_j\)</span>, then the total exceedance probability using the reduced set of earthquake
+could be written as:</p>
+<div class="math notranslate nohighlight" id="equation-common-technical-manual-desktop-hazard-occurrence-1">
+<span class="eqno">()<a class="headerlink" href="#equation-common-technical-manual-desktop-hazard-occurrence-1" title="Permalink to this equation">¶</a></span>\[\Sigma_{j=1}^{J} [P_j \times P(y \geq Sa_{ir})] - e_{ir}^{+}+e_{ir}^{-} = \frac{1}{r}, \forall i, r\]</div>
+<p>Note if <span class="math notranslate nohighlight">\(P_j=0\)</span>, then the earthquake <span class="math notranslate nohighlight">\(j\)</span> is not included in the reduced set of earthquake scenarios (<span class="math notranslate nohighlight">\(N_{red}\)</span>).  The other constraints in the optimization are:</p>
+<div class="math notranslate nohighlight" id="equation-common-technical-manual-desktop-hazard-occurrence-2">
+<span class="eqno">()<a class="headerlink" href="#equation-common-technical-manual-desktop-hazard-occurrence-2" title="Permalink to this equation">¶</a></span>\[0 \leq P_j \leq z_j, \forall j\]</div>
+<div class="math notranslate nohighlight" id="equation-common-technical-manual-desktop-hazard-occurrence-3">
+<span class="eqno">()<a class="headerlink" href="#equation-common-technical-manual-desktop-hazard-occurrence-3" title="Permalink to this equation">¶</a></span>\[z_j \in \{0, 1\}, \forall j\]</div>
+<div class="math notranslate nohighlight" id="equation-common-technical-manual-desktop-hazard-occurrence-4">
+<span class="eqno">()<a class="headerlink" href="#equation-common-technical-manual-desktop-hazard-occurrence-4" title="Permalink to this equation">¶</a></span>\[\Sigma_{j=1}^{J} z_j \leq N_{req}\]</div>
+<div class="math notranslate nohighlight" id="equation-common-technical-manual-desktop-hazard-occurrence-5">
+<span class="eqno">()<a class="headerlink" href="#equation-common-technical-manual-desktop-hazard-occurrence-5" title="Permalink to this equation">¶</a></span>\[e_{ir}^{+}, e_{ir}^{-} \geq 0, \forall i,r\]</div>
+<p>The above OPS method can also be applied to reduce the number of ground motion maps to recover the reference hazard curves for the sites in the studied region.
+The only difference is the computation of the exceedance probability given the ground motion map <span class="math notranslate nohighlight">\(k\)</span>, <span class="math notranslate nohighlight">\(P(y \geq Sa_{ir})\)</span>, which would be a binary
+variable (either 1 or 0) as whether to exceed <span class="math notranslate nohighlight">\(Sa_{ir}\)</span> is deterministic given a ground motion map.</p>
+<p>The flowchart below summarizes the workflow of using the OPS method to select reduced number of earthquakes, reduce ground motion maps given the selected earthquake scenarios,
+and assign new occurrence rates for the earthquake scenarios and ground motion maps. To illustrate the process, an example case will be introduced along with
+a bit more details of each major step.</p>
+<div class="align-center figure" id="id16">
+<a class="reference internal image-reference" href="../../../_images/hazard_occurrence_flowchart.png"><img alt="../../../_images/hazard_occurrence_flowchart.png" src="../../../_images/hazard_occurrence_flowchart.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-text">Workflow to generate a hazard-consistent reduced sample of earthquakes and ground motion maps using the OPS method.</span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
+</div>
+<p>In this example, we want to get minimal number of earthquakes with modified occurrence rates to recover the reference hazard curves at each site location as much as possible.
+The figure below plots the example sites in the San Francisco Bay Area, whose longitude and latitude data can be downloaded <a class="reference download internal" download="" href="../../../_downloads/ff34ee7b4d03926762ea9ee39d40cb51/SiteFile.csv"><code class="xref download docutils literal notranslate"><span class="pre">here</span></code></a>.</p>
+<div class="align-center figure" id="id17">
+<a class="reference internal image-reference" href="../../../_images/hazard_occurrence_sites.png"><img alt="../../../_images/hazard_occurrence_sites.png" src="../../../_images/hazard_occurrence_sites.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-text">Site locations for hazard occurrence modeling and probabilistic earthquake scenarios.</span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
+</div>
+<p>Once downloaded, the site csv file can be loaded in the site widget of the <strong>HAZ</strong> panel under the “Earthquake Scenario Simulation” option. The figure below shows the site widget
+after the file is loaded. The site-specific Vs30 data are fetched from Wills et al. 2015 model.</p>
+<div class="align-center figure" id="id18">
+<a class="reference internal image-reference" href="../../../_images/hazard_occurrence_site_widget.png"><img alt="../../../_images/hazard_occurrence_site_widget.png" src="../../../_images/hazard_occurrence_site_widget.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-text">Loading the site csv file in the site widget (scattering locations).</span><a class="headerlink" href="#id18" title="Permalink to this image">¶</a></p>
+</div>
+<p>The figure below summarizes the hazard occurrence configuration: we want to select earthquake scenarios from the UCERF2 seismic sources. For
+this demostration, we want to have 100 candidate earthquakes.  The backend script in the R2D follows the suggestion by Han and Davidson (2012)
+(<a class="reference internal" href="#han12" id="id13"><span>[Han12]</span></a>) to first order the candidate by its true occurrence rates - so the 100 candidates here are the ones with highest occurrence rates to
+the region. For the reduced representation with the probabilistic earthquake scenarios, we want no more than 10 earthquakes and no more than 100
+ground motion maps. Note this setup is just for demonstration as the example site locations are not distant to each other - for more distributed
+sites, the candidate earthquak number as well as the reduced earthquake number should be increased to have better matching results (<a class="reference internal" href="#han12" id="id14"><span>[Han12]</span></a>).</p>
+<div class="align-center figure" id="id19">
+<a class="reference internal image-reference" href="../../../_images/hazard_occurrence_configuration.png"><img alt="../../../_images/hazard_occurrence_configuration.png" src="../../../_images/hazard_occurrence_configuration.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-text">Configurations for hazard occurrence modeling.</span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
+</div>
+<p>For all sites, we do not prescribe but fetch the site-specific hazard curves directly from <a class="reference external" href="https://earthquake.usgs.gov/nshmp-haz-ws/hazard">USGS API</a>.
+The intensity measure for the hazard curve is the response spectral acceleration at 1.0 second, Sa(T=1.0). The hazard curves are digitized at
+four different return periods from 224 years to 2475 years. These four levels will be used later to compute the error for fitting the hazard curve.
+These hazard curves are also saved during the simulation, please see the example format in <a class="reference download internal" download="" href="../../../_downloads/9a6ac91f6a6c8445de84afb6fc97f399/HazardCurves.json"><code class="xref download docutils literal notranslate"><span class="pre">./src/HazardCurves.json</span></code></a>.</p>
+<p>Once everything above set up, please click the “Run Hazard Simulation” button located in the bottom right of the <strong>HAZ</strong> panel. It may take 5 to 10
+minutes to run the entire example (internet connection is needed for fetching data in this example).  Once the run completed, there are three types of
+output files in the “Output Directory” (please feel free to change the default one to your own directory in the
+textbox located in the bottom left of the <strong>HAZ</strong> panel):</p>
+<ol class="arabic simple">
+<li><p><em>RupSampled.json</em>: the information about the selected probabilistic earthquake ruptures (<a class="reference download internal" download="" href="../../../_downloads/c74553c0e8625d497ea832e2c1d0bb0d/RupSampled.json"><code class="xref download docutils literal notranslate"><span class="pre">example</span></code></a>).</p></li>
+<li><p><em>InfoSampledGM.json</em>: the information about the selected ground motion maps (<a class="reference download internal" download="" href="../../../_downloads/b3e6cbcea474f136993f4c7185e2dd15/InfoSampledGM.json"><code class="xref download docutils literal notranslate"><span class="pre">example</span></code></a>).</p></li>
+<li><p><em>SiteIM.json</em>: the simulated intensity measures of the selected ground motion maps (<a class="reference download internal" download="" href="../../../_downloads/763d878419337abd35e9e2d9a38cf1cc/SiteIM.json"><code class="xref download docutils literal notranslate"><span class="pre">example</span></code></a>).</p></li>
+</ol>
+<p>To validate the selected earthquake scenarios, the figure below constrasts the recovered seismic hazard curve and the reference hazard curve
+(ground truth) for each individual site.</p>
+<div class="align-center figure" id="id20">
+<a class="reference internal image-reference" href="../../../_images/hazard_occurrence_result.png"><img alt="../../../_images/hazard_occurrence_result.png" src="../../../_images/hazard_occurrence_result.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-text">Comparison of recovered and reference hazard curves for the first 9 sites in the example.</span><a class="headerlink" href="#id20" title="Permalink to this image">¶</a></p>
+</div>
+<dl class="citation">
+<dt class="label" id="bazzurro07"><span class="brackets"><a class="fn-backref" href="#id1">Bazzurro07</a></span></dt>
+<dd><p>Bazzurro, P., &amp; Luco, N. (2007). Effects of different sources of uncertainty and correlation on earthquake-generated losses. Australian Journal of Civil Engineering, 4(1), 1-14.</p>
+</dd>
+<dt class="label" id="chang00"><span class="brackets"><a class="fn-backref" href="#id2">Chang00</a></span></dt>
+<dd><p>Chang, S. E., Shinozuka, M., &amp; Moore, J. E. (2000). Probabilistic earthquake scenarios: extending risk analysis methodologies to spatially distributed systems. Earthquake Spectra, 16(3), 557-572.</p>
+</dd>
+<dt class="label" id="vaziri12"><span class="brackets"><a class="fn-backref" href="#id4">Vaziri12</a></span></dt>
+<dd><p>Vaziri, P., Davidson, R., Apivatanagul, P., &amp; Nozick, L. (2012). Identification of optimization-based probabilistic earthquake scenarios for regional loss estimation. Journal of Earthquake Engineering, 16(2), 296-315.</p>
+</dd>
+<dt class="label" id="jayaram10"><span class="brackets"><a class="fn-backref" href="#id3">Jayaram10</a></span></dt>
+<dd><p>Jayaram, N., &amp; Baker, J. W. (2010). Efficient sampling and data reduction techniques for probabilistic seismic lifeline risk assessment. Earthquake Engineering &amp; Structural Dynamics, 39(10), 1109-1131.</p>
+</dd>
+<dt class="label" id="han12"><span class="brackets">Han12</span><span class="fn-backref">(<a href="#id5">1</a>,<a href="#id9">2</a>,<a href="#id10">3</a>,<a href="#id12">4</a>,<a href="#id13">5</a>,<a href="#id14">6</a>)</span></dt>
+<dd><p>Han, Y., &amp; Davidson, R. A. (2012). Probabilistic seismic hazard analysis for spatially distributed infrastructure. Earthquake Engineering &amp; Structural Dynamics, 41(15), 2141-2158.</p>
+</dd>
+<dt class="label" id="miller14"><span class="brackets"><a class="fn-backref" href="#id7">Miller14</a></span></dt>
+<dd><p>Miller, M., &amp; Baker, J. (2015). Ground‐motion intensity and damage map selection for probabilistic infrastructure network risk assessment using optimization. Earthquake Engineering &amp; Structural Dynamics, 44(7), 1139-1156.</p>
+</dd>
+<dt class="label" id="wang20"><span class="brackets"><a class="fn-backref" href="#id6">Wang20</a></span></dt>
+<dd><p>Wang, P, Z Liu, SJ Brandenberg, P Zimmaro, JP Stewart (2022). Regression-based event selection for hazard-consistent seismic risk assessment. Proceedings of the 12th National Conference in Earthquake Engineering, Salt Lake City, UT.</p>
+</dd>
+<dt class="label" id="ma22"><span class="brackets"><a class="fn-backref" href="#id8">Ma22</a></span></dt>
+<dd><p>Ma, L., Conus, D., &amp; Bocchini, P. (2022). Optimal Generation of Multivariate Seismic Intensity Maps Using Hazard Quantization. ASCE-ASME Journal of Risk and Uncertainty in Engineering Systems, Part A: Civil Engineering, 8(1), 04021078.</p>
+</dd>
+<dt class="label" id="manzour16"><span class="brackets"><a class="fn-backref" href="#id11">Manzour16</a></span></dt>
+<dd><p>Manzour, H., Davidson, R. A., Horspool, N., &amp; Nozick, L. K. (2016). Seismic hazard and loss analysis for spatially distributed infrastructure in Christchurch, New Zealand. Earthquake Spectra, 32(2), 697-712.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2018-2023, The Regents of the University of California.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-158130480-4', 'auto');
+    
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+         .wy-nav-content { max-width: none; }
+  </style>
+
+<script>
+    /*
+    let selectedFilters = [];
+    const images  = document.getElementsByClassName("gallery-item");
+    const filters = [...document.querySelectorAll('.filter select')];
+    const toggles = [...document.querySelectorAll('.filter input')];
+
+    var show = function (elem) {
+        elem.style.display = 'block';
+    };
+    var hide = function (elem) {
+        elem.style.display = 'none';
+    };
+    var toggleFilter =  function(el,elid) {
+        const filter = document.getElementById(elid);
+        filter.disabled = !el.checked;
+       
+        if ("createEvent" in document) {
+            var evt = document.createEvent("HTMLEvents");
+            evt.initEvent("change", false, true);
+            filter.dispatchEvent(evt);
+        }
+        else
+            filter.fireEvent("change");
+    };
+    
+    for (const filter of filters) {
+        filter.addEventListener('change', function(event) {
+            selectedFilters = filters.map(filter => filter.disabled ? '' : filter.value).filter(Boolean);
+            console.log(selectedFilters);
+            for (const image of images) {
+                if (selectedFilters.every(filter => image.classList.contains(filter))) {
+                    show(image);
+                }
+                else {hide(image)};
+            };
+        })
+    };
+    */
+</script>
+
+
+</body>
+</html>

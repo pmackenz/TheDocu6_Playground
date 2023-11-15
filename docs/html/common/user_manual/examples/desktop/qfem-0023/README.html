@@ -1,0 +1,539 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>4.12. Global Sensitivity Analysis for Field QoI &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/js/lightbox-plus-jquery.min.js"></script>
+        <script src="../../../../../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="4.13. Heteroscedastic Gaussian Process modeling" href="../qfem-0025/README.html" />
+    <link rel="prev" title="4.11. Two-Dimensional Truss: PLoM Modeling and Simulation" href="../qfem-0022/README.html" />
+<script src="https://cdn.jsdelivr.net/npm/vega@5.12.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@4.13.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.8.0"></script>
+<style media="screen">.vega-actions a {margin-right: 5px;}</style>
+<link href="../../../../../_static/css/bootstrap.css" rel="stylesheet">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #F2F2F2" >
+          
+<a href="https://simcenter.designsafe-ci.org/" style="margin-bottom: 0px;">
+  <img src="../../../../../_static/img/SimCenter-Only.png" class="logo" alt="Org-Logo" />
+</a>
+<hr style="margin: 0px;">
+
+  <a href="../../../../../index.html">
+
+
+
+  
+  <img src="../../../../../_static/quoFEM-Logo.png" class="logo" alt="Logo"/>
+
+</a>
+
+
+  
+  
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about/quoFEM/about.html">1. About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../front-matter/desktop/ack.html">2. Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../front-matter/license.html">3. Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../front-matter/cite.html">4. How To Cite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../releases/quoCapabilities.html">5. Capabilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../releases/quoReleaseNotes.html">6. Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../releases/quoPlans.html">7. Release Plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../front-matter/glossary.html">8. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../front-matter/abbreviations.html">9. Abbreviations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Manual</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../installation/desktop/installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about/quoFEM/quoFEMtutorial.html">2. Getting Started Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/desktop/usage.html">3. User Interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">4. Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0001/README.html">4.1. Two-Dimensional Truss: Sampling, Reliability and Sensitivity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0002/README.html">4.2. Forward Propagation - OpenSeesPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0005/README.html">4.3. Basic modeling with Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0007/README.html">4.4. Steel Frame: Conventional Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0009/README.html">4.5. Two-Dimensional Truss: Global Sensitivity Analysis using SimCenterUQ Engine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0014/README.html">4.6. Steel Frame: Bayesian Calibration using TMCMC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0015/README.html">4.7. Surrogate Modeling for One Story Building Earthquake Response</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0016/README.html">4.8. Surrogate Modeling to Predict Mean and Variance of Earthquake Response</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0017/README.html">4.9. Custom UQ for UQpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0019/README.html">4.10. Bayesian Calibration of Material Model Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0022/README.html">4.11. Two-Dimensional Truss: PLoM Modeling and Simulation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4.12. Global Sensitivity Analysis for Field QoI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#outline">4.12.1. Outline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#video-resources">4.12.2. Video Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-description">4.12.3. Problem description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#files-required">4.12.4. Files required</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uq-workflow">4.12.5. UQ workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#comparison-with-the-results-without-pca">4.12.6. Comparison with the results without PCA</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0025/README.html">4.13. Heteroscedastic Gaussian Process modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0027/README.html">4.14. Forward propagation of uncertainty with multiple simulation models</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting/desktop/troubleshooting.html">5. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../reqments/reqQUOFE.html">6. Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bugs.html">7. Bugs &amp; Feature Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dcv/quoFEM/quoFEM.html">8. Running in Your Browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/desktop/quoFEM/usage_video.html">9. Video Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_inputs_documentation/User_Input_Documentation_Tables.html">10. User Inputs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Technical Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../technical_manual/desktop/technical_manual.html">1. Technical Manual</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/how_to_build/desktop/how_to_build.html">1. How to Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/architecture/desktop/architecture.html">2. Software Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/verification/desktop/verification.html">4. Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/coding_style/desktop/coding_style.html">5. Coding Style</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">Quantified Uncertainty with Optimization for the FEM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../examples.html"><span class="section-number">4. </span>Examples</a> &raquo;</li>
+        
+      <li><span class="section-number">4.12. </span>Global Sensitivity Analysis for Field QoI</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../../../_sources/common/user_manual/examples/desktop/qfem-0023/README.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="global-sensitivity-analysis-for-field-qoi">
+<span id="qfem-0023"></span><h1><span class="section-number">4.12. </span>Global Sensitivity Analysis for Field QoI<a class="headerlink" href="#global-sensitivity-analysis-for-field-qoi" title="Permalink to this heading">¶</a></h1>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 75%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Problem files</p></td>
+<td><p><a class="reference external" href="https://github.com/NHERI-SimCenter/quoFEM/tree/master/Examples/qfem-0023/">Github</a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="outline">
+<h2><span class="section-number">4.12.1. </span>Outline<a class="headerlink" href="#outline" title="Permalink to this heading">¶</a></h2>
+<p>In this example, we investigate how much each parameter affects multiple outputs of a model. In particular, influence of different martial model parameters to the resulting stress time history under cyclic load setting will be compared via global sensitivity analysis. To gain efficiency dealing with such high-dimensional outputs, ‘principal component analysis and probability model-based global sensitivity analysis (PCA-PSA)’ method is used in the analysis.</p>
+</div>
+<div class="section" id="video-resources">
+<h2><span class="section-number">4.12.2. </span>Video Resources<a class="headerlink" href="#video-resources" title="Permalink to this heading">¶</a></h2>
+<p>Global Senstivity Analysis for Multiple outputs?  (from 7:24 to 20:15)</p>
+<div style="text-align: center;">
+   <iframe src="https://www.youtube.com/embed/Z0BqspO7yuE?start=444" width="560" height="315" frameborder="5" allowfullscreen="allowfullscreen"></iframe>
+</div><p><br>Click to replay the video from <a href="javascript:window.location.reload(true);">7:24</a>. Please note there were minor changes in the user interface since it is recorded.</p></div>
+<div class="section" id="problem-description">
+<h2><span class="section-number">4.12.3. </span>Problem description<a class="headerlink" href="#problem-description" title="Permalink to this heading">¶</a></h2>
+<div class="align-center figure" id="id2">
+<span id="figsteel02"></span><a class="reference internal image-reference" href="../../../../../_images/qf-0023-Steel02.png"><img alt="../../../../../_images/qf-0023-Steel02.png" src="../../../../../_images/qf-0023-Steel02.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 4.12.3.1 </span><span class="caption-text">Steel02 Material – Hysteretic Behavior of Model with Isotropic Hardening in Compression</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>Consider STEEL02 material model in OpenSees that describes cyclic stress-strain response of the steel reinforcing bar in finite element simulations. The STEEL02 material model in OpenSees can take up to 11 parameters as input, as described in the <a class="reference external" href="https://opensees.berkeley.edu/wiki/index.php/Steel02_Material_--_Giuffré-Menegotto-Pinto_Model_with_Isotropic_Strain_Hardening">documentation</a>. Of these 11 parameters, 7 parameters shown in <a class="reference internal" href="#table-1">Table 1</a> will be considered.</p>
+<p id="table-1">Table 1: Parameters of the STEEL02 material model</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 73%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>lower bound</p></th>
+<th class="head"><p>upper bound</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Yield strength <span class="math notranslate nohighlight">\(f_y\)</span></p></td>
+<td><p>300</p></td>
+<td><p>700</p></td>
+</tr>
+<tr class="row-odd"><td><p>Initial elastic tangent <span class="math notranslate nohighlight">\(E\)</span></p></td>
+<td><p>150000</p></td>
+<td><p>250000</p></td>
+</tr>
+<tr class="row-even"><td><p>Strain hardening ratio <span class="math notranslate nohighlight">\(b\)</span></p></td>
+<td><p>0</p></td>
+<td><p>0.2</p></td>
+</tr>
+<tr class="row-odd"><td><p>Elastic-plastic transition parameter 1 <span class="math notranslate nohighlight">\(cR_1\)</span></p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>Elastic-plastic transition parameter 2 <span class="math notranslate nohighlight">\(cR_2\)</span></p></td>
+<td><p>0</p></td>
+<td><p>0.2</p></td>
+</tr>
+<tr class="row-odd"><td><p>Isotropic hardening parameter for compression <span class="math notranslate nohighlight">\(a_1\)</span></p></td>
+<td><p>0</p></td>
+<td><p>0.1</p></td>
+</tr>
+<tr class="row-even"><td><p>Isotropic hardening parameter for tension <span class="math notranslate nohighlight">\(a_3\)</span></p></td>
+<td><p>0</p></td>
+<td><p>0.1</p></td>
+</tr>
+</tbody>
+</table>
+<p>The other four parameters are kept fixed value at:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 84%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Elastic-plastic transition parameter <span class="math notranslate nohighlight">\(R_0\)</span></p></td>
+<td><p>20</p></td>
+</tr>
+<tr class="row-odd"><td><p>Isotropic hardening parameter for compression <span class="math notranslate nohighlight">\(a_2\)</span></p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>Isotropic hardening parameter for tension <span class="math notranslate nohighlight">\(a_4\)</span></p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>Initial stress value <span class="math notranslate nohighlight">\(\sigma_{init}\)</span></p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="files-required">
+<h2><span class="section-number">4.12.4. </span>Files required<a class="headerlink" href="#files-required" title="Permalink to this heading">¶</a></h2>
+<p>The exercise requires one main script file and one supplementary file. The user should download these files and place them in a <strong>NEW</strong> folder.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do NOT place the files in your root, downloads, or desktop folder as when the application runs it will copy the contents on the directories and subdirectories containing these files multiple times. If you are like us, your root, Downloads or Documents folders contains a lot of files.</p>
+</div>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://github.com/NHERI-SimCenter/quoFEM/tree/master/Examples//qfem-0023/src/matTestAllParamsReadStrain.tcl">matTestAllParamsReadStrain.tcl</a> - This is an OpenSees script written in tcl which simulates a material test and writes the stress response (in a file called <code class="docutils literal notranslate"><span class="pre">results.out</span></code>) when subjected to the chosen strain history, for a given value of the parameters of the material model. Note that the random variables are using <code class="docutils literal notranslate"><span class="pre">pset</span></code> command while the other deterministic variables are defined by <code class="docutils literal notranslate"><span class="pre">set</span></code> command.</p></li>
+<li><p><a class="reference external" href="https://github.com/NHERI-SimCenter/quoFEM/tree/master/Examples//qfem-0023/src/stress.1.coords">stress.1.coords</a> - This file contains the cyclic strain history that is used as input during the finite element simulation of the material response. The strain values stored in this file are read in by the tcl script performing the OpenSees analysis. <strong>Place this file to the same directory as</strong> <a class="reference external" href="https://github.com/NHERI-SimCenter/quoFEM/tree/master/Examples//qfem-0023/src/matTestAllParamsReadStrain.tcl">matTestAllParamsReadStrain.tcl</a> <strong>such that this file is automatically copied to the working directory of quoFEM.</strong> Since quoFEM copies all the files in the directory, it does not require to explicitly specify the supplementary files (other than the main analysis script) individually.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since the tcl script creates a <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file when it runs, no postprocessing script is needed.</p>
+</div>
+<div class="align-center figure" id="id3">
+<span id="figexperimentaldatasteelcouponstrain"></span><a class="reference internal image-reference" href="../../../../../_images/qf-0023-StrainHistory.png"><img alt="../../../../../_images/qf-0023-StrainHistory.png" src="../../../../../_images/qf-0023-StrainHistory.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 4.12.4.1 </span><span class="caption-text">Strain history in ‘stress.1.coords’.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="uq-workflow">
+<h2><span class="section-number">4.12.5. </span>UQ workflow<a class="headerlink" href="#uq-workflow" title="Permalink to this heading">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Selecting the <code class="docutils literal notranslate"><span class="pre">Global</span> <span class="pre">Sensitivity</span> <span class="pre">Analysis</span> <span class="pre">for</span> <span class="pre">Field</span> <span class="pre">QoI</span></code> example in the quoFEM Examples menu will autopopulate all the input fields required to run this example.
+The procedure outlined below demonstrates how to manually set up this problem in quoFEM.</p>
+</div>
+<p>The steps involved are as follows:</p>
+<ol class="arabic simple">
+<li><p>Start the application and the <strong>UQ</strong> panel will be highlighted. In the <strong>UQ Engine</strong> drop down menu, select the <strong>SimCenterUQ</strong> engine. In the <strong>Method</strong> select <strong>Sensitivity Analysis</strong> option. Enter the values in this panel as shown in the figure below.</p></li>
+</ol>
+<div class="align-center figure">
+<img alt="../../../../../_images/qf-0023-UQ.png" src="../../../../../_images/qf-0023-UQ.png" />
+</div>
+<p>If the total number of QoI components exceeds 15, quoFEM will automatically run ‘principal component analysis and probability model-based sensitivity analysis (PCA-PSA)’ <a class="reference internal" href="#jung2023" id="id1"><span>[Jung2023]</span></a> to gain efficiency.
+Because this example have 342 QoI components representing stress values of discretized time series, PCA will be performed for the QoI vector by default to gain efficiency.</p>
+<ol class="arabic simple" start="2">
+<li><p>Next select the <strong>FEM</strong> panel from the input panel selection. This will default to the <strong>OpenSees</strong> FEM engine. In the <strong>Input Script</strong> field, enter the path to the <code class="docutils literal notranslate"><span class="pre">matTestAllParamsReadStrain.tcl</span></code> file or select <strong>Choose</strong> and navigate to the file.</p></li>
+</ol>
+<div class="align-center figure">
+<img alt="../../../../../_images/qf-0023-FEM.png" src="../../../../../_images/qf-0023-FEM.png" />
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since the tcl script creates a <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file when it runs, no postprocessing script is needed.</p>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Select the <strong>RV</strong> tab from the input panel. This panel should be pre-populated with seven random variables. If not, press the <strong>Add</strong> button to create new fields to define the input random variables. Enter the same variable names, as required in the model script.</p></li>
+</ol>
+<p>For each variable, specify the probability distribution and its parameters, as shown in the figure below.</p>
+<div class="align-center figure">
+<img alt="../../../../../_images/qf-0023-RV.png" src="../../../../../_images/qf-0023-RV.png" />
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The results of sensitivity analysis will depend on the the choice of distribution types and parameters. Higher uncertainty leads to higher influece on the response.</p>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>In the <strong>QoI</strong> panel denote that the variable named <code class="docutils literal notranslate"><span class="pre">stress</span></code> is not a scalar response variable, but has a length of 342.</p></li>
+</ol>
+<div class="align-center figure">
+<img alt="../../../../../_images/qf-0023-QOI.png" src="../../../../../_images/qf-0023-QOI.png" />
+</div>
+<p><strong>Note that the aggregated sensitivity indices will also be provided for the field QoIs. The aggregated sensitivity indices is obtained by weighted sum of the component sensitivity indices, where the weight is proportional to the variance of each QoI component. If multiple of field QoIs are defined, aggregated sensitivity indices will be provided for each of them.</strong></p>
+<ol class="arabic simple" start="5">
+<li><p>Click on the <strong>Run</strong> button. This will cause the backend application to launch the <strong>SimCenterUQ</strong> engine, which performs Global Sensitivity Analysis. When done, the <strong>RES</strong> tab will be selected and the results will be displayed as shown in the figure below.</p></li>
+</ol>
+<div class="align-center figure">
+<img alt="../../../../../_images/qf-0023-RES1.png" src="../../../../../_images/qf-0023-RES1.png" />
+</div>
+<p>The results show the sensitivity indices (Sobol indices) for each QoIs. The results tab first shows the aggregated sensitivity indices for the fields QoIs. Using the drop down menu, the user can also inspect individual sensitivity indices. See <a class="reference external" href="../../../../technical_manual/desktop/SimCenterUQTechnical.html">here</a> to learn about the difference between the main and total indices. The analysis took around 28.5 seconds and 5 principal components are used to reduce the dimension during the analysis.</p>
+<p>If the user selects the <strong>Data Values</strong> tab in the results panel, they will be presented with both a graphical plot and a tabular listing of the data.</p>
+<div class="align-center figure">
+<img alt="../../../../../_images/qf-0023-RES2.png" src="../../../../../_images/qf-0023-RES2.png" />
+</div>
+</div>
+<div class="section" id="comparison-with-the-results-without-pca">
+<h2><span class="section-number">4.12.6. </span>Comparison with the results without PCA<a class="headerlink" href="#comparison-with-the-results-without-pca" title="Permalink to this heading">¶</a></h2>
+<p>Using the same configuration but without PCA (with <code class="docutils literal notranslate"><span class="pre">No</span></code> option selected for ‘Perform PCA with QoI’ in the UQ panel), the analysis took 1198 seconds on the same computer used to run the case above with PCA. The below figure shows the aggregated sensitivity indices which appears to be similar to the previous results.</p>
+<div class="align-center figure">
+<img alt="../../../../../_images/qf-0023-RES3.png" src="../../../../../_images/qf-0023-RES3.png" />
+</div>
+<div class="align-center figure">
+<img alt="../../../../../_images/qf-0023-RES4.png" src="../../../../../_images/qf-0023-RES4.png" />
+</div>
+<dl class="citation">
+<dt class="label" id="jung2023"><span class="brackets"><a class="fn-backref" href="#id1">Jung2023</a></span></dt>
+<dd><p>Jung, W.H., &amp; Taflanidis, A.A. (2023). Efficient global sensitivity analysis for high-dimensional outputs combining data-driven probability models and dimensionality reduction. Reliability Engineering &amp; System Safety, Volume 231, 108805.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2018-2023, The Regents of the University of California.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-158130480-4', 'auto');
+    
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+         .wy-nav-content { max-width: none; }
+  </style>
+
+<script>
+    /*
+    let selectedFilters = [];
+    const images  = document.getElementsByClassName("gallery-item");
+    const filters = [...document.querySelectorAll('.filter select')];
+    const toggles = [...document.querySelectorAll('.filter input')];
+
+    var show = function (elem) {
+        elem.style.display = 'block';
+    };
+    var hide = function (elem) {
+        elem.style.display = 'none';
+    };
+    var toggleFilter =  function(el,elid) {
+        const filter = document.getElementById(elid);
+        filter.disabled = !el.checked;
+       
+        if ("createEvent" in document) {
+            var evt = document.createEvent("HTMLEvents");
+            evt.initEvent("change", false, true);
+            filter.dispatchEvent(evt);
+        }
+        else
+            filter.fireEvent("change");
+    };
+    
+    for (const filter of filters) {
+        filter.addEventListener('change', function(event) {
+            selectedFilters = filters.map(filter => filter.disabled ? '' : filter.value).filter(Boolean);
+            console.log(selectedFilters);
+            for (const image of images) {
+                if (selectedFilters.every(filter => image.classList.contains(filter))) {
+                    show(image);
+                }
+                else {hide(image)};
+            };
+        })
+    };
+    */
+</script>
+
+
+</body>
+</html>

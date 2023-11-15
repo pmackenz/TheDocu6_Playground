@@ -1,0 +1,473 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>3.1.4.1. Transitional Markov chain Monte Carlo (TMCMC) algorithm &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/js/lightbox-plus-jquery.min.js"></script>
+        <script src="../../../../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="3.1.5.1. Configuring CustomUQ Engine" href="Configuring_CustomUQ.html" />
+    <link rel="prev" title="3.1.3.4. Probabilistic Learning on Manifolds (PLoM)" href="SimCenterUQPLoM.html" />
+<script src="https://cdn.jsdelivr.net/npm/vega@5.12.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@4.13.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.8.0"></script>
+<style media="screen">.vega-actions a {margin-right: 5px;}</style>
+<link href="../../../../_static/css/bootstrap.css" rel="stylesheet">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #F2F2F2" >
+          
+<a href="https://simcenter.designsafe-ci.org/" style="margin-bottom: 0px;">
+  <img src="../../../../_static/img/SimCenter-Only.png" class="logo" alt="Org-Logo" />
+</a>
+<hr style="margin: 0px;">
+
+  <a href="../../../../index.html">
+
+
+
+  
+  <img src="../../../../_static/quoFEM-Logo.png" class="logo" alt="Logo"/>
+
+</a>
+
+
+  
+  
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about/quoFEM/about.html">1. About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/desktop/ack.html">2. Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/license.html">3. Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/cite.html">4. How To Cite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases/quoCapabilities.html">5. Capabilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases/quoReleaseNotes.html">6. Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases/quoPlans.html">7. Release Plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/glossary.html">8. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/abbreviations.html">9. Abbreviations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Manual</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation/desktop/installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/quoFEM/quoFEMtutorial.html">2. Getting Started Tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="usage.html">3. User Interface</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="UQ.html">3.1. UQ: Uncertainty Quantification</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="UQ.html#uq-features-at-a-glance">3.1.1. UQ Features At-a-Glance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UQ.html#dakota-uq-engine">3.1.2. Dakota UQ Engine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UQ.html#simcenter-uq-engine">3.1.3. SimCenter UQ Engine</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="UQ.html#ucsd-uq-engine">3.1.4. UCSD UQ Engine</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">3.1.4.1. Transitional Markov chain Monte Carlo (TMCMC) algorithm</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="UQ.html#custom-uq-engine">3.1.5. Custom UQ Engine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UQ.html#video-resources">3.1.6. Video Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="quoFEM/FEM.html">3.2. FEM: Finite Element Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RV.html">3.3. RV: Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quoFEM/QuantitiesOfInterest.html">3.4. QoI: Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quoFEM/resQUO.html">3.5. RES: Results</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/desktop/examples.html">4. Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/desktop/troubleshooting.html">5. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reqments/reqQUOFE.html">6. Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bugs.html">7. Bugs &amp; Feature Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dcv/quoFEM/quoFEM.html">8. Running in Your Browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quoFEM/usage_video.html">9. Video Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_inputs_documentation/User_Input_Documentation_Tables.html">10. User Inputs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Technical Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../technical_manual/desktop/technical_manual.html">1. Technical Manual</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/how_to_build/desktop/how_to_build.html">1. How to Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/architecture/desktop/architecture.html">2. Software Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/verification/desktop/verification.html">4. Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/coding_style/desktop/coding_style.html">5. Coding Style</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Quantified Uncertainty with Optimization for the FEM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="usage.html"><span class="section-number">3. </span>User Interface</a> &raquo;</li>
+        
+          <li><a href="UQ.html"><span class="section-number">3.1. </span>UQ: Uncertainty Quantification</a> &raquo;</li>
+        
+      <li><span class="section-number">3.1.4.1. </span>Transitional Markov chain Monte Carlo (TMCMC) algorithm</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../../_sources/common/user_manual/usage/desktop/UCSD_UQ_TMCMC.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="transitional-markov-chain-monte-carlo-tmcmc-algorithm">
+<span id="lblucsdtmcmc"></span><h1><span class="section-number">3.1.4.1. </span>Transitional Markov chain Monte Carlo (TMCMC) algorithm<a class="headerlink" href="#transitional-markov-chain-monte-carlo-tmcmc-algorithm" title="Permalink to this heading">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a></h2>
+<p>TMCMC is an algorithm which is used to draw samples from the posterior probability distribution of random variables when performing Bayesian estimation. Bayesian estimation is a probabilistic inverse problem where the objective is to estimate the probability distribution of the parameters of a computational model, given data. The data consist of numbers which are typically obtained from measurements of a physical phenomenon being studied. In quoFEM, the data are provided in a text file, whose path is defined in the <strong>UQ</strong> panel. The computational model (defined in the <strong>FEM</strong> panel) is an approximation of the real process that generated the data and the outputs of this model (defined in the <strong>QoI</strong> panel) are the same quantities of interest for which we have measured data. The model has several parameters that influence the output predicted by the model when it is evaluated at a set of inputs. In the inverse problem, the values of these parameters are unknown, and in the Bayesian setting, they are treated as random variables, with specified prior probability distribution functions (defined in the <strong>RV</strong> panel). To complete the definition of the Bayesian inverse problem, the probability model for the data needs to be specified, which is done by the log-likelihood function in the <strong>UQ</strong> panel.</p>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h2>
+<p>To use the TMCMC algorithm, select the <strong>UCSD-UQ</strong> engine in the <strong>UQ</strong> panel. Currently, only the TMCMC method is available with the <strong>UCSD-UQ</strong> engine.</p>
+<p>The required inputs to perform Bayesian calibration in quoFEM using the TMCMC algorithm are <strong># Samples</strong>, <strong>Seed</strong>, and <strong>Calibration Data File</strong>. Specifying <strong>Log Likelihood Script</strong> is optional. Figure <a class="reference internal" href="#figtmcmcpanel"><span class="std std-numref">Fig. 3.1.4.1.1</span></a> shows the input panel that is presented when the TMCMC method is selected. Each of the options on this panel will be explained next.</p>
+<div class="align-center figure" id="id1">
+<span id="figtmcmcpanel"></span><img alt="../../../../_images/UCSD_UQ_Engine.png" src="../../../../_images/UCSD_UQ_Engine.png" />
+<p class="caption"><span class="caption-number">Fig. 3.1.4.1.1 </span><span class="caption-text">TMCMC algorithm input panel.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<ol class="arabic simple">
+<li><p><strong># Samples</strong> defines the number of values to be sampled from the posterior probability distribution of the parameters of the computational model. This number is not the same as the number of times the computational model is evaluated. In order to sample from the posterior probability distribution of the inputs, the TMCMC algorithm relies on gradually changing the target distribution from the prior to posterior in a number of stages. The number of stages is not known apriori. In every stage, the Markov chain is propagated for a number of steps (which varies betwen 2-5) for each sample, which requires the computational model to be evaluated. So, if <strong># Samples</strong> is set to a number denoted as <span class="math notranslate nohighlight">\(N_{samples}\)</span>, the total number of times that the computational model is evaluated is given by <span class="math notranslate nohighlight">\(N_{eval} = \sum_{i=1}^{N_{stages}} N_{samples}*N_{steps}^{(i)}\)</span>.</p></li>
+<li><p><strong>Seed</strong> is an integer that specifies the seed value of the psuedo-random number generator. If the same Bayesian estimation problem is run multiple times without having the same seed, a different set of samples produced in each run. Setting the same seed as a previous TMCMC sampling run ensures that the the same result is reproduced if the TMCMC sampling is run again.</p></li>
+<li><p><strong>Calibration Data File</strong> is the path to a text file that contains the data of the measured values of the quantities of interest.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The data are provided in the calibration data file, which must fulfill the following requirements:</p>
+<ol class="arabic simple">
+<li><p>Each row of the calibration data file contains data from one experiment. The individual entries in every row of this file can be separated by spaces, tabs, or commas.</p></li>
+<li><p>The number of entries in each row must equal the sum of the length of all outputs defined in the <strong>QoI</strong> panel.</p></li>
+<li><p>The order of the entries in each row of the calibration data file must match the order in which the outputs are defined in the <strong>QoI</strong> panel, and must correspond to the output from the computational model in the <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file.</p></li>
+</ol>
+<p>For example, if there are data from two experiments, and there are 2 response quantities, of length 2 and 1 respectively, then, there must be two rows of values in the calibration data file, the length of each row must be 3, the first two values in each row correspond to the first response quantity and the third value in each row corresponds to the second response quantity.</p>
+</div>
+<ol class="arabic simple" start="4">
+<li><p><strong>Log Likelihood Script</strong>: By default, a Gaussian log-likelihood function is used in the TMCMC algorithm. If desired, a different log-likelihood function defined in a Python script can be provided, and the path to this Python script is provided here.</p></li>
+</ol>
+</div>
+<div class="section" id="defining-the-log-likelihood-function">
+<h2>Defining the log-likelihood function<a class="headerlink" href="#defining-the-log-likelihood-function" title="Permalink to this heading">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This feature is meant for advanced users, and users must exercise care if defining their own log-likelihood function.</p>
+</div>
+<p>In the <strong>Log Likelihood Script</strong> field, users can provide the path to a Python script which contains a function called <code class="docutils literal notranslate"><span class="pre">log_likelihood</span></code> that returns the log-likelihood value.</p>
+<p>By allowing users to define a <code class="docutils literal notranslate"><span class="pre">log_likelihood</span></code> function in the <strong>Log Likelihood Script</strong>, the workflow provides users full control in defining the log-likelihood model they desire to use.
+The <code class="docutils literal notranslate"><span class="pre">log_likelihood</span></code> function is called internally during the execution of the TMCMC algorithm, and this function must compute and return the log-likelihood value at a point in the parameter space. The function must take the arguments as shown below in signature of the <a class="reference external" href="https://github.com/NHERI-SimCenter/quoFEM/blob/master/backend/modules/performUQ/UCSD_UQ/defaultLogLikeScript.py">default log-likelihood script</a>. Within this function, users can define their own log-likelihood function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">log_likelihood</span><span class="p">(</span><span class="n">calibrationData</span><span class="p">,</span> <span class="n">prediction</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">numExperiments</span><span class="p">,</span> <span class="n">covarianceMatrixList</span><span class="p">,</span> <span class="n">edpNamesList</span><span class="p">,</span>
+<span class="linenos"> 2</span>                   <span class="n">edpLengthsList</span><span class="p">,</span> <span class="n">covarianceMultiplierList</span><span class="p">,</span> <span class="n">scaleFactors</span><span class="p">,</span> <span class="n">shiftFactors</span><span class="p">):</span>
+<span class="linenos"> 3</span>    <span class="s2">&quot;&quot;&quot; Compute the log-likelihood</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="s2">    :param calibrationData: Calibration data consisting of the measured values of response. Each row contains the data</span>
+<span class="linenos"> 6</span><span class="s2">    from one experiment. The length of each row equals the sum of the lengths of all response quantities.</span>
+<span class="linenos"> 7</span><span class="s2">    :type calibrationData: numpy ndarray (atleast_2d)</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="s2">    :param prediction: Prediction of the response from the model, evaluated using the parameter values for</span>
+<span class="linenos">10</span><span class="s2">    which the log-likelihood function needs to be calculated.</span>
+<span class="linenos">11</span><span class="s2">    :type prediction: numpy ndarray (atleast_2d)</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="s2">    :param parameters: A sample value of the model parameter vector.</span>
+<span class="linenos">14</span><span class="s2">    :type parameters: numpy ndarray</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="s2">    :param numExperiments: Number of experiments from which data is available, this is equal to the number of rows</span>
+<span class="linenos">17</span><span class="s2">    (i.e., the first index) of the calibration data array</span>
+<span class="linenos">18</span><span class="s2">    :type numExperiments: int</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="s2">    :param covarianceMatrixList: A list of length numExperiments * numResponses, where each item in the list contains</span>
+<span class="linenos">21</span><span class="s2">    the covariance matrix or variance value corresponding to that experiment and response quantity, i.e., each item in</span>
+<span class="linenos">22</span><span class="s2">    the list is a block on the diagonal of the error covariance matrix</span>
+<span class="linenos">23</span><span class="s2">    :type covarianceMatrixList: list of numpy ndarrays</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="s2">    :param edpNamesList: A list containing the names of the response quantities</span>
+<span class="linenos">26</span><span class="s2">    :type edpNamesList: list of strings</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span><span class="s2">    :param edpLengthsList: A list containing the length of each response quantity</span>
+<span class="linenos">29</span><span class="s2">    :type edpLengthsList: list of ints</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span><span class="s2">    :param covarianceMultiplierList: A list containing multipliers on the default covariance matrices or variance</span>
+<span class="linenos">32</span><span class="s2">    values. The length of this list is equal to the number of response quantities. These additional variables, one</span>
+<span class="linenos">33</span><span class="s2">    per response quantity, are parameters of the likelihood model whose values are also calibrated.</span>
+<span class="linenos">34</span><span class="s2">    :type covarianceMultiplierList: list of floats</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span><span class="s2">    :param scaleFactors: A list containing the normalizing factors used to scale (i.e. divide) the model</span>
+<span class="linenos">37</span><span class="s2">    prediction values. The length of this list is equal to the number of response quantities.</span>
+<span class="linenos">38</span><span class="s2">    :type scaleFactors: list of ints</span>
+<span class="linenos">39</span>
+<span class="linenos">40</span><span class="s2">    :param shiftFactors: A list containing the values used to shift (i.e. added to) the prediction values. The length of</span>
+<span class="linenos">41</span><span class="s2">    this list is equal to the number of response quantities.</span>
+<span class="linenos">42</span><span class="s2">    :type shiftFactors: list of ints</span>
+<span class="linenos">43</span>
+<span class="linenos">44</span><span class="s2">    :return: loglikelihood. This is a scalar value, which is equal to the logpdf of a zero-mean multivariate normal</span>
+<span class="linenos">45</span><span class="s2">    distribution and a user-supplied covariance structure. Block-diagonal covariance structures are supported. The value</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="default-error-covariance-structure">
+<h2>Default error covariance structure<a class="headerlink" href="#default-error-covariance-structure" title="Permalink to this heading">¶</a></h2>
+<p>The likelihood is a function of the difference between the predicted and the measured values of the response quantities of interest. These differences are also called <strong>residuals</strong> or <strong>errors</strong>. The likelihood function assumes a structure of the covariance matrix for these error terms.</p>
+<p>By default, quoFEM assumes a block-diagonal error covariance structure. An example of the block-diagonal covariance structure is shown in <a class="reference internal" href="#figdefaultcovariancestructure"><span class="std std-numref">Fig. 3.1.4.1.2</span></a>. In this figure, the number of experiments is denoted as <span class="math notranslate nohighlight">\(N_{exp}\)</span>. The number of response quantities of interest is denoted as <span class="math notranslate nohighlight">\(N_{q}\)</span>, and <span class="math notranslate nohighlight">\(q_1, q_2, ..., q5\)</span> are the names of the quantities of interest in this example (these will be defined in the <strong>QoI</strong> panel when using quoFEM). Of these, <span class="math notranslate nohighlight">\(q_1\)</span> and <span class="math notranslate nohighlight">\(q_2\)</span> are scalar response quantities (i.e., they have a length of 1), while <span class="math notranslate nohighlight">\(q_3\)</span>, <span class="math notranslate nohighlight">\(q_4\)</span>, and <span class="math notranslate nohighlight">\(q_5\)</span> are response quantities whose length &gt; 1 (referred to as vector/field quantities). The length of each of the <span class="math notranslate nohighlight">\(N_q\)</span> quantities of interest is denoted by <span class="math notranslate nohighlight">\(l_i\)</span>. So, <span class="math notranslate nohighlight">\(N\)</span>, the total number of calibration data terms, which is the same as the total number of terms in the <code class="docutils literal notranslate"><span class="pre">results.out</span></code> file output from the model, and is also equal to the total number of error/residual terms, is given by:</p>
+<div class="math notranslate nohighlight" id="equation-eqncalibrationterms">
+<span class="eqno">(3.1.4.1.1)<a class="headerlink" href="#equation-eqncalibrationterms" title="Permalink to this equation">¶</a></span>\[N = N_{exp} \times \sum_{i=1}^{N_q} l_i\]</div>
+<p>Note that quoFEM requires that the calibration data be provided in a text file separate from the script where the model is defined. In this text file, the number of rows corresponds to the number of experiment <span class="math notranslate nohighlight">\(N_{exp}\)</span>, and the number of terms in each row (i.e., the number of columns) is equal to <span class="math notranslate nohighlight">\(\sum_{i=1}^{N_q} l_i\)</span>. Hence, the total number of calibration terms <span class="math notranslate nohighlight">\(N\)</span> is equal to the product of the number of rows and number of columns in the calibration data file.</p>
+<p>The error-covariance matrix is a block-diagonal square matrix of size <span class="math notranslate nohighlight">\(N \times N\)</span>. There are <span class="math notranslate nohighlight">\(N_{exp} \times N_q\)</span> blocks on the diagonal. For each of these blocks, if it corresponds to a scalar response quantity, then a scalar variance value is used by default else, a scalar matrix (i.e., an identity matrix of size <span class="math notranslate nohighlight">\(l_i \times l_i\)</span> multiplied by a scalar value) is used by default.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For numerical convenience, during execution, a transformation is applied to the calibration data and model prediction corresponding to each response quantity. The calibration data and model prediction for each response quantity are first shifted (a scalar value is added to the data and prediction) and then scaled (the data and prediction is divided by a positive scalar value).</p>
+<p>Currently, the shift factors are set to 0.0 for all response quantities by default. The scale factors used are the absolute maximum of the data for each response variable. If the absolute maximum of the data for any response variable is 0.0, then the scale factor is set to 1.0, and the shift factor is set to 1.0.</p>
+</div>
+<p>If there is data from more than one experiment, the default variance value used per response quantity, which is constant across experiments, is computed as the variance of the transformed calibration data. If there is data from only one experiment, then a default variance value is computed by assuming that the standard deviation of the error is 5% of the absolute maximum value of the corresponding transformed calibration data.</p>
+<div class="align-center figure" id="id2">
+<span id="figdefaultcovariancestructure"></span><a class="reference internal image-reference" href="../../../../_images/DefaultBlockDiagonalCovariance.png"><img alt="../../../../_images/DefaultBlockDiagonalCovariance.png" src="../../../../_images/DefaultBlockDiagonalCovariance.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.1.4.1.2 </span><span class="caption-text">Default block-diagonal error covariance structure.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>In <a class="reference internal" href="#figdefaultcovariancestructure"><span class="std std-numref">Fig. 3.1.4.1.2</span></a>, the outermost square marked by the blue dashed lines represents the block-diagonal error-covariance matrix for all the <span class="math notranslate nohighlight">\(N\)</span> error/residual terms. The two squares marked by the black dotted lines along the diagonal of the error covariance matrix indicate the portions of the error covariance matrix corresponding to the two experiments. The solid colored squares indicate the portions of the error covariance matrix that correspond to each quantity of interest.</p>
+<p>The block-diagonal structure implies that there is no correlation among the error/residual terms across experiments, i.e., the portions of the error-covariance matrix outside the two squares marked by black dotted lines are filled with zeros. There is also no correlation among the error/residual terms corresponding to different quantities of interest within each experiment.</p>
+</div>
+<div class="section" id="user-defined-covariance-structure">
+<h2>User-defined covariance structure<a class="headerlink" href="#user-defined-covariance-structure" title="Permalink to this heading">¶</a></h2>
+<p>quoFEM provides users the option to supply error covariance matrices per response quantity per experiment, i.e., users can define each block of the diagonal error-covariance structure which will be utilized in the calculation of the log-likelihood. To do so, users must provide a separate text file for each block containing the values for that block. The names of these text files are expected to follow the convention of “{QoIName}.{ExpNum}.sigma”. Examples of the names of the files that contain values which will be used instead of the default values are shown for each block in <a class="reference internal" href="#figuserdefinedcovariancestructure"><span class="std std-numref">Fig. 3.1.4.1.3</span></a>.</p>
+<p>Within these files, the entries can be separated by either commas, spaces, or tabs. Users can provide a scalar variance value for scalar response quantities, which will be used instead of the default value. For vector/field response quantities, users can supply in the files either</p>
+<ol class="arabic simple">
+<li><p>a scalar value, in which case the block corresponding to this response variable and this experiment will be an identity matrix of size <span class="math notranslate nohighlight">\(l_i \times l_i\)</span> multipled by this scalar value, or</p></li>
+<li><p>a row/column of <span class="math notranslate nohighlight">\(l_i\)</span> values, in which case, these will be treated as the elements of the diagonal of the block, or</p></li>
+<li><p>a matrix of values of size <span class="math notranslate nohighlight">\(l_i \times l_i\)</span>, which implies that the error/residual terms corresponding to this block are correlated.</p></li>
+</ol>
+<div class="align-center figure" id="id3">
+<span id="figuserdefinedcovariancestructure"></span><a class="reference internal image-reference" href="../../../../_images/UserDefinedBlockDiagonalCovariance.png"><img alt="../../../../_images/UserDefinedBlockDiagonalCovariance.png" src="../../../../_images/UserDefinedBlockDiagonalCovariance.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.1.4.1.3 </span><span class="caption-text">User-defined block-diagonal error covariance structure.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="additional-calibration-parameters">
+<h2>Additional calibration parameters<a class="headerlink" href="#additional-calibration-parameters" title="Permalink to this heading">¶</a></h2>
+<p>In Bayesian calibration problems, the value of the variance/covariances of the error/residual terms is also typically unknown. The residuals include not only measurement errors, but also errors caused due to the inability of the model to prefectly represent the behavior being modeled. Hence, by default, quoFEM also calibrates the values of multipliers on the block-diagonal terms in the error covariance matrix. Therefore, the total number of parameters being calibrated is given by the sum of the number of parameters of the computational model and the number of response quantities of interest.</p>
+<p>In quoFEM, the parameters of the model are defined in the <strong>RV</strong> panel, and the response quantities are specified in the <strong>QoI</strong> panel. Hence the total number of parameters being calibrated is equal to the sum of the number of RVs and the number of QoIs. There is one multiplier per response quantity, irrespective of it being either a scalar or a vector/field quantity. Also, the same multiplier per response quantity is used on the blocks of the error covariance matrix across experiments.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2018-2023, The Regents of the University of California.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-158130480-4', 'auto');
+    
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+         .wy-nav-content { max-width: none; }
+  </style>
+
+<script>
+    /*
+    let selectedFilters = [];
+    const images  = document.getElementsByClassName("gallery-item");
+    const filters = [...document.querySelectorAll('.filter select')];
+    const toggles = [...document.querySelectorAll('.filter input')];
+
+    var show = function (elem) {
+        elem.style.display = 'block';
+    };
+    var hide = function (elem) {
+        elem.style.display = 'none';
+    };
+    var toggleFilter =  function(el,elid) {
+        const filter = document.getElementById(elid);
+        filter.disabled = !el.checked;
+       
+        if ("createEvent" in document) {
+            var evt = document.createEvent("HTMLEvents");
+            evt.initEvent("change", false, true);
+            filter.dispatchEvent(evt);
+        }
+        else
+            filter.fireEvent("change");
+    };
+    
+    for (const filter of filters) {
+        filter.addEventListener('change', function(event) {
+            selectedFilters = filters.map(filter => filter.disabled ? '' : filter.value).filter(Boolean);
+            console.log(selectedFilters);
+            for (const image of images) {
+                if (selectedFilters.every(filter => image.classList.contains(filter))) {
+                    show(image);
+                }
+                else {hide(image)};
+            };
+        })
+    };
+    */
+</script>
+
+
+</body>
+</html>

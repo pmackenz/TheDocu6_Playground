@@ -1,0 +1,432 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>1.2. Install on macOS 10 &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/js/lightbox-plus-jquery.min.js"></script>
+        <script src="../../../../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="2. Getting Started Tutorial" href="../../about/quoFEM/quoFEMtutorial.html" />
+    <link rel="prev" title="1.1. Install on Windows 10" href="install_Windows.html" />
+<script src="https://cdn.jsdelivr.net/npm/vega@5.12.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@4.13.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.8.0"></script>
+<style media="screen">.vega-actions a {margin-right: 5px;}</style>
+<link href="../../../../_static/css/bootstrap.css" rel="stylesheet">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #F2F2F2" >
+          
+<a href="https://simcenter.designsafe-ci.org/" style="margin-bottom: 0px;">
+  <img src="../../../../_static/img/SimCenter-Only.png" class="logo" alt="Org-Logo" />
+</a>
+<hr style="margin: 0px;">
+
+  <a href="../../../../index.html">
+
+
+
+  
+  <img src="../../../../_static/quoFEM-Logo.png" class="logo" alt="Logo"/>
+
+</a>
+
+
+  
+  
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about/quoFEM/about.html">1. About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/desktop/ack.html">2. Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/license.html">3. Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/cite.html">4. How To Cite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases/quoCapabilities.html">5. Capabilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases/quoReleaseNotes.html">6. Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases/quoPlans.html">7. Release Plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/glossary.html">8. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/abbreviations.html">9. Abbreviations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Manual</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="installation.html">1. Installation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="install_Windows.html">1.1. Install on Windows 10</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1.2. Install on macOS 10</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-python-3-9">1.2.1. Install Python 3.9</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#download-the-application">1.2.4. Download the Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test-the-installation">1.2.5. Test the Installation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/quoFEM/quoFEMtutorial.html">2. Getting Started Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage/desktop/usage.html">3. User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/desktop/examples.html">4. Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/desktop/troubleshooting.html">5. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reqments/reqQUOFE.html">6. Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bugs.html">7. Bugs &amp; Feature Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dcv/quoFEM/quoFEM.html">8. Running in Your Browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage/desktop/quoFEM/usage_video.html">9. Video Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_inputs_documentation/User_Input_Documentation_Tables.html">10. User Inputs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Technical Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../technical_manual/desktop/technical_manual.html">1. Technical Manual</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/how_to_build/desktop/how_to_build.html">1. How to Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/architecture/desktop/architecture.html">2. Software Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/verification/desktop/verification.html">4. Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/coding_style/desktop/coding_style.html">5. Coding Style</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Quantified Uncertainty with Optimization for the FEM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="installation.html"><span class="section-number">1. </span>Installation</a> &raquo;</li>
+        
+      <li><span class="section-number">1.2. </span>Install on macOS 10</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../../_sources/common/user_manual/installation/desktop/install_macOS.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="install-on-macos-10">
+<span id="lblinstallmac"></span><h1><span class="section-number">1.2. </span>Install on macOS 10<a class="headerlink" href="#install-on-macos-10" title="Permalink to this heading">¶</a></h1>
+<div class="section" id="install-python-3-9">
+<h2><span class="section-number">1.2.1. </span>Install Python 3.9<a class="headerlink" href="#install-python-3-9" title="Permalink to this heading">¶</a></h2>
+<p>SimCenter tools require an x86-based version of Python 3.9 to run properly. If you have a different version of Python installed, you will need to add a Python 3.9 x86 version to your system. Below, we will demonstrate the process for installing Python 3.9 using the official distributor of Python, <strong>python.org</strong>.</p>
+<p>To see if you have python installed and whether it is compatable with SimCenter tools, issue the following in a terminal window.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span>
+<span class="kn">import</span> <span class="nn">platform</span>
+<span class="n">platform</span><span class="o">.</span><span class="n">uname</span><span class="p">()</span>
+<span class="n">exit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>As shown in screenshot below, you should see a Python 3.9 version after issuing the python3 command and the machine=’x86_64’ in the last line of output from the platform.uname() command. If you see another Python version or machine=’arm64’, you will need to install an x86 Python 3.9 on your computer.</p>
+<div class="align-center figure" id="id5">
+<img alt="../../../../_images/pythonKernel.png" src="../../../../_images/pythonKernel.png" />
+<p class="caption"><span class="caption-number">Fig. 1.2.1.1 </span><span class="caption-text">Python: Kernel Version</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<p><strong>1.</strong> To obtain an x86 version of Python 3.9 use <a class="reference external" href="https://www.python.org/downloads/macos/">Python.org</a> . From their Downloads page, look under the available downloads for a 3.9 version with an <strong>macOS 64-bit Intel-only installer</strong> link below the version number, e.g. Python 3.9.13, and select that installer to download it.</p>
+<div class="align-center figure" id="id6">
+<img alt="../../../../_images/pythonDownload.png" src="../../../../_images/pythonDownload.png" />
+<p class="caption"><span class="caption-number">Fig. 1.2.1.2 </span><span class="caption-text">Python: python.org MacOS Download Page</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<p><strong>2.</strong> After running yhe Python.org installer, a pop up directory window will appear containing a number of files, as shown in the figure below. Two of these files, <code class="docutils literal notranslate"><span class="pre">Update</span> <span class="pre">Shell</span> <span class="pre">Profile.command.sh</span></code> and <code class="docutils literal notranslate"><span class="pre">Install</span> <span class="pre">CertificateCommand.sh</span></code> are script files. You need to execute both script files to get Python set up correctly so that it can be invoked from the terminal application. To execute the files, double click on the files individually with your mouse.</p>
+<blockquote>
+<div><div class="align-center figure" id="id7">
+<img alt="../../../../_images/pythonInstallShell.png" src="../../../../_images/pythonInstallShell.png" />
+<p class="caption"><span class="caption-number">Fig. 1.2.1.3 </span><span class="caption-text">Python: Folder Displayed at Conclusion of Install</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+<p><strong>3.</strong> Once Python is installed, you need to extend it by installing a few additional packages. To facilitate this phase of the installation, we created a <strong>nheri_simcenter</strong> python package that automatically installs all other dependencies. Start a Terminal window and type the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3<span class="w"> </span>install<span class="w"> </span>nheri_simcenter<span class="w"> </span>--upgrade
+</pre></div>
+</div>
+<p>Make sure you see a message that confirms the successful installation of the nheri-simcenter package before proceeding to the next step.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>If you forget to invoke the <code class="docutils literal notranslate"><span class="pre">UpdateShellProfile.command.sh</span></code> script at the end of the install, you can always execute the correct shell file later to update the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> variable to point to the Python application.</p></li>
+</ol>
+<p>On Linux systems, the shell is the program that takes commands from the keyboard that you enter in the terminal window and passes them to the operating system to perform by invoking applications and passing data between applications. In the good old days, it was the only interface available to the user, i.e., there was no such thing as Finder! There are a number of shell programs that can be installed and made available to you. The most popular is the <strong>bash</strong> shell, the up and coming one is the <strong>Z</strong> shell. Power MacOS users will write shell scripts to do many many useful things. By default the applications that the shell program will invoke are limited to applications in a few specific directories that are defined in the users <code class="docutils literal notranslate"><span class="pre">PATH</span></code>. Users can modify this path by editing files that the shell program will read from everytime the program is started.</p>
+<p>When the frontend application is running the computations it is actually running a backend application using the shell program. As a consequence the shell program must be made aware of the locations of  some of the external applications that you have installed as <strong>OpenSees</strong> and <strong>Dakota</strong> do not provide installers that automatically do this when they are installed. Other applications, like <strong>Tcl</strong> provide scripts that you invoke to do it. In short you have to edit the file appropriate to the shell you are using.</p>
+<p>To find which shell program you are using when you issue commands inside the terminal window, type the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>env<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>SHELL
+</pre></div>
+</div>
+<p>If the result is <code class="docutils literal notranslate"><span class="pre">/bin/bash</span></code> you will need to edit the <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> file or the <code class="docutils literal notranslate"><span class="pre">bash_profile</span></code> file. If the result is <code class="docutils literal notranslate"><span class="pre">/bin/zsh</span></code> you will need to edit the <code class="docutils literal notranslate"><span class="pre">.zshrc</span></code> or <code class="docutils literal notranslate"><span class="pre">.zprofile</span></code>. Typically, the <code class="docutils literal notranslate"><span class="pre">.bash_profile</span></code> or the <code class="docutils literal notranslate"><span class="pre">.zprofile</span></code> file is the one to edit as by design these will invoke the <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> or <code class="docutils literal notranslate"><span class="pre">.zshrc</span></code> file. If in doubt, look for these files in your home directory and see which of these other installers have modified.</p>
+<ol class="arabic simple" start="2">
+<li><p>Python 3.10 from python.org will also work, though there is no x86 installer. The reason we do not recommend it’s usage is that there is additional settings that need to be modified in the application under the Preferences tab as that python package has a different mechanism for invoking the x86 version, specifically <strong>python3-intel64</strong>.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="download-the-application">
+<h2><span class="section-number">1.2.4. </span>Download the Application<a class="headerlink" href="#download-the-application" title="Permalink to this heading">¶</a></h2>
+<p>To download the quoFEM app, navigate to the <a class="reference external" href="https://www.designsafe-ci.org/data/browser/public/designsafe.storage.community//SimCenter/Software/quoFEM">quoFEM Download</a> page which should resemble <a class="reference internal" href="#figdownload-quofem"><span class="std std-numref">Fig. 1.2.4.5</span></a>. The download page contains a list of downloadable files and directories.</p>
+<div class="align-center figure" id="id12">
+<span id="figdownload-quofem"></span><img alt="../../../../_images/quoFEMDownload.png" src="../../../../_images/quoFEMDownload.png" />
+<p class="caption"><span class="caption-number">Fig. 1.2.4.5 </span><span class="caption-text">quoFEM download page.</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+</div>
+<p>Click on the file with a name ending with <strong>Mac_Download.dmg</strong> to download the quoFEM app. In the pop-up window, click on the <strong>Download</strong> button in the bottom right corner. After the download has completed, open the dmg file and copy the quoFEM app application to a location in your filesystem.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We suggest copying the application to your Desktop. After copying the application, you can move the dmg file to the trash or eject it.</p>
+</div>
+</div>
+<div class="section" id="test-the-installation">
+<h2><span class="section-number">1.2.5. </span>Test the Installation<a class="headerlink" href="#test-the-installation" title="Permalink to this heading">¶</a></h2>
+<p>Once the installation procedure has been completed, it is a good practice to run some basic checks. Navigate to the location where you placed the application and open it by running the quoFEM.exe executable.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>SimCenter apps are code-signed and notarized, but because they are not downloaded from the operating system’s app store, they may not be recognized as safe applications. Depending on your security settings, when you start a SimCenter app for the first time, your operating system may show a dialog box indicating it is unsafe. If this dialog appears, choose the cancel button. Try to start the app again, this time by right clicking on it and selecting open.</p>
+<p>If the app still fails to open. You need to go to System Settings-&gt;Privacy and Security. Under the Security section you need to at least temprarily select the option to allow applications downloaded from the <strong>App Store and Identified Developers</strong>. With this schecked try again. If it fails again, go back to System Settings-&gt;Privacy and Security. Just below the section you just checked, there should be some text about why the app was stopped and an option to <a href="#id3"><span class="problematic" id="id4">**</span></a>Open Anayway” , as shown in figure below. Click on the button and the app should start.</p>
+<div class="align-center figure">
+<img alt="../../../../_images/AppleSecurity.png" src="../../../../_images/AppleSecurity.png" />
+</div>
+</div>
+<p>Once the application started, you should see the user interface shown in <a class="reference internal" href="#figui-quofem"><span class="std std-numref">Fig. 1.2.5.5</span></a>. We recommend running the example problem <a class="reference internal" href="../../examples/desktop/qfem-0001/README.html#qfem-0001"><span class="std std-ref">Two-Dimensional Truss: Sampling, Reliability and Sensitivity</span></a> to test the application.</p>
+<div class="align-center figure" id="id18">
+<span id="figui-quofem"></span><img alt="../../../../_images/quoFEM1.png" src="../../../../_images/quoFEM1.png" />
+<p class="caption"><span class="caption-number">Fig. 1.2.5.5 </span><span class="caption-text">quoFEM application on startup.</span><a class="headerlink" href="#id18" title="Permalink to this image">¶</a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When the quoFEM app is running, open the app/preferences or File/Preferences and make sure that python3 appears under <strong>External Applications:Python</strong>, as shown in the figure below. If you used older versions of SimCenter tools this was not the default. The exact location of python3 that you installed can be found by opening the terminal application and executing the <strong>which python3</strong> command. Enter the path shown as a response to the Preferences panel under Python and then press the <strong>Save</strong> button.</p>
+<blockquote>
+<div><blockquote>
+<div><div class="figure align-default">
+<img alt="../../../../_images/pythonPreferences.png" src="../../../../_images/pythonPreferences.png" />
+</div>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">align</dt>
+<dd class="field-odd"><p>center</p>
+</dd>
+<dt class="field-even">figclass</dt>
+<dd class="field-even"><p>align-center</p>
+</dd>
+</dl>
+<p>Set Python Preferences.</p>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2018-2023, The Regents of the University of California.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-158130480-4', 'auto');
+    
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+         .wy-nav-content { max-width: none; }
+  </style>
+
+<script>
+    /*
+    let selectedFilters = [];
+    const images  = document.getElementsByClassName("gallery-item");
+    const filters = [...document.querySelectorAll('.filter select')];
+    const toggles = [...document.querySelectorAll('.filter input')];
+
+    var show = function (elem) {
+        elem.style.display = 'block';
+    };
+    var hide = function (elem) {
+        elem.style.display = 'none';
+    };
+    var toggleFilter =  function(el,elid) {
+        const filter = document.getElementById(elid);
+        filter.disabled = !el.checked;
+       
+        if ("createEvent" in document) {
+            var evt = document.createEvent("HTMLEvents");
+            evt.initEvent("change", false, true);
+            filter.dispatchEvent(evt);
+        }
+        else
+            filter.fireEvent("change");
+    };
+    
+    for (const filter of filters) {
+        filter.addEventListener('change', function(event) {
+            selectedFilters = filters.map(filter => filter.disabled ? '' : filter.value).filter(Boolean);
+            console.log(selectedFilters);
+            for (const image of images) {
+                if (selectedFilters.every(filter => image.classList.contains(filter))) {
+                    show(image);
+                }
+                else {hide(image)};
+            };
+        })
+    };
+    */
+</script>
+
+
+</body>
+</html>

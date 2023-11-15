@@ -1,0 +1,876 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>1.2. Methods in SimCenterUQ Engine &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/js/lightbox-plus-jquery.min.js"></script>
+        <script src="../../../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="1.3. Methods in UCSD UQ Engine" href="UCSDUQTechnical.html" />
+    <link rel="prev" title="1.1. Dakota Methods" href="uqTechnical.html" />
+<script src="https://cdn.jsdelivr.net/npm/vega@5.12.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@4.13.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.8.0"></script>
+<style media="screen">.vega-actions a {margin-right: 5px;}</style>
+<link href="../../../_static/css/bootstrap.css" rel="stylesheet">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #F2F2F2" >
+          
+<a href="https://simcenter.designsafe-ci.org/" style="margin-bottom: 0px;">
+  <img src="../../../_static/img/SimCenter-Only.png" class="logo" alt="Org-Logo" />
+</a>
+<hr style="margin: 0px;">
+
+  <a href="../../../index.html">
+
+
+
+  
+  <img src="../../../_static/quoFEM-Logo.png" class="logo" alt="Logo"/>
+
+</a>
+
+
+  
+  
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/about/quoFEM/about.html">1. About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../front-matter/desktop/ack.html">2. Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../front-matter/license.html">3. Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../front-matter/cite.html">4. How To Cite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/releases/quoCapabilities.html">5. Capabilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/releases/quoReleaseNotes.html">6. Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/releases/quoPlans.html">7. Release Plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../front-matter/glossary.html">8. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../front-matter/abbreviations.html">9. Abbreviations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/installation/desktop/installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/about/quoFEM/quoFEMtutorial.html">2. Getting Started Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/usage/desktop/usage.html">3. User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/examples/desktop/examples.html">4. Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/troubleshooting/desktop/troubleshooting.html">5. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reqments/reqQUOFE.html">6. Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/bugs.html">7. Bugs &amp; Feature Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/dcv/quoFEM/quoFEM.html">8. Running in Your Browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/usage/desktop/quoFEM/usage_video.html">9. Video Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_manual/user_inputs_documentation/User_Input_Documentation_Tables.html">10. User Inputs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Technical Manual</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="technical_manual.html">1. Technical Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="uqTechnical.html">1.1. Dakota Methods</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1.2. Methods in SimCenterUQ Engine</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nataf-transformation">Nataf transformation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#global-sensitivity-analysis">Global sensitivity analysis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#variance-based-global-sensitivity-indices">Variance-based global sensitivity indices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#estimation-of-sobol-indices-using-probabilistic-model-based-global-sensitivity-analysis-pm-gsa">Estimation of Sobol indices using Probabilistic model-based global sensitivity analysis (PM-GSA)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dealing-with-high-dimensional-responses-with-pca-psa">Dealing with high-dimensional responses with PCA-PSA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#aggregated-sensitivity-index">Aggregated sensitivity index</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#global-surrogate-modeling">Global surrogate modeling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction-to-gaussian-process-regression-kriging">Introduction to Gaussian process regression (Kriging)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dealing-with-noisy-measurements">Dealing with noisy measurements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#construction-of-surrogate-model">Construction of surrogate model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#adaptive-design-of-experiments-doe">Adaptive Design of Experiments (DoE)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#verification-of-surrogate-model">Verification of surrogate model</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#multi-fidelity-monte-carlo-mfmc">Multi-fidelity Monte Carlo (MFMC)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#models-with-different-infidelities">Models with different infidelities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pre-execution-checklist-for-mfmc">Pre-execution checklist for MFMC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#algorithm-details">Algorithm details</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#speed-up">Speed-up</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="UCSDUQTechnical.html">1.3. Methods in UCSD UQ Engine</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../developer_manual/how_to_build/desktop/how_to_build.html">1. How to Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer_manual/architecture/desktop/architecture.html">2. Software Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer_manual/how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer_manual/verification/desktop/verification.html">4. Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer_manual/coding_style/desktop/coding_style.html">5. Coding Style</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Quantified Uncertainty with Optimization for the FEM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="technical_manual.html"><span class="section-number">1. </span>Technical Manual</a> &raquo;</li>
+        
+      <li><span class="section-number">1.2. </span>Methods in SimCenterUQ Engine</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../_sources/common/technical_manual/desktop/SimCenterUQTechnical.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="methods-in-simcenteruq-engine">
+<span id="lbluqsimtechnical"></span><h1><span class="section-number">1.2. </span>Methods in SimCenterUQ Engine<a class="headerlink" href="#methods-in-simcenteruq-engine" title="Permalink to this heading">¶</a></h1>
+<div class="section" id="nataf-transformation">
+<h2>Nataf transformation<a class="headerlink" href="#nataf-transformation" title="Permalink to this heading">¶</a></h2>
+<p>Nataf transformation is introduced to standardize the interface between UQ methods and Simulation models. Nataf converts the samples in the physical space (X-space) into the standard normal samples (U-space), <span class="math notranslate nohighlight">\(T:\rm{X} \rightarrow \rm{U}\)</span>, and vice versa, during UQ computations <a class="reference internal" href="#liu1986" id="id1"><span>[Liu1986]</span></a>. Specifically, the latter transformation, called inverse Nataf <span class="math notranslate nohighlight">\(T^{-1}\)</span>, is performed each time when UQ engine generates sample points and calls external workflow applications, so that the main UQ algorithms would face only the standard normal random variables. Among various standardization transformations, Nataf is one of the most popular methods which exploits <strong>marginal distributions</strong> of each physical variables and their <strong>correlation coefficients</strong>.</p>
+<div class="align-center figure" id="id25">
+<span id="fignataf1"></span><a class="reference internal image-reference" href="../../../_images/SimCenterNataf1.png"><img alt="../../../_images/SimCenterNataf1.png" src="../../../_images/SimCenterNataf1.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.2.1 </span><span class="caption-text">Standardization of random variables using Nataf transformation</span><a class="headerlink" href="#id25" title="Permalink to this image">¶</a></p>
+</div>
+<p>(Ongoing implementation) All the custom UQ algorithms need to prepare for the standard Gaussian input while quoFEM intertwines with the simulation model to receive standard normal input u and gives physical <span class="math notranslate nohighlight">\(y=G(u)\)</span> back.</p>
+<p>For the Nataf transformation, the SimCenterUQ engine borrows a part of the distribution class structure developed by ERA group in the Technical University of Munich <a class="reference internal" href="#era2019" id="id2"><span>[ERA2019]</span></a></p>
+<dl class="citation">
+<dt class="label" id="liu1986"><span class="brackets"><a class="fn-backref" href="#id1">Liu1986</a></span></dt>
+<dd><p>Liu, P.L. and Der Kiureghian, A. (1986). Multivariate distribution models with prescribed marginals and covariances. <em>Probabilistic Engineering Mechanics</em>, 1(2), 105-112.</p>
+</dd>
+<dt class="label" id="era2019"><span class="brackets"><a class="fn-backref" href="#id2">ERA2019</a></span></dt>
+<dd><p>Engineering Risk Analysis Group, Technische Universität München: <a class="reference external" href="https://www.bgu.tum.de/era/software/eradist/">https://www.bgu.tum.de/era/software/eradist/</a> (Matlab, python programs and documentations)</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="global-sensitivity-analysis">
+<span id="lbluqsimtechnical-sensitivity"></span><h2>Global sensitivity analysis<a class="headerlink" href="#global-sensitivity-analysis" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="variance-based-global-sensitivity-indices">
+<h3>Variance-based global sensitivity indices<a class="headerlink" href="#variance-based-global-sensitivity-indices" title="Permalink to this heading">¶</a></h3>
+<p>Global sensitivity analysis (GSA) is performed to quantify the contribution of each input variable to the uncertainty in QoI. Using the global sensitivity indices, users can set preferences between random variables considering both inherent randomness and its propagation through the model. GSA helps users to understand the overall impact of different sources of uncertainties, as well as accelerate UQ computations by focusing on dominant dimensions or screening out trivial input variables.</p>
+<div class="align-center figure" id="id26">
+<span id="figsensitivity1"></span><a class="reference internal image-reference" href="../../../_images/SimCenterSensitivity1.png"><img alt="../../../_images/SimCenterSensitivity1.png" src="../../../_images/SimCenterSensitivity1.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.2.2 </span><span class="caption-text">Concept of Global Sensitivity Analysis</span><a class="headerlink" href="#id26" title="Permalink to this image">¶</a></p>
+</div>
+<p>Sobol indices are widely used variance-based global sensitivity measures. It has two types: main effect and total effect sensitivity indices. The <strong>main effect index</strong> finds the fraction of variance in QoI that can be attributed to specific input random variable(s) but without considering the interactive effect with other input variables. The <strong>total effect index</strong>, on the other hand, additionally takes the interactions into account.</p>
+<p>Given the output of model <span class="math notranslate nohighlight">\(y=g(\boldsymbol{x})\)</span> and input random variables <span class="math notranslate nohighlight">\(\boldsymbol{x}=\{x_1,x_2, \cdots ,x_d\}\)</span>, the first-order main and total effect indices of each input variable is defined as</p>
+<div class="math notranslate nohighlight" id="equation-si">
+<span class="eqno">(1.2.1)<a class="headerlink" href="#equation-si" title="Permalink to this equation">¶</a></span>\[S_i=\frac{\text{Var}_{x_i}[\text{E}_{\boldsymbol{x}_{\sim i}}[y|x_i]]}{\text{Var}[y]}, \qquad i=1, \cdots ,d\]</div>
+<div class="math notranslate nohighlight" id="equation-sit">
+<span class="eqno">(1.2.2)<a class="headerlink" href="#equation-sit" title="Permalink to this equation">¶</a></span>\[S_i^T=\frac{\text{E}_{\boldsymbol{x}_{\sim i}}[\text{Var}_{x_i}[y|\boldsymbol{x}_{\sim i}]]}{\text{Var}[y]},  \qquad  i=1, \cdots ,d\]</div>
+<p>respectively, where <span class="math notranslate nohighlight">\(\boldsymbol{x}_{\sim i}\)</span> indicates the set of all input variables except <span class="math notranslate nohighlight">\(x_i\)</span>. It is noteworthy that in both equations, the variance operator <span class="math notranslate nohighlight">\(\text{Var}_{x_i}[\cdot]\)</span> captures only the part of uncertainty associated with <span class="math notranslate nohighlight">\(x_i\)</span>, while the mean operator <span class="math notranslate nohighlight">\(\text{E}_{\boldsymbol{x}_{\sim i}}[\cdot]\)</span> averages out all remaining uncertainties. From the definitions, two indices theoretically have values between zero and one. Eq. <a class="reference internal" href="#equation-si">(1.2.1)</a> can also be understood intuitively. For example, if the QoI is insensitive to <span class="math notranslate nohighlight">\(x_i\)</span>, the term inside <span class="math notranslate nohighlight">\(\text{Var}_{x_i}[\cdot]\)</span> is nearly constant and <span class="math notranslate nohighlight">\(S_i\)</span> approaches zero. On the other hand, when one single variable <span class="math notranslate nohighlight">\(x_i\)</span> dominates QoI, inside <span class="math notranslate nohighlight">\(\text{Var}_{x_i}[\cdot]\)</span> is approximately the same as <span class="math notranslate nohighlight">\(y\)</span>, and thus <span class="math notranslate nohighlight">\(S_i\)</span> approaches one. Eq. <a class="reference internal" href="#equation-sit">(1.2.2)</a> can be understood in similar ways. The second-order main effect index that provides the pair-wise interaction effect is defined as</p>
+<div class="math notranslate nohighlight" id="equation-sij">
+<span class="eqno">(1.2.3)<a class="headerlink" href="#equation-sij" title="Permalink to this equation">¶</a></span>\[S_{ij}=\frac{\text{Var}_{x_i,x_j}[\text{E}_{\boldsymbol{x}\sim ij}[y|x_i,x_j]]}{\text{Var}[y]} - S_i - S_j,  \qquad  i,j=1, \cdots ,d\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{x}_{\sim ij}\)</span> indicates the set of all input variables except <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(x_j\)</span>. The higher-order indices are derived likewise. Theoretically, When all the input variables are uncorrelated to each other, the following equality holds.</p>
+<div class="math notranslate nohighlight" id="equation-sbound">
+<span class="eqno">(1.2.4)<a class="headerlink" href="#equation-sbound" title="Permalink to this equation">¶</a></span>\[\sum^d_{i=1} S_i + \sum^d_{i&lt;j} S_{ij} + \cdots + S_{12 \cdots d} = 1\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>The numerical results of global sensitivity analysis may show negative values due to the sampling variability</p></li>
+<li><p>The numerical results of Eq. <a class="reference internal" href="#equation-sbound">(1.2.4)</a> for uncorrelated inputs may not hold due to the sampling variability and approximation errors. If this error is very high, the sensitivity index may not be reliable. However, the sensitivity rank between variables is relatively robust.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="estimation-of-sobol-indices-using-probabilistic-model-based-global-sensitivity-analysis-pm-gsa">
+<h3>Estimation of Sobol indices using Probabilistic model-based global sensitivity analysis (PM-GSA)<a class="headerlink" href="#estimation-of-sobol-indices-using-probabilistic-model-based-global-sensitivity-analysis-pm-gsa" title="Permalink to this heading">¶</a></h3>
+<p>GSA is typically computationally expensive. High computation cost attributes to the multiple integrations (<span class="math notranslate nohighlight">\(d\)</span>-dimensional) associated with the variance and expectation operations shown in Eqs. <a class="reference internal" href="#equation-si">(1.2.1)</a> and <a class="reference internal" href="#equation-sit">(1.2.2)</a>. To reduce the computational cost, efficient Monte Carlo methods, stochastic expansion methods, or meta-model-based methods can be employed. Among different approaches, the SimCenterUQ engine supports the probability model-based GSA (PM-GSA) framework developed by <a class="reference internal" href="#hu2019" id="id3"><span>[Hu2019]</span></a>.</p>
+<p>The framework first conducts ordinary MCS to obtain input-output data pairs. Then by extracting only a subset dimension of the dataset, the probability distribution of a reduced dimension can be approximated and used for estimating the Sobol index. Among different probability distribution models introduced in <a class="reference internal" href="#hu2019" id="id4"><span>[Hu2019]</span></a>  the Gaussian mixture model is implemented in this engine to approximate this lower dimension distribution. For example, to identify 1st order main Sobol index for a variable <span class="math notranslate nohighlight">\(x_i\)</span>, a bivariate Gaussian mixture model is fitted for the joint probability distribution of <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(y\)</span>, i.e.</p>
+<div class="math notranslate nohighlight" id="equation-gm">
+<span class="eqno">(1.2.5)<a class="headerlink" href="#equation-gm" title="Permalink to this equation">¶</a></span>\[f_{x_i,y}(x_i,y) \simeq f_{x_i,y}^{GM} (x_i,y)\]</div>
+<p>using the expectation-maximization (EM) algorithm. The mean operation Eq. <a class="reference internal" href="#equation-si">(1.2.1)</a> is then derived analytically from the Gaussian mixture model, while the variance is approximated to be the sample variance. Therefore, the accuracy of the method depends on the quality of the base samples as well as the fitness of the mixture model. The below figure summarizes the procedure of Gaussian mixture model-based PM-GSA introduced in <a class="reference internal" href="#hu2019" id="id5"><span>[Hu2019]</span></a>. The number of mixture components is optimized along with the mixture parameters during expectation-maximization iterations.</p>
+<div class="align-center figure" id="id27">
+<span id="figsensitivity2"></span><a class="reference internal image-reference" href="../../../_images/SimCenterSensitivity2.png"><img alt="../../../_images/SimCenterSensitivity2.png" src="../../../_images/SimCenterSensitivity2.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.2.3 </span><span class="caption-text">Data-driven global sensitivity analysis by Hu and Mahadevan (2019)</span><a class="headerlink" href="#id27" title="Permalink to this image">¶</a></p>
+</div>
+<dl class="citation">
+<dt class="label" id="hu2019"><span class="brackets">Hu2019</span><span class="fn-backref">(<a href="#id3">1</a>,<a href="#id4">2</a>,<a href="#id5">3</a>)</span></dt>
+<dd><p>Hu, Z. and Mahadevan, S. (2019). Probability models for data-driven global sensitivity analysis. <em>Reliability Engineering &amp; System Safety</em>, 187, 40-57.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="dealing-with-high-dimensional-responses-with-pca-psa">
+<h3>Dealing with high-dimensional responses with PCA-PSA<a class="headerlink" href="#dealing-with-high-dimensional-responses-with-pca-psa" title="Permalink to this heading">¶</a></h3>
+<p>When the number of the quantities of interest (QoI) is very large, it is computationally cumbersome to perform above Gaussian fitting independently for each QoI. To promote efficient global sensitivity analysis for such cases, SimCenterUQ provides the ‘principal component analysis-based PM-GSA’ module, which is referred to as PCA-PSA <a class="reference internal" href="#id8" id="id6"><span>[Jung2022]</span></a>. In this method, the dimension of QoI is first reduced by principal component analysis (PCA), and the conditional variance required to calculate the Sobol indices (the numerators in <a class="reference internal" href="#equation-si">(1.2.1)</a> and <a class="reference internal" href="#equation-sit">(1.2.2)</a>) is approximately reconstructed from those of the conditional variance/covariance information of the reduced dimension variables. If the high-dimensional QoI has a linear data structure that be reconstructed with a small number of principal components, the computational gain of this approach can be significant. For example, suppose QoI can be reconstructed using 10 principal components. In that case, the Gaussian mixture fitting, which is the most time-consuming step of PM-GSA apart from FEM analysis, needs to be repeated only 10 times per random variable or group of random variables regardless of the actual dimension of QoI. <a class="reference internal" href="../../user_manual/examples/desktop/qfem-0023/README.html#qfem-0023"><span class="std std-ref">This example</span></a> shows how PCA-PSA can facilitate efficient global sensitivity analysis for a field (time series) QoI.</p>
+<dl class="citation">
+<dt class="label" id="jung2022"><span class="brackets">Jung2022</span></dt>
+<dd><p>Jung, W., &amp; Taflanidis, A. A. (2023). Efficient global sensitivity analysis for high-dimensional outputs combining data-driven probability models and dimensionality reduction. <em>Reliability Engineering &amp; System Safety</em>, 231, 108805.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="aggregated-sensitivity-index">
+<h3>Aggregated sensitivity index<a class="headerlink" href="#aggregated-sensitivity-index" title="Permalink to this heading">¶</a></h3>
+<p>When the quantities of interest (QoI) are given as a vector or field variable, an aggregated sensitivity index can provide insight into the system’s overall sensitivity characteristics. The aggregated sensitivity index achieves this by calculating the weighted average of the sensitivity indices of each QoI component, where the weights are proportional to the variances of the components <a class="reference internal" href="#id8" id="id7"><span>[Jung2022]</span></a>. Component sensitivity indices are useful for visualization, while the aggregated sensitivity index gives instant intuition on how much each variable influences the system response overall. See <a class="reference internal" href="../../user_manual/examples/desktop/qfem-0023/README.html#qfem-0023"><span class="std std-ref">this example</span></a>.</p>
+<dl class="citation">
+<dt class="label" id="id8"><span class="brackets">Jung2022</span></dt>
+<dd><p>Jung, W., &amp; Taflanidis, A. A. (2023). Efficient global sensitivity analysis for high-dimensional outputs combining data-driven probability models and dimensionality reduction. <em>Reliability Engineering &amp; System Safety</em>, 231, 108805.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="global-surrogate-modeling">
+<span id="lbluqsimtechnical-surrogate"></span><h2>Global surrogate modeling<a class="headerlink" href="#global-surrogate-modeling" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="introduction-to-gaussian-process-regression-kriging">
+<h3>Introduction to Gaussian process regression (Kriging)<a class="headerlink" href="#introduction-to-gaussian-process-regression-kriging" title="Permalink to this heading">¶</a></h3>
+<p>Global surrogate modeling aims to build a regression model that reproduces the outcomes of computationally expensive high fidelity simulations.</p>
+<div class="math notranslate nohighlight" id="equation-gp">
+<span class="eqno">(1.2.9)<a class="headerlink" href="#equation-gp" title="Permalink to this equation">¶</a></span>\[\boldsymbol{y}=g^{\rm{ex}} (\boldsymbol{x}) \simeq g^{\rm{sur}} (\boldsymbol{x})\]</div>
+<p>where the basic assumption is that the function evaluation speed of <span class="math notranslate nohighlight">\(g^{\rm{sur}}(\boldsymbol{x})\)</span> is incomparably faster than <span class="math notranslate nohighlight">\(g^{\rm{ex}}(\boldsymbol{x})\)</span>. To perform surrogate modeling, we first need to acquire data samples, <span class="math notranslate nohighlight">\((\boldsymbol{x},\boldsymbol{y})\)</span>, of exact model based on a few rounds of model evaluations, and then the function is interpolated and extrapolated based on the data set. Among various surrogate techniques, Kriging approximates the response surface using a Gaussian process model. Specifically, Kriging surrogate model has the following form:</p>
+<div class="math notranslate nohighlight" id="equation-gpsurr">
+<span class="eqno">(1.2.7)<a class="headerlink" href="#equation-gpsurr" title="Permalink to this equation">¶</a></span>\[g^{\rm{sur}} (\boldsymbol{x}) = \tilde{g}(\boldsymbol{x})^T\boldsymbol{\beta}+z(\boldsymbol{x})\]</div>
+<p>where the term <span class="math notranslate nohighlight">\(\tilde{g}(\boldsymbol{x})^T\boldsymbol{\beta}\)</span> captures the deterministic global trend via basis functions and linear combination coefficients <span class="math notranslate nohighlight">\(\boldsymbol{\beta}\)</span>. The second term <span class="math notranslate nohighlight">\(z(\boldsymbol{x})\)</span> represents the residual and is modeled as a centered second-order stationary Gaussian process. The assumption is that the true residual value is one of the realizations of the random process:</p>
+<div class="math notranslate nohighlight" id="equation-gpresidual">
+<span class="eqno">(1.2.8)<a class="headerlink" href="#equation-gpresidual" title="Permalink to this equation">¶</a></span>\[z(\boldsymbol{x}) \sim GP (\boldsymbol{x};0,K(\boldsymbol{x_i},\boldsymbol{x_j}))\]</div>
+<p>Therefore the main tasks of surrogate modeling is (1) to find optimal stochastic parameters <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\beta}}\)</span> and <span class="math notranslate nohighlight">\(\hat{K}(x_i,x_j)\)</span> that best match the observations, and (2) to predict the response at an arbitrary sample point <span class="math notranslate nohighlight">\(\boldsymbol{x^*}\)</span> as a conditional distribution of <span class="math notranslate nohighlight">\(f(\boldsymbol{y^*}|\boldsymbol{y^{obs}})\)</span>, exploiting the fact that
+<span class="math notranslate nohighlight">\(\boldsymbol{y^*}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{y^{obs}}\)</span> are joint Gaussian distribution with known mean and covariances.</p>
+<div class="align-center figure" id="id28">
+<span id="figsensitivity2-2"></span><a class="reference internal image-reference" href="../../../_images/SimCenterSurrogate.png"><img alt="../../../_images/SimCenterSurrogate.png" src="../../../_images/SimCenterSurrogate.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.2.4 </span><span class="caption-text">Surrogate model for UQ/Optimization</span><a class="headerlink" href="#id28" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="dealing-with-noisy-measurements">
+<h3>Dealing with noisy measurements<a class="headerlink" href="#dealing-with-noisy-measurements" title="Permalink to this heading">¶</a></h3>
+<blockquote>
+<div><div class="line-block">
+<div class="line">In natural hazard applications, often the exact observations of <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> are not available and only the noisy observations <span class="math notranslate nohighlight">\(\boldsymbol{y^{obs}}\)</span> are available:</div>
+</div>
+<div class="math notranslate nohighlight" id="equation-gp">
+<span class="eqno">(1.2.9)<a class="headerlink" href="#equation-gp" title="Permalink to this equation">¶</a></span>\[        \boldsymbol{y^{obs}}=\boldsymbol{y} + \boldsymbol{\varepsilon} =g^{\rm{ex}} (\boldsymbol{x}) + \boldsymbol{\varepsilon}\]</div>
+<div class="line-block">
+<div class="line">where a common assumption is that the measurement noise, <span class="math notranslate nohighlight">\(\boldsymbol{\varepsilon}\)</span>, follows a white Gaussian distribution (i.e. <span class="math notranslate nohighlight">\(\varepsilon\)</span> is unbiased, follows a normal distribution with variance <span class="math notranslate nohighlight">\(\tau\)</span>, and is independent of other observation noises). Additionally since the noise level is often unknown, <span class="math notranslate nohighlight">\(\tau\)</span> is also calibrated along with <span class="math notranslate nohighlight">\(\beta\)</span> and <span class="math notranslate nohighlight">\(K(x_i,x_j)\)</span>. In such settings, surrogate model estimation will not interpolate the observation outputs <span class="math notranslate nohighlight">\(\boldsymbol{y^{obs}}\)</span>, but instead make a regression curve passing through the optimal estimation of the true underlying outputs <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span>. In addition to the measurement noise, a mild amount of inherent uncertainty in the simulation model (mild compared to a global trend) can be accounted for in terms of the same noise parameter <span class="math notranslate nohighlight">\(\varepsilon\)</span>.</div>
+</div>
+</div></blockquote>
+<ul>
+<li><p><strong>Nugget effect: artificial noise for numerical stability</strong></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">The constructed Kriging surrogate model is always smooth and continuous as it is a realization of a Gaussian process, while the actual response may be non-smooth, discontinuous, or highly variant that goes beyond the flexibility of the surrogate model. Especially when the measurements are noiseless, the Gaussian process training can suffer from numerical instability. In such ill-posed problems, the introduction of a small amount of artificial noise, often referred to as <em>nugget</em>, may significantly improve the algorithmic stability. In the quoFEM, the nugget parameter is automatically optimized in the loop along with the other parameters. (Note: technically, the nugget effect and measurement noise do not coincide in the mathematical formulation as the nugget effect conserves the <em>interpolating</em> property while measurement noise does not <a class="reference internal" href="#roustant2012" id="id9"><span>[Roustant2012]</span></a>. However, this program treats the nugget as an artificial noise as its outcomes are often practically indistinguishable.)</div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<div class="align-center figure" id="id29">
+<span id="figgp1-2"></span><a class="reference internal image-reference" href="../../../_images/GPnugget.png"><img alt="../../../_images/GPnugget.png" src="../../../_images/GPnugget.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.2.5 </span><span class="caption-text">Gaussian process regression with and without measurement noise ( or nugget effect)</span><a class="headerlink" href="#id29" title="Permalink to this image">¶</a></p>
+</div>
+<ul>
+<li><p><strong>Heteroscedastic measurement noise</strong></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">When one expects a high noise level in the response observations with varying variance scales across the domain, one may want to consider modeling the heteroscedastic noise. Note that the observation noise here comes from the variability not captured by the RV values we defined (i.e. <span class="math notranslate nohighlight">\(x\)</span>). For example, mapping between structural parameters (<span class="math notranslate nohighlight">\(x\)</span>) and the earthquake response (<span class="math notranslate nohighlight">\(y\)</span>) typically requires heteroscedastic GP models to capture the effect of the aleatoric variability in the response ground motion time history. The below figure shows an example data shape for which a heteroscedastic GP model is required. quoFEM app introduces the <strong>stochastic Kriging</strong> algorithm in <a class="reference internal" href="../../user_manual/usage/desktop/SimCenterUQSurrogate.html#kyprioti2021" id="id10"><span>[Kyprioti2021]</span></a> to achieve this, which relies on the so-called <strong>partial replication strategy</strong>, that is, to generate multiple realizations for a subset of inputs to examine response variance. In particular, a subset of initial samples are replicated to obtain variance estimates, i.e., variance realizations, at different sample locations, and these values are used to construct a variance-field model. Then by constraining the relative scales of the variance, the stochastic kriging emulator is trained using both replication and unique (non-replicated) samples. <a class="reference internal" href="../../user_manual/examples/desktop/qfem-0025/README.html#qfem-0025"><span class="std std-ref">This example</span></a> reproduces the results of <a class="reference internal" href="#figgp1-3"><span class="std std-numref">Fig. 1.2.6</span></a></div>
+</div>
+<div class="align-center figure" id="id30">
+<span id="figgp1-3"></span><a class="reference internal image-reference" href="../../../_images/StochasticGP.png"><img alt="../../../_images/StochasticGP.png" src="../../../_images/StochasticGP.png" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.2.6 </span><span class="caption-text">When heteroscedastic GP is needed</span><a class="headerlink" href="#id30" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="construction-of-surrogate-model">
+<h3>Construction of surrogate model<a class="headerlink" href="#construction-of-surrogate-model" title="Permalink to this heading">¶</a></h3>
+<div class="section" id="input-output-settings">
+<h4>Input-Output settings<a class="headerlink" href="#input-output-settings" title="Permalink to this heading">¶</a></h4>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 38%" />
+<col style="width: 14%" />
+<col style="width: 39%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head" colspan="2"><p>Input (RV) type</p></th>
+<th class="head"><p>Output (QoI) type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Case1</strong></p></td>
+<td colspan="2"><p>Adaptive Design of Experiments (DoE) :</p>
+<p>a bounded variable space of <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span></p>
+</td>
+<td><p>Simulator :</p>
+<p><span class="math notranslate nohighlight">\(\boldsymbol{y}=g(\boldsymbol{x})\)</span></p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><strong>Case2</strong></p></td>
+<td colspan="2"><p>Data set :</p>
+<p>{<span class="math notranslate nohighlight">\(\boldsymbol{x_1,x_2, ... ,x_N}\)</span>}</p>
+</td>
+<td><p>Simulator :</p>
+<p><span class="math notranslate nohighlight">\(\boldsymbol{y}=g(\boldsymbol{x})\)</span></p>
+</td>
+</tr>
+<tr class="row-even"><td><p><strong>Case3</strong></p></td>
+<td colspan="2"><p>Data set :</p>
+<p>{<span class="math notranslate nohighlight">\(\boldsymbol{x_1,x_2, ... ,x_N}\)</span>}</p>
+</td>
+<td><p>Data set :</p>
+<p>{<span class="math notranslate nohighlight">\(\boldsymbol{y_1,y_2, ... ,y_N}\)</span>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>User have the following options:</p>
+<ul class="simple">
+<li><p><strong>Case1</strong> : users can provide a range of input variables (bounds) and a simulation model. After the initial space-filling phase using Latin hypercube sampling (LHS), <strong>adaptive design of experiment (DoE)</strong> is activated. Given current predictions, the next optimal simulation point is optimized such that the expected gain is maximized.</p></li>
+<li><p><strong>Case2</strong> : users can provide pairs of input-output dataset</p></li>
+<li><p><strong>Case3</strong> : users can provide input data points and a simulation model</p></li>
+</ul>
+</div>
+<div class="section" id="kernel-and-basis-functions">
+<h4>Kernel and basis functions<a class="headerlink" href="#kernel-and-basis-functions" title="Permalink to this heading">¶</a></h4>
+<p>The covariance kernel of the outcome process is unknown in most practical applications. Therefore, the mathematical form of the kernel is first assumed, and its parameters are calibrated based on the observation data. Following are some of the popular stationary covariance kernels.</p>
+<ul>
+<li><p><strong>Radial-basis function (RBF)</strong></p>
+<div class="line-block">
+<div class="line">Radial-basis function, also known as squared-exponential or Gaussian kernel, is one of the most widely used covariance kernel.</div>
+</div>
+<blockquote>
+<div><div class="math notranslate nohighlight" id="equation-rbd">
+<span class="eqno">(1.2.10)<a class="headerlink" href="#equation-rbd" title="Permalink to this equation">¶</a></span>\[k(\boldsymbol{x_i},\boldsymbol{x_j}) = \sigma\prod_{d=1}^{D} \exp\Bigg(-\frac{1}{2} \frac{(x_{i,d}-x_{j,d})^2}{l_d^2}\Bigg)\]</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line">where <span class="math notranslate nohighlight">\(\boldsymbol{x_i}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{x_j}\)</span> are two arbitrary points in the domain and the hyperparameters, <span class="math notranslate nohighlight">\(D\)</span> is number of the input variables. The parameters <span class="math notranslate nohighlight">\(\sigma\)</span> and <span class="math notranslate nohighlight">\(l_d\)</span> respectively control the error scale and correlation length of the process.</div>
+</div>
+</li>
+</ul>
+<div class="align-center figure" id="id31">
+<span id="figgp2"></span><a class="reference internal image-reference" href="../../../_images/GPtmp.png"><img alt="../../../_images/GPtmp.png" src="../../../_images/GPtmp.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.2.7 </span><span class="caption-text">Gaussian process regression for different correlation length parameters</span><a class="headerlink" href="#id31" title="Permalink to this image">¶</a></p>
+</div>
+<ul>
+<li><p><strong>Exponential</strong></p>
+<div class="line-block">
+<div class="line">Similarly, the exponential covariance function is defined as follows.</div>
+</div>
+<blockquote>
+<div><div class="math notranslate nohighlight" id="equation-exponential">
+<span class="eqno">(1.2.11)<a class="headerlink" href="#equation-exponential" title="Permalink to this equation">¶</a></span>\[k(\boldsymbol{x_i},\boldsymbol{x_j}) = \sigma\prod_{d=1}^{D} \exp\Bigg(-\frac{1}{2} \frac{|x_{i,d}-x_{j,d}|}{l_d}\Bigg)\]</div>
+</div></blockquote>
+</li>
+<li><p><strong>Matern Class</strong></p>
+<div class="line-block">
+<div class="line">Matern class of covariance function is another popular choice. It has a positive shape parameter, often denotoed as <span class="math notranslate nohighlight">\(\nu\)</span> which additionally determines the roughness of the parameters. For Kriging regression, <span class="math notranslate nohighlight">\(\nu=5/2\)</span> and <span class="math notranslate nohighlight">\(\nu=3/2\)</span> is known to be generally applicable choices considering the roughness property and the simplicity of the functional form. <a class="reference internal" href="#rasmussen2006" id="id11"><span>[Rasmussen2006]</span></a></div>
+</div>
+<blockquote>
+<div><div class="math notranslate nohighlight" id="equation-matern1">
+<span class="eqno">(1.2.12)<a class="headerlink" href="#equation-matern1" title="Permalink to this equation">¶</a></span>\[k(\boldsymbol{x_i},\boldsymbol{x_j}) = \sigma\prod_{d=1}^{D} g_d(h_{d})\]</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line">where <span class="math notranslate nohighlight">\(h_d = x_{i,d}-x_{j,d}\)</span> and</div>
+</div>
+<blockquote>
+<div><div class="math notranslate nohighlight" id="equation-matern2">
+<span class="eqno">(1.2.13)<a class="headerlink" href="#equation-matern2" title="Permalink to this equation">¶</a></span>\[\begin{split}g_{d,\frac{5}{2}}(h_d) &amp;= \Bigg(1+ \frac{\sqrt{5}|h_d|}{l_d}+\frac{5h_d^2}{3l_d^2}\Bigg)\exp\Bigg(-\frac{\sqrt{5}|h_d|}{l_d}\Bigg)     \\
+g_{d,\frac{3}{2}}(h_d) &amp;= \Bigg(1+ \frac{\sqrt{3}|h_d|}{l_d}\Bigg)\exp\Bigg(-\frac{\sqrt{3}|h_d|}{l_d}\Bigg)\end{split}\]</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line">respectively for <span class="math notranslate nohighlight">\(\nu=5/2\)</span> (smoother) and <span class="math notranslate nohighlight">\(\nu=3/2\)</span> (rougher). It is noted in the literature that if <span class="math notranslate nohighlight">\(\nu\)</span> is greater than <span class="math notranslate nohighlight">\(5/2\)</span>, the Matern kernel behaves similarly to the radial-basis function.</div>
+</div>
+</li>
+</ul>
+<p>Once the kernel form is selected, the parameters are calibrated to maximize the likelihood of observations within the Gaussian process model. The default optimization function embedded in GPy is limited-memory BFGS with bound constraints (L-BFGS-B) algorithm from <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/optimize.minimize-lbfgsb.html">Python/Numpy</a> package. <a class="reference internal" href="#shaffieldml2012" id="id12"><span>[ShaffieldML2012]</span></a></p>
+</div>
+</div>
+<div class="section" id="adaptive-design-of-experiments-doe">
+<h3>Adaptive Design of Experiments (DoE)<a class="headerlink" href="#adaptive-design-of-experiments-doe" title="Permalink to this heading">¶</a></h3>
+<p>In the case where bounds of input variables and a simulator model are provided (Case 1), model evaluation points can be selected by space-filling methods, e.g. Latin hypercube sampling (LHS). This is a non-adaptive Design of Experiments (DoE) in the sense that the whole samples can be located before running any simulations. On the other hand, the number of model evaluations can be reduced by selecting evaluation points <em>adaptively</em> after each run to get the best model improvements.</p>
+<div class="align-center figure" id="id32">
+<span id="figgp-doe1"></span><a class="reference internal image-reference" href="../../../_images/GPtmp1.png"><img alt="../../../_images/GPtmp1.png" src="../../../_images/GPtmp1.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.2.8 </span><span class="caption-text">Two optimizations in design of experiments</span><a class="headerlink" href="#id32" title="Permalink to this image">¶</a></p>
+</div>
+<p>However, as shown in the figure, adaptive DoE requires multiple optimization turns to find the optimal surrogate model parameters as well as the next optimal DoE. Therefore, it is noted that the adaptive DoE is efficient only when model evaluation time is significantly greater than the optimization time.</p>
+<p><strong>Adaptive DoE algorithm: IMSEw, MMSEw</strong> (<a class="reference internal" href="#kyprioti2020" id="id13"><span>[Kyprioti2020]</span></a>)</p>
+<p>The optimal design points can be selected by finding arguments that maximize (or minimize) the so-called score function. The score function in global surrogate modeling is often designed to predict the amount of reduced (or remaining) variance and bias after adding the new sample points. While there are many variations of the score function <a class="reference internal" href="#fuhg2020" id="id14"><span>[Fuhg2020]</span></a>, in quoFEM, the modified integrated mean squared error (IMSE) from Kyprioti <em>et al.</em> (2020) is introduced as:</p>
+<div class="math notranslate nohighlight" id="equation-imse">
+<span class="eqno">(1.2.14)<a class="headerlink" href="#equation-imse" title="Permalink to this equation">¶</a></span>\[\begin{align*}
+        \rm{IMSE}_w(\boldsymbol{X},\boldsymbol{x_{new}}) &amp;= \int_{\boldsymbol{X_d}} \phi^\rho\boldsymbol{\sigma_n}^2(\boldsymbol{x}|\boldsymbol{X,x_{new}})dx
+\end{align*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\phi\)</span> is bias measure from leave-one-out cross validation (LOOCV) analysis, <span class="math notranslate nohighlight">\(\rho\)</span> is a weighting coefficient, and <span class="math notranslate nohighlight">\(\boldsymbol{\sigma_n}^2(\boldsymbol{x}|\boldsymbol{X,x_{new}})\)</span> is the predictive variance after additional observation <span class="math notranslate nohighlight">\(x_{new}\)</span> <a class="reference internal" href="#kyprioti2020" id="id15"><span>[Kyprioti2020]</span></a>. To find the sample location that gives minimum IMSE value, a two-step screening-clustering algorithm is implemented.</p>
+<div class="align-center figure" id="id33">
+<span id="figgp-doe2"></span><a class="reference internal image-reference" href="../../../_images/GPtmp2.png"><img alt="../../../_images/GPtmp2.png" src="../../../_images/GPtmp2.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.2.9 </span><span class="caption-text">Adaptive DoE procedure by Kyprioti et al. (2020) <a class="reference internal" href="#kyprioti2020" id="id16"><span>[Kyprioti2020]</span></a></span><a class="headerlink" href="#id33" title="Permalink to this image">¶</a></p>
+</div>
+<p><strong>Adaptive DoE algorithm: Pareto</strong></p>
+<p>Alternatively, multiple design points can be selected by a multi-objective optimization scheme. The variance measure and bias measure are defined by</p>
+<div class="math notranslate nohighlight" id="equation-pareto">
+<span class="eqno">(1.2.15)<a class="headerlink" href="#equation-pareto" title="Permalink to this equation">¶</a></span>\[\begin{align*}
+        \rm{IMSE}_w(\boldsymbol{X},\boldsymbol{x_{new}}) &amp;= \int_{\boldsymbol{X_d}} \phi^\rho\boldsymbol{\sigma_n}^2(\boldsymbol{x}|\boldsymbol{X,x_{new}})dx
+\end{align*}\]</div>
+<p>Adaptive DoE is terminated when one of the three conditions is met:</p>
+<ul class="simple">
+<li><p><strong>Time</strong>: analysis time exceeds a predefined (rough) time constraint</p></li>
+<li><p><strong>Count</strong>: the number of model evaluations exceeds a predefined count constraint</p></li>
+<li><p><strong>Accuracy</strong>: the accuracy measure of the model meets a predefined convergence level</p></li>
+</ul>
+<p>only:: EEUQ_app</p>
+<blockquote>
+<div><p>Currently not supported in EE-UQ.</p>
+</div></blockquote>
+</div>
+<div class="section" id="verification-of-surrogate-model">
+<h3>Verification of surrogate model<a class="headerlink" href="#verification-of-surrogate-model" title="Permalink to this heading">¶</a></h3>
+<p>Once the training is completed, the following three verification measures are presented based on leave-one-out cross-validation (LOOCV) error estimation.</p>
+<ul>
+<li><p><strong>Leave-one-out cross-validation (LOOCV)</strong></p>
+<div class="line-block">
+<div class="line">LOOCV prediction <span class="math notranslate nohighlight">\(\hat{\boldsymbol{y}}_k\)</span> at each sample location <span class="math notranslate nohighlight">\(\boldsymbol{x}_k\)</span> is obtained by the following procedure: A temporary surrogate model <span class="math notranslate nohighlight">\(\hat{\boldsymbol{y}}=g^{sur}_{loo,k}(\boldsymbol{\boldsymbol{x}})\)</span> is constructed using the samples <span class="math notranslate nohighlight">\(\{\boldsymbol{x}_1,\boldsymbol{x}_2,...,\boldsymbol{x}_{k-1},\boldsymbol{x}_{k+1},...,\boldsymbol{x}_N\}\)</span> and the calibrated parameters, and the prediction <span class="math notranslate nohighlight">\(\hat{\boldsymbol{y}}_k=g^{sur}_{loo,k}(\boldsymbol{x}_k)\)</span> is compared with the exact outcome.</div>
+</div>
+</li>
+</ul>
+<p>We provide different verification measures for two different cases.</p>
+<ol class="lowerroman simple">
+<li><p>When nugget variance is low : The LOOCV prediction <span class="math notranslate nohighlight">\(\hat{\boldsymbol{y}}_k\)</span> is expected to match the exact outcome <span class="math notranslate nohighlight">\(\boldsymbol{y_k}=g(\boldsymbol{x}_k)\)</span> when the surrogate model is well-trained. To quantify the goodness, R2 error, normalized root-mean-squared-error (NRMSE), and correlation coefficient are provided:</p></li>
+</ol>
+<ul>
+<li><p><strong>R2 error</strong></p>
+<div class="line-block">
+<div class="line">R2 error is defined in terms of the total sum of squares over the residual sum of squares</div>
+</div>
+<blockquote>
+<div><div class="math notranslate nohighlight" id="equation-r2">
+<span class="eqno">(1.2.16)<a class="headerlink" href="#equation-r2" title="Permalink to this equation">¶</a></span>\[\begin{align*}
+        R^2 &amp;= 1 - \frac{\sum^N_{k=1} (\hat{y}_k-\mu_\hat{y})^2}{\sum^N_{k=1} (\hat{y}_k-y_k)^2}
+\end{align*}\]</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line">The surrogate model is considered well-trained when the <strong>R2 (&lt;1) approaches 1</strong></div>
+</div>
+</li>
+<li><p><strong>Normalized root-mean-squared-error (NRMSE)</strong></p>
+<blockquote>
+<div><div class="math notranslate nohighlight" id="equation-nrmse">
+<span class="eqno">(1.2.17)<a class="headerlink" href="#equation-nrmse" title="Permalink to this equation">¶</a></span>\[\begin{align*}
+        \rm{NRMSE} ~ &amp;= \frac{\sqrt{\frac{1}{N_t} \sum^{N_t}_{k=1} (y_k-\hat{y}_k)^2}}{\max_{k=1,...,N_t}(y_k)-\min_{k=1,...,N_t}(y_k)}
+\end{align*}\]</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line">The surrogate model is considered well-trained when the <strong>NRMSE (&gt;0) approaches 0</strong></div>
+</div>
+</li>
+<li><p><strong>Correlation coefficient</strong></p>
+<div class="line-block">
+<div class="line">Correlation coefficient is a statistic that measures a linear correlation between two variables</div>
+</div>
+<div class="math notranslate nohighlight" id="equation-corr">
+<span class="eqno">(1.2.18)<a class="headerlink" href="#equation-corr" title="Permalink to this equation">¶</a></span>\[  \rho_{y,\hat{y}} = \frac{\sum^N_{k=1}(y_k-\mu_{y})(\hat{y}_k-\mu_{\hat{y}})} {\sigma_y \sigma_\hat{y}}\]</div>
+<div class="line-block">
+<div class="line">where</div>
+<div class="line-block">
+<div class="line"><span class="math notranslate nohighlight">\(\mu_{y}\)</span> : mean of <span class="math notranslate nohighlight">\(\{y_k\}\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(\mu_{\hat{y}}\)</span>: mean of <span class="math notranslate nohighlight">\(\{\hat{y}_k\}\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(\sigma_{y}\)</span>: standard deviation of <span class="math notranslate nohighlight">\(\{y_k\}\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(\sigma_{\hat{y}}\)</span>: standard deviation of <span class="math notranslate nohighlight">\(\{\hat{y}_k\}\)</span></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">The surrogate model is considered well-trained when the <strong>correlation coefficient (</strong> <span class="math notranslate nohighlight">\(-1&lt;\rho&lt;1\)</span> <strong>) approaches 1</strong></div>
+</div>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since these measures are calculated from the cross-validation predictions rather than external validation predictions, they can be biased, particularly when a <strong>highly localized nonlinear range exists in the actual response surface</strong> and those regions are not covered by the training samples.</p>
+</div>
+<ol class="lowerroman simple" start="2">
+<li><p>When nugget variance is high : The distance between LOOCV prediction <span class="math notranslate nohighlight">\(\hat{\boldsymbol{y}}_k\)</span> and the exact outcome <span class="math notranslate nohighlight">\(\boldsymbol{y_k}=g(\boldsymbol{x}_k)\)</span> is expected to follow a normal distribution when the surrogate model is well-trained. To quantify the goodness, inter-quartile ratio (IQR) and Cramer-Von Mises statistics can be evaluated:</p></li>
+</ol>
+<blockquote>
+<div><ul>
+<li><p><strong>Inter-quartile ratio (IQR)</strong>: IQR provides the ratio of the sample QoIs that lies in 25-75% LOOCV prediction bounds (interquartile range). The IQR values should theoretically approach 0.5 if the prediction is accurate.</p></li>
+<li><p><strong>Cramer-Von Mises statistics</strong>: Cramer-Von Mises statistics calculates the normality score. GP assumes that the observations follow a normal distribution conditional on the input parameters. To assess the normality of the model predictions, the difference between the mean prediction <span class="math notranslate nohighlight">\(\hat{y}_k\)</span> and the sample observation  <span class="math notranslate nohighlight">\(y_k\)</span> value is divided by the standard deviation prediction from surrogate <span class="math notranslate nohighlight">\(\hat{\sigma}_{y,k}\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-normed">
+<span class="eqno">(1.2.19)<a class="headerlink" href="#equation-normed" title="Permalink to this equation">¶</a></span>\[  u_k = \frac{y_k-\hat{y}_k} {\hat{\sigma}_{y,k}}\]</div>
+</li>
+</ul>
+<blockquote>
+<div><p>If the values of <span class="math notranslate nohighlight">\({u_k}\)</span> follow the standard normal distribution, the resulting surrogate model may be considered well-constructed. The Cramer-Von Mises test is calculated using the <code class="docutils literal notranslate"><span class="pre">scipy.stats.cramervonmises</span></code> function in the Python package Scipy, and the resulting p-value is displayed. Conventionally, if the p-value exceeds a significance threshold, e.g. 0.05, the null hypothesis that the samples are from a normal distribution is not rejected, meaning the samples may be considered to follow a Gaussian distribution.</p>
+</div></blockquote>
+</div></blockquote>
+<dl class="citation">
+<dt class="label" id="rasmussen2006"><span class="brackets"><a class="fn-backref" href="#id11">Rasmussen2006</a></span></dt>
+<dd><p>Rasmussen, C.E. and Williams, C.K. (2006). <em>Gaussian Process for Machine Learning</em>. Cambridge, MA: The MIT Press, 2006 (available online at <a class="reference external" href="http://www.gaussianprocess.org/gpml/">http://www.gaussianprocess.org/gpml/</a>)</p>
+</dd>
+<dt class="label" id="kyprioti2020"><span class="brackets">Kyprioti2020</span><span class="fn-backref">(<a href="#id13">1</a>,<a href="#id15">2</a>,<a href="#id16">3</a>)</span></dt>
+<dd><p>Kyprioti, A.P., Zhang, J., and Taflanidis, A.A. (2020). Adaptive design of experiments for global Kriging metamodeling through cross-validation information. <em>Structural and Multidisciplinary Optimization</em>, 1-23.</p>
+</dd>
+<dt class="label" id="kyprioti2021"><span class="brackets"><a class="fn-backref" href="#id10">Kyprioti2021</a></span></dt>
+<dd><p>Kyprioti, A.P. and Taflanidis, A.A., (2021). Kriging metamodeling for seismic response distribution estimation. <em>Earthquake Engineering &amp; Structural Dynamics</em>, 50(13), pp.3550-3576.</p>
+</dd>
+<dt class="label" id="shaffieldml2012"><span class="brackets"><a class="fn-backref" href="#id12">ShaffieldML2012</a></span></dt>
+<dd><p>GPy, A Gaussian process framework in python, <a class="reference external" href="http://github.com/SheffieldML/GPy">http://github.com/SheffieldML/GPy</a>, since 2012</p>
+</dd>
+<dt class="label" id="sacks1989"><span class="brackets">Sacks1989</span></dt>
+<dd><p>Sacks J.,Welch W.J.,Mitchell T.J.,Wynn H.P. (1989). Design and analysis of
+computer experiments. <em>Stat Sci</em> 4(4):409–435</p>
+</dd>
+<dt class="label" id="fuhg2020"><span class="brackets"><a class="fn-backref" href="#id14">Fuhg2020</a></span></dt>
+<dd><p>Fuhg, J.N., Fau, A., and Nackenhorst, U. (2020). State-of-the-art and comparative review of adaptive sampling methods for kriging. <em>Archives of Computational Methods in Engineering</em>, 1-59.</p>
+</dd>
+<dt class="label" id="roustant2012"><span class="brackets"><a class="fn-backref" href="#id9">Roustant2012</a></span></dt>
+<dd><p>Roustant, O., Ginsbourger, D., and Deville, Y. (2012). DiceKriging, DiceOptim: Two R packages for the analysis of computer experiments by kriging-based metamodeling and optimization. <em>Journal of Statistical Software</em>, 21:1–55</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="multi-fidelity-monte-carlo-mfmc">
+<span id="lbluqsimtechnical-mfmc"></span><h2>Multi-fidelity Monte Carlo (MFMC)<a class="headerlink" href="#multi-fidelity-monte-carlo-mfmc" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="models-with-different-infidelities">
+<h3>Models with different infidelities<a class="headerlink" href="#models-with-different-infidelities" title="Permalink to this heading">¶</a></h3>
+<p>When one has multiple models of a target system with different fidelities, they can introduce multi-fidelity Monte Carlo (MFMC) methods. MFMC helps us to reduce the high-fidelity simulation runs by leveraging a large number of low-fidelity simulations. The high-fidelity and low-fidelity models are defined as the following.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>High-fidelity (HF) model</strong>: The model with a desired level of accuracy and high computational cost.</p></li>
+<li><p><strong>Low-fidelity (LF) model(s)</strong>: The model(s) with lower computational cost and lower accuracy.</p></li>
+</ul>
+</div></blockquote>
+<p>The goal of MFMC is to estimate the statistics of the HF model using a small number of HF simulations and a large number of LF simulations. Those <em>fidelity</em> can be attributed to different idealization of models as shown in <a class="reference internal" href="#fig-beamcolumn"><span class="std std-numref">Fig. 1.2.10</span></a> (e.g. reduced order model), or the models with same idealization in different resolutions (e.g. coarser mesh or grids). The latter is also referred to as multi-level Monte Carlo (MLMC).</p>
+<div class="align-center figure" id="id34">
+<span id="fig-beamcolumn"></span><a class="reference internal image-reference" href="../../../_images/SimCenterMF.png"><img alt="../../../_images/SimCenterMF.png" src="../../../_images/SimCenterMF.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.2.10 </span><span class="caption-text">Idealized models of beam-column elements (Fig 2.1 in <a class="reference internal" href="#deierlein2010" id="id17"><span>[Deierlein2010]</span></a>)</span><a class="headerlink" href="#id34" title="Permalink to this image">¶</a></p>
+</div>
+<dl class="citation">
+<dt class="label" id="deierlein2010"><span class="brackets"><a class="fn-backref" href="#id17">Deierlein2010</a></span></dt>
+<dd><p>Deierlein, Gregory G., Andrei M. Reinhorn, and Michael R. Willford. (2010). Nonlinear structural analysis for seismic design. <em>NEHRP seismic design technical brief</em> 4 : 1-36.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The concept of MFMC is different from that of <strong>multi-model forward propagation</strong> referred to at other parts of the documentation.</p>
+<ul class="simple">
+<li><p><strong>MFMC</strong> algorithm has a clear hierarchy between different models in terms of accuracy. A good MFMC algorithm will give accurate estimates of the statistics of HF model.</p></li>
+<li><p><strong>Multi-model forward propagation</strong> is used when one has different alternative models without clear hierarchy in accuracy, meaning for each model, we have certain <em>belief</em> that this model gives true value. Therefore, a good multi-model forward propagation algorithm will give the final estimate that compromises the estimation from different models by considering how much <em>belief</em> we have in each model.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="pre-execution-checklist-for-mfmc">
+<h3>Pre-execution checklist for MFMC<a class="headerlink" href="#pre-execution-checklist-for-mfmc" title="Permalink to this heading">¶</a></h3>
+<p>Before running the MFMC simulation model, the users are advised to check the validity and effectiveness of MFMC for their problem. Only when the below conditions are satisfied, the users are expected to gain meaningful benefit by using MFMC compared to only HF simulations:</p>
+<ul class="simple">
+<li><p><strong>The models should take the same input random variables and produces the same output quantities of interest.</strong> For example, if target system is a structure, if one model takes stiffness as random variable and the other does not, the model violates the problem definition. Similarly, if <span class="math notranslate nohighlight">\(j\)</span>-th output of the HF model is the 1st floor inter-story drift, <span class="math notranslate nohighlight">\(j\)</span>-th output of the LF model should also be 1st floor inter-story drift.</p></li>
+<li><p><strong>The models should have clear hierarchy in terms of accuracy and time.</strong> When the HF and LF model responses are different, the assumption is that the HF response is always accurate. Therefore, if a LF model runs faster than the HF model, it is optimal to run only the HF model, and there is no reason to introduce MFMC.</p></li>
+<li><p><strong>The response of different models should have high correlation</strong>. The efficiency of MFMC heavily depends on the correlation between the HF and LF model outputs. Only if the correlation is fairly high, the MF estimation is meaningfully efficient than conducting only HF simulations.</p></li>
+</ul>
+<p>Efficiency of MFMC can be evaluated using the speed-up ratio, defined as the reduction of computational effort you need to get the same Monte Carlo statistical accuracy by the MFMC and direct Monte Carlo method. <a class="reference internal" href="#fig-mf-sp"><span class="std std-numref">Fig. 1.2.11</span></a> shows the expected speed-up factor for different computation time ratios and correlation coefficient values. One can notice that only when the ratio of the model evaluation time is greater than 100 and when the correlation is greater than 0.85-0.9, the expected speed-up is significant <a class="reference internal" href="../../user_manual/usage/desktop/SimCenterUQSurrogate.html#patsialis2021" id="id18"><span>[Patsialis2021]</span></a>. The formulation used to estimate the speed-up ratio can found at the end of this section.</p>
+<div class="align-center figure" id="id35">
+<span id="fig-mf-sp"></span><a class="reference internal image-reference" href="../../../_images/SimCenterMF4.png"><img alt="../../../_images/SimCenterMF4.png" src="../../../_images/SimCenterMF4.png" style="width: 700px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.2.11 </span><span class="caption-text">Speed-up offered by the MFMC estimation (<span class="math notranslate nohighlight">\(c_{HF}\)</span>: HF model evaluation time, <span class="math notranslate nohighlight">\(c_{LF}\)</span>: LF model evaluation time, <span class="math notranslate nohighlight">\(\rho_{LF,HF}\)</span>: correlation between HF and LF responses)</span><a class="headerlink" href="#id35" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="algorithm-details">
+<h3>Algorithm details<a class="headerlink" href="#algorithm-details" title="Permalink to this heading">¶</a></h3>
+<p>The implementation of MFMC in quoFEM follows that of <a class="reference internal" href="../../user_manual/usage/desktop/SimCenterUQSurrogate.html#patsialis2021" id="id19"><span>[Patsialis2021]</span></a> which is based on the original work of <a class="reference internal" href="#peherstorfer2016" id="id20"><span>[Peherstorfer2016]</span></a>. Let us denote the HF and LF output for a given input <span class="math notranslate nohighlight">\(x\)</span> as</p>
+<blockquote>
+<div><div class="math notranslate nohighlight" id="equation-common-technical-manual-desktop-simcenteruqtechnical-0">
+<span class="eqno">(1.2.20)<a class="headerlink" href="#equation-common-technical-manual-desktop-simcenteruqtechnical-0" title="Permalink to this equation">¶</a></span>\[y_{HF} = g_{HF}(\boldsymbol{x})\]</div>
+<div class="math notranslate nohighlight" id="equation-common-technical-manual-desktop-simcenteruqtechnical-1">
+<span class="eqno">(1.2.21)<a class="headerlink" href="#equation-common-technical-manual-desktop-simcenteruqtechnical-1" title="Permalink to this equation">¶</a></span>\[y_{LF} = g_{LF}(\boldsymbol{x})\]</div>
+</div></blockquote>
+<p>The goal of MFMC is to estimate the mean and variance of <span class="math notranslate nohighlight">\(y_{HF}\)</span>, given some distribution of <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> and computational budget, with the highest accuracy. The MFMC consists of three steps.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For notational simplicity, the procedure presented on this page is the simplest case where we have single LF model and single output, aiming to estimate first-order statistics. However, once one understands the simplest case, the extension into the advanced cases are fairly straightforward.</p>
+<ul class="simple">
+<li><p>For <strong>multiple LF models</strong>, a similar formulation can be found in the literature. (<a class="reference internal" href="../../user_manual/usage/desktop/SimCenterUQSurrogate.html#patsialis2021" id="id21"><span>[Patsialis2021]</span></a>, <a class="reference internal" href="#peherstorfer2016" id="id22"><span>[Peherstorfer2016]</span></a>, etc).</p></li>
+<li><p>For <strong>multiple outputs</strong> <span class="math notranslate nohighlight">\(y_{HF}\)</span> and <span class="math notranslate nohighlight">\(y_{LF}\)</span> in the formulations can respectively be replaced with <span class="math notranslate nohighlight">\(y_{j,HF}\)</span> and <span class="math notranslate nohighlight">\(y_{j,LF}\)</span>, meaning it is <span class="math notranslate nohighlight">\(j\)</span>-th output of the models.</p></li>
+<li><p>The presented procedure leads to the estimation of mean of <span class="math notranslate nohighlight">\(\rm{E}[y_{HF}]\)</span>. The <strong>variance can be estimated</strong> by replacing <span class="math notranslate nohighlight">\(y_{HF}\)</span> and <span class="math notranslate nohighlight">\(y_{LF}\)</span> with <span class="math notranslate nohighlight">\(y^2_{HF}\)</span> and <span class="math notranslate nohighlight">\(y^2_{LF}\)</span>, respectively, which lead to the estimation of <span class="math notranslate nohighlight">\(\rm{E}[y_{HF}^2]\)</span> and additionally introducing a post-processing step to subtract <span class="math notranslate nohighlight">\(\rm{E}[y_{HF}]^2\)</span>. Other higher-order statistics can be estimated in a similar manner.</p></li>
+</ul>
+<p>The current implementation can accommodate multiple LF models, process multiple outputs, and output MFMC estimates of the variance. The complete formulations can be found in the literature (<a class="reference internal" href="../../user_manual/usage/desktop/SimCenterUQSurrogate.html#patsialis2021" id="id23"><span>[Patsialis2021]</span></a>, <a class="reference internal" href="#peherstorfer2016" id="id24"><span>[Peherstorfer2016]</span></a>, etc).</p>
+</div>
+<p><strong>Step 1: Pilot Simulations</strong></p>
+<div class="align-center figure" id="id36">
+<a class="reference internal image-reference" href="../../../_images/SimCenterMF2.png"><img alt="../../../_images/SimCenterMF2.png" src="../../../_images/SimCenterMF2.png" style="width: 900px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.2.12 </span><span class="caption-text">Step 1: Pilot Simulation</span><a class="headerlink" href="#id36" title="Permalink to this image">¶</a></p>
+</div>
+<p>Randomly generate <span class="math notranslate nohighlight">\(N_p\)</span> sample points and run both HF and LF simulations. Compute the correlation between two model outputs (<span class="math notranslate nohighlight">\(\rho_{LF,HF}\)</span>) and estimate the average model evaluation times (<span class="math notranslate nohighlight">\(c_{HF}\)</span> and <span class="math notranslate nohighlight">\(c_{LF}\)</span>). The optimal ratio of HF and LF simulation runs can be decided by</p>
+<blockquote>
+<div><div class="math notranslate nohighlight" id="equation-common-technical-manual-desktop-simcenteruqtechnical-2">
+<span class="eqno">(1.2.22)<a class="headerlink" href="#equation-common-technical-manual-desktop-simcenteruqtechnical-2" title="Permalink to this equation">¶</a></span>\[r^* = \sqrt{  \frac{c_{HF}\rho^2_{LF,HF}}{c_{LF}(1-\rho^2_{LF,HF})}  }\]</div>
+</div></blockquote>
+<p>Considering the remaining computational budget (<span class="math notranslate nohighlight">\(C_T\)</span>), the optimal number of HF and LF simulations (denoted as <span class="math notranslate nohighlight">\(N_1\)</span> and <span class="math notranslate nohighlight">\(N_1+N_2\)</span>) can ideally be decided such that <span class="math notranslate nohighlight">\(N_1:(N_1+N_2) = 1:r\)</span> and <span class="math notranslate nohighlight">\(C_T = N_1 c_{HF} + (N_1+N_2) c_{LF}\)</span>. However, the due to practical obstacles (e.g. when multiple outputs are simultaneously considered or when the number of pilot samples exceeds <span class="math notranslate nohighlight">\(N_1\)</span>) the final ratio <span class="math notranslate nohighlight">\(r\)</span> can be different from the optimal one.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When multiple outputs are considered, the simulation ratio is chosen to be the average of the optimal ratios (<span class="math notranslate nohighlight">\(r^*\)</span>) for different outputs.</p>
+</div>
+<p><strong>Step 2: Final Simulations</strong></p>
+<ul class="simple">
+<li><p>Randomly generate <span class="math notranslate nohighlight">\(N_1-N_p\)</span> sample points and run both HF and LF. We now have <span class="math notranslate nohighlight">\(N_1\)</span> data points <span class="math notranslate nohighlight">\(\{\boldsymbol{x}^{(n)}\}_{n=1,...,N_1}\)</span> , and corresponding outputs <span class="math notranslate nohighlight">\(\{y^{(n)}_{HF}\}_{n=1,...,N_1}\)</span> and <span class="math notranslate nohighlight">\(\{y^{(n)}_{LF}\}_{n=1,...,N_1}\)</span>. Let us denote a set of these data points as <span class="math notranslate nohighlight">\(D_1\)</span>.</p></li>
+<li><p>Generate <span class="math notranslate nohighlight">\(N_2\)</span> more sample points and run only LF simulations. We now have <span class="math notranslate nohighlight">\(N_2\)</span> more data points <span class="math notranslate nohighlight">\(\{\boldsymbol{x}^{(n)}\}_{n=N_1,...,N_1+N_2}\)</span>, and corresponding LF outputs <span class="math notranslate nohighlight">\(\{y^{(n)}_{LF}\}_{n=N_1,...,N_1+N_2}\)</span>. Let us denote this batch of data points as <span class="math notranslate nohighlight">\(D_2\)</span>.</p></li>
+</ul>
+<p><strong>Step 3: Estimation of Statistics</strong></p>
+<div class="align-center figure" id="id37">
+<a class="reference internal image-reference" href="../../../_images/SimCenterMF3.png"><img alt="../../../_images/SimCenterMF3.png" src="../../../_images/SimCenterMF3.png" style="width: 900px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1.2.13 </span><span class="caption-text">Step 3: Estimation of Statistics</span><a class="headerlink" href="#id37" title="Permalink to this image">¶</a></p>
+</div>
+<p>Using data sets <span class="math notranslate nohighlight">\(D_1\)</span> and <span class="math notranslate nohighlight">\(D_2\)</span>, the final statistics are estimated as</p>
+<blockquote>
+<div><div class="math notranslate nohighlight" id="equation-common-technical-manual-desktop-simcenteruqtechnical-3">
+<span class="eqno">(1.2.23)<a class="headerlink" href="#equation-common-technical-manual-desktop-simcenteruqtechnical-3" title="Permalink to this equation">¶</a></span>\[\mu_{MF} = \mu_{HF}+\rho_{LF,HF}\frac{\sigma_{HF}}{\sigma_{LF2}}\left( \mu_{LF2}-\mu_{LF1}  \right)\]</div>
+</div></blockquote>
+<p>where</p>
+<blockquote>
+<div><div class="math notranslate nohighlight" id="equation-common-technical-manual-desktop-simcenteruqtechnical-4">
+<span class="eqno">(1.2.24)<a class="headerlink" href="#equation-common-technical-manual-desktop-simcenteruqtechnical-4" title="Permalink to this equation">¶</a></span>\[\mu_{HF} = \frac{1}{N_1} \sum^{N_1}_{n=1} y^{(n)}_{HF}\]</div>
+<div class="math notranslate nohighlight" id="equation-common-technical-manual-desktop-simcenteruqtechnical-5">
+<span class="eqno">(1.2.25)<a class="headerlink" href="#equation-common-technical-manual-desktop-simcenteruqtechnical-5" title="Permalink to this equation">¶</a></span>\[\sigma_{HF}^2 = \frac{1}{N_1} \sum^{N_1}_{n=1} (y^{(n)}_{HF} - \mu_{HF})^2\]</div>
+<div class="math notranslate nohighlight" id="equation-common-technical-manual-desktop-simcenteruqtechnical-6">
+<span class="eqno">(1.2.26)<a class="headerlink" href="#equation-common-technical-manual-desktop-simcenteruqtechnical-6" title="Permalink to this equation">¶</a></span>\[\mu_{LF1} = \frac{1}{N_1} \sum^{N_1}_{n=1} y^{(n)}_{LF}\]</div>
+<div class="math notranslate nohighlight" id="equation-common-technical-manual-desktop-simcenteruqtechnical-7">
+<span class="eqno">(1.2.27)<a class="headerlink" href="#equation-common-technical-manual-desktop-simcenteruqtechnical-7" title="Permalink to this equation">¶</a></span>\[\rho_{LF,HF} = \frac{\sum^{N_1}_{n=1}(y^{(n)}_{LF} - \mu_{LF1})(y^{(n)}_{HF} - \mu_{HF})}{\sqrt{ \sum^{N_1}_{n=1}(y^{(n)}_{LF} - \mu_{LF1})^2   \sum^{N_1}_{n=1}(y^{(n)}_{HF} - \mu_{HF})^2  }}\]</div>
+<div class="math notranslate nohighlight" id="equation-common-technical-manual-desktop-simcenteruqtechnical-8">
+<span class="eqno">(1.2.28)<a class="headerlink" href="#equation-common-technical-manual-desktop-simcenteruqtechnical-8" title="Permalink to this equation">¶</a></span>\[\mu_{LF2} = \frac{1}{N_1+N_2} \sum^{N_1+N_2}_{n=1} y^{(n)}_{LF}\]</div>
+<div class="math notranslate nohighlight" id="equation-common-technical-manual-desktop-simcenteruqtechnical-9">
+<span class="eqno">(1.2.29)<a class="headerlink" href="#equation-common-technical-manual-desktop-simcenteruqtechnical-9" title="Permalink to this equation">¶</a></span>\[\sigma_{LF2}^2 = \frac{1}{N_1+N_2} \sum^{N_1+N_2}_{n=1} (y^{(n)}_{LF} - \mu_{LF2})^2\]</div>
+</div></blockquote>
+<p>Note that the first four terms are evaluated using only <span class="math notranslate nohighlight">\(D_1\)</span>, and the last two terms are evaluated using both <span class="math notranslate nohighlight">\(D_1\)</span> and <span class="math notranslate nohighlight">\(D_2\)</span>. Additionally, the precision of the estimation can be measured by the coefficient of variation (c.o.v):</p>
+<blockquote>
+<div><div class="math notranslate nohighlight" id="equation-common-technical-manual-desktop-simcenteruqtechnical-10">
+<span class="eqno">(1.2.30)<a class="headerlink" href="#equation-common-technical-manual-desktop-simcenteruqtechnical-10" title="Permalink to this equation">¶</a></span>\[c.o.v[\mu_{MF}] = \frac{\sigma_{HF}}{N_1} \left(1-\left(1-\frac{1}{r}\right)\rho_{LF,HF}^2 \right)\]</div>
+</div></blockquote>
+</div>
+<div class="section" id="speed-up">
+<h3>Speed-up<a class="headerlink" href="#speed-up" title="Permalink to this heading">¶</a></h3>
+<p>The speed-up is an efficiency metric that represents the computational time you save by using MFMC compared to only HF simulations to reach the same level of accuracy (same variance).</p>
+<blockquote>
+<div><div class="math notranslate nohighlight" id="equation-common-technical-manual-desktop-simcenteruqtechnical-11">
+<span class="eqno">(1.2.31)<a class="headerlink" href="#equation-common-technical-manual-desktop-simcenteruqtechnical-11" title="Permalink to this equation">¶</a></span>\[SP_i = \frac{c_{HF}}{c_{HF}+rc_{LF}} \left(1-\left(1-\frac{1}{r}\right)\rho_{LF,HF}^2 \right)^{-1}\]</div>
+</div></blockquote>
+<dl class="citation">
+<dt class="label" id="patsialis2021"><span class="brackets">Patsialis2021</span><span class="fn-backref">(<a href="#id18">1</a>,<a href="#id19">2</a>,<a href="#id21">3</a>,<a href="#id23">4</a>)</span></dt>
+<dd><p>Patsialis, D., and A. A. Taflanidis. (2021). Multi-fidelity Monte Carlo for seismic risk assessment applications. <em>Structural Safety</em> 93 (2021): 102129.</p>
+</dd>
+<dt class="label" id="peherstorfer2016"><span class="brackets">Peherstorfer2016</span><span class="fn-backref">(<a href="#id20">1</a>,<a href="#id22">2</a>,<a href="#id24">3</a>)</span></dt>
+<dd><p>Peherstorfer, B., Willcox, K., Gunzburger, M. (2016). Optimal model management for multifidelity Monte Carlo estimation. <em>SIAM Journal on Scientific Computing</em> 38:A3163-A94.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2018-2023, The Regents of the University of California.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-158130480-4', 'auto');
+    
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+         .wy-nav-content { max-width: none; }
+  </style>
+
+<script>
+    /*
+    let selectedFilters = [];
+    const images  = document.getElementsByClassName("gallery-item");
+    const filters = [...document.querySelectorAll('.filter select')];
+    const toggles = [...document.querySelectorAll('.filter input')];
+
+    var show = function (elem) {
+        elem.style.display = 'block';
+    };
+    var hide = function (elem) {
+        elem.style.display = 'none';
+    };
+    var toggleFilter =  function(el,elid) {
+        const filter = document.getElementById(elid);
+        filter.disabled = !el.checked;
+       
+        if ("createEvent" in document) {
+            var evt = document.createEvent("HTMLEvents");
+            evt.initEvent("change", false, true);
+            filter.dispatchEvent(evt);
+        }
+        else
+            filter.fireEvent("change");
+    };
+    
+    for (const filter of filters) {
+        filter.addEventListener('change', function(event) {
+            selectedFilters = filters.map(filter => filter.disabled ? '' : filter.value).filter(Boolean);
+            console.log(selectedFilters);
+            for (const image of images) {
+                if (selectedFilters.every(filter => image.classList.contains(filter))) {
+                    show(image);
+                }
+                else {hide(image)};
+            };
+        })
+    };
+    */
+</script>
+
+
+</body>
+</html>

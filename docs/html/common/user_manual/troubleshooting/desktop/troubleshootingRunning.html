@@ -1,0 +1,355 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>5.2. Issues While Running &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/js/lightbox-plus-jquery.min.js"></script>
+        <script src="../../../../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="6. Requirements" href="../../../reqments/reqQUOFE.html" />
+    <link rel="prev" title="5.1. Startup Issues" href="troubleshootingStartup.html" />
+<script src="https://cdn.jsdelivr.net/npm/vega@5.12.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@4.13.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.8.0"></script>
+<style media="screen">.vega-actions a {margin-right: 5px;}</style>
+<link href="../../../../_static/css/bootstrap.css" rel="stylesheet">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #F2F2F2" >
+          
+<a href="https://simcenter.designsafe-ci.org/" style="margin-bottom: 0px;">
+  <img src="../../../../_static/img/SimCenter-Only.png" class="logo" alt="Org-Logo" />
+</a>
+<hr style="margin: 0px;">
+
+  <a href="../../../../index.html">
+
+
+
+  
+  <img src="../../../../_static/quoFEM-Logo.png" class="logo" alt="Logo"/>
+
+</a>
+
+
+  
+  
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about/quoFEM/about.html">1. About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/desktop/ack.html">2. Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/license.html">3. Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/cite.html">4. How To Cite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases/quoCapabilities.html">5. Capabilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases/quoReleaseNotes.html">6. Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases/quoPlans.html">7. Release Plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/glossary.html">8. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/abbreviations.html">9. Abbreviations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Manual</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation/desktop/installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/quoFEM/quoFEMtutorial.html">2. Getting Started Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage/desktop/usage.html">3. User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/desktop/examples.html">4. Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="troubleshooting.html">5. Troubleshooting</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="troubleshootingStartup.html">5.1. Startup Issues</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.2. Issues While Running</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reqments/reqQUOFE.html">6. Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bugs.html">7. Bugs &amp; Feature Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dcv/quoFEM/quoFEM.html">8. Running in Your Browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage/desktop/quoFEM/usage_video.html">9. Video Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_inputs_documentation/User_Input_Documentation_Tables.html">10. User Inputs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Technical Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../technical_manual/desktop/technical_manual.html">1. Technical Manual</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/how_to_build/desktop/how_to_build.html">1. How to Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/architecture/desktop/architecture.html">2. Software Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/verification/desktop/verification.html">4. Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/coding_style/desktop/coding_style.html">5. Coding Style</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Quantified Uncertainty with Optimization for the FEM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="troubleshooting.html"><span class="section-number">5. </span>Troubleshooting</a> &raquo;</li>
+        
+      <li><span class="section-number">5.2. </span>Issues While Running</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../../_sources/common/user_manual/troubleshooting/desktop/troubleshootingRunning.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="issues-while-running">
+<span id="troubleshootingrunning"></span><h1><span class="section-number">5.2. </span>Issues While Running<a class="headerlink" href="#issues-while-running" title="Permalink to this heading">¶</a></h1>
+<p>Common causes of failure include incorrect setup, non-functioning or poorly functioning websites, user error, and possible bugs in the software. To discover the errors, it is useful to understand how the user interface (UI) and the backend work when the user submits to run a job. A number of things occur when the Submit button is clicked:</p>
+<ol class="arabic simple">
+<li><p>The UI creates a <code class="docutils literal notranslate"><span class="pre">tmp.SimCenter</span></code> folder in the working directory and later creates a <code class="docutils literal notranslate"><span class="pre">templatedir</span></code> within tmp.SimCenter.</p></li>
+<li><p>The UI then iterates through all the input panels and the selected workflow applications place the files they need for the computation into the <code class="docutils literal notranslate"><span class="pre">templatedir</span></code> directory.</p></li>
+</ol>
+<p>#. A Python script is run from this <code class="docutils literal notranslate"><span class="pre">templatedir</span></code> directory that manages the simulation workflow. Regional simulations use rWHALE.py, individual building assessments use sWHALE.py. rWHALE can be imagined as a wrapper that calls sWHALE for every asset in a regional simulation.
+# If the workflow requires structural response simulation, the uncertainty propagation in the corresponding simulation is handled by the selected UQ Engine (e.g., Dakota). The workflow script creates an input file for the UQ Engine (e.g., <code class="docutils literal notranslate"><span class="pre">dakota.in</span></code>) and places it in the <code class="docutils literal notranslate"><span class="pre">tmp.SimCenter</span></code> folder.
+#. The response simulation is run in the workflow by the UQ engine using the input file created earlier.
+#. The UQ engine creates one workdir folder in <code class="docutils literal notranslate"><span class="pre">tmp.SimCenter</span></code> for each realization of the structural response.
+#. After all realizations have been generated, the UQ engine extracts the required outputs from the workdirs and prepares result files in the <code class="docutils literal notranslate"><span class="pre">tmp.SimCenter</span></code> folder.
+#. These result files are then processed by the front-end and presented to the user in the <strong>RES</strong> tab of the desktop application.</p>
+<p>The following is a list of issues we have observed when the user interface informs the user of a failure and steps you can take to fix them:</p>
+<ol class="arabic simple">
+<li><p><strong>Could not create working dir</strong>: The user does not have permission to create the <code class="docutils literal notranslate"><span class="pre">tmp.SimCenter</span></code> folder in the working directory. Change the <strong>Local Jobs Directory</strong> and the <strong>Remote Jobs Directory</strong> in the application’s <strong>Preferences</strong> menu option.</p></li>
+<li><p><strong>No Script File</strong>: The application cannot find the main Python scripts (rWHALE.py, sWHALE.py, or qWHALE.py) that run the workflow using our backend engine. You might have changed the Local Applications directory location in Preferences, or modified the applications folder that accompanies the installation. Make sure the Local Applications points to the correct directory location. If that does not help, re-install the tool to fix a corrupted applications folder.</p></li>
+<li><p><strong>Dakota failed to finish</strong>: The simulation requested from the UQ Engine terminated before completion. This can occur for a number of reasons. Go to the <code class="docutils literal notranslate"><span class="pre">tmp.SimCenter</span></code> folder and look for the <code class="docutils literal notranslate"><span class="pre">dakota.err</span></code> file. If no file exists then the UQ Engine did not even start. If the file exists look at its contents to learn more about the errors.</p>
+<ol class="arabic simple">
+<li><p><strong>No dakota.err file and no dakota.in file</strong>: the Python script in <code class="docutils literal notranslate"><span class="pre">templatedir</span></code> failed to create the files required to start the UQ Engine. Take a look at the workflow log file in the <code class="docutils literal notranslate"><span class="pre">tmp.SimCenter</span></code> folder to see if it shows any errors. These errors typically point to an incorrect setting in your input file. If no workflow log file exists, the Python script managing the workflow failed to start. This is typically caused by an issue with your Python installation. Make sure you’ve followed the instructions in the Installation guide and set up your Python environment properly.</p></li>
+<li><p><strong>No dakota.err but dakota.in exists</strong>: Even though the required files are available, the UQ Engine failed to start. If Dakota was selected as the UQ Engine, check the Dakota installation. Also make sure you’ve followed the instructions in the Installation guide and set up your Python environment properly.</p></li>
+<li><p><strong>dakota.err file exists but it is empty</strong>: This means that the UQ Engine started successfully, but there was a problem during the simulation. Go to one of the <code class="docutils literal notranslate"><span class="pre">workdir</span></code> folders that contain individual realizations. You can run that simulation using the workflow driver file. Run the driver file from the command line to see what errors are generated during the simulation. These errors are typically related to the event or structural model description.</p></li>
+<li><p><strong>dakota.err file exists</strong>: Open the file and see what the error is.  For example, if it says <strong>Error: at least one variable must be specified.</strong> This means no random variables have been specified. You have only one deterministic event or you have not specified any random variables for the analysis. Do not hesitate to reach out to the developers through the <a class="reference external" href="https://simcenter-messageboard.designsafe-ci.org/smf/index.php?board=4.0">Message Board</a> if you do not understand the error messages in this file.</p></li>
+</ol>
+</li>
+<li><p><strong>You ran remotely at DesignSafe and no dakota.out files come back</strong>: Go to your data depot folder at DesignSafe using your browser. Go to archive/jobs and use the job number from the table that pops up when you ask to get the job results from DesignSafe. Study both the <code class="docutils literal notranslate"><span class="pre">.err</span></code> and <code class="docutils literal notranslate"><span class="pre">.out</span></code> files in that directory for information on what went wrong.</p></li>
+<li><p><strong>No results and you used the Site Response to create the event</strong>. You must run a simulated event in the Site Response Widget before you can submit a job to run.</p></li>
+</ol>
+<p>If the problems persist please post them on the <a class="reference external" href="https://simcenter-messageboard.designsafe-ci.org/smf/index.php?board=4.0">Message Board</a></p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2018-2023, The Regents of the University of California.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-158130480-4', 'auto');
+    
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+         .wy-nav-content { max-width: none; }
+  </style>
+
+<script>
+    /*
+    let selectedFilters = [];
+    const images  = document.getElementsByClassName("gallery-item");
+    const filters = [...document.querySelectorAll('.filter select')];
+    const toggles = [...document.querySelectorAll('.filter input')];
+
+    var show = function (elem) {
+        elem.style.display = 'block';
+    };
+    var hide = function (elem) {
+        elem.style.display = 'none';
+    };
+    var toggleFilter =  function(el,elid) {
+        const filter = document.getElementById(elid);
+        filter.disabled = !el.checked;
+       
+        if ("createEvent" in document) {
+            var evt = document.createEvent("HTMLEvents");
+            evt.initEvent("change", false, true);
+            filter.dispatchEvent(evt);
+        }
+        else
+            filter.fireEvent("change");
+    };
+    
+    for (const filter of filters) {
+        filter.addEventListener('change', function(event) {
+            selectedFilters = filters.map(filter => filter.disabled ? '' : filter.value).filter(Boolean);
+            console.log(selectedFilters);
+            for (const image of images) {
+                if (selectedFilters.every(filter => image.classList.contains(filter))) {
+                    show(image);
+                }
+                else {hide(image)};
+            };
+        })
+    };
+    */
+</script>
+
+
+</body>
+</html>

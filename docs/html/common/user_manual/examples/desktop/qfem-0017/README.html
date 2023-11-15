@@ -1,0 +1,488 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>4.9. Custom UQ for UQpy &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/js/lightbox-plus-jquery.min.js"></script>
+        <script src="../../../../../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="4.10. Bayesian Calibration of Material Model Parameters" href="../qfem-0019/README.html" />
+    <link rel="prev" title="4.8. Surrogate Modeling to Predict Mean and Variance of Earthquake Response" href="../qfem-0016/README.html" />
+<script src="https://cdn.jsdelivr.net/npm/vega@5.12.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@4.13.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.8.0"></script>
+<style media="screen">.vega-actions a {margin-right: 5px;}</style>
+<link href="../../../../../_static/css/bootstrap.css" rel="stylesheet">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #F2F2F2" >
+          
+<a href="https://simcenter.designsafe-ci.org/" style="margin-bottom: 0px;">
+  <img src="../../../../../_static/img/SimCenter-Only.png" class="logo" alt="Org-Logo" />
+</a>
+<hr style="margin: 0px;">
+
+  <a href="../../../../../index.html">
+
+
+
+  
+  <img src="../../../../../_static/quoFEM-Logo.png" class="logo" alt="Logo"/>
+
+</a>
+
+
+  
+  
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about/quoFEM/about.html">1. About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../front-matter/desktop/ack.html">2. Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../front-matter/license.html">3. Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../front-matter/cite.html">4. How To Cite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../releases/quoCapabilities.html">5. Capabilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../releases/quoReleaseNotes.html">6. Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../releases/quoPlans.html">7. Release Plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../front-matter/glossary.html">8. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../front-matter/abbreviations.html">9. Abbreviations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Manual</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../installation/desktop/installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about/quoFEM/quoFEMtutorial.html">2. Getting Started Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/desktop/usage.html">3. User Interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">4. Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0001/README.html">4.1. Two-Dimensional Truss: Sampling, Reliability and Sensitivity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0002/README.html">4.2. Forward Propagation - OpenSeesPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0005/README.html">4.3. Basic modeling with Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0007/README.html">4.4. Steel Frame: Conventional Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0009/README.html">4.5. Two-Dimensional Truss: Global Sensitivity Analysis using SimCenterUQ Engine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0014/README.html">4.6. Steel Frame: Bayesian Calibration using TMCMC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0015/README.html">4.7. Surrogate Modeling for One Story Building Earthquake Response</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0016/README.html">4.8. Surrogate Modeling to Predict Mean and Variance of Earthquake Response</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4.9. Custom UQ for UQpy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uq-workflow">4.9.1. UQ Workflow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0019/README.html">4.10. Bayesian Calibration of Material Model Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0022/README.html">4.11. Two-Dimensional Truss: PLoM Modeling and Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0023/README.html">4.12. Global Sensitivity Analysis for Field QoI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0025/README.html">4.13. Heteroscedastic Gaussian Process modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qfem-0027/README.html">4.14. Forward propagation of uncertainty with multiple simulation models</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting/desktop/troubleshooting.html">5. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../reqments/reqQUOFE.html">6. Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bugs.html">7. Bugs &amp; Feature Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dcv/quoFEM/quoFEM.html">8. Running in Your Browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/desktop/quoFEM/usage_video.html">9. Video Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_inputs_documentation/User_Input_Documentation_Tables.html">10. User Inputs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Technical Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../technical_manual/desktop/technical_manual.html">1. Technical Manual</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/how_to_build/desktop/how_to_build.html">1. How to Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/architecture/desktop/architecture.html">2. Software Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/verification/desktop/verification.html">4. Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_manual/coding_style/desktop/coding_style.html">5. Coding Style</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">Quantified Uncertainty with Optimization for the FEM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../examples.html"><span class="section-number">4. </span>Examples</a> &raquo;</li>
+        
+      <li><span class="section-number">4.9. </span>Custom UQ for UQpy</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../../../_sources/common/user_manual/examples/desktop/qfem-0017/README.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="custom-uq-for-uqpy">
+<span id="qfem-0017"></span><h1><span class="section-number">4.9. </span>Custom UQ for UQpy<a class="headerlink" href="#custom-uq-for-uqpy" title="Permalink to this heading">¶</a></h1>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 72%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Problem files</p></td>
+<td><p><a class="reference external" href="https://github.com/NHERI-SimCenter/quoFEM/tree/master/Examples/qfem-0017/">Github</a></p></td>
+</tr>
+</tbody>
+</table>
+<p>This example illustrates how quoFEM can interface a custom UQ engine. A simple forward propagation is conducted using <a class="reference external" href="https://sites.google.com/site/jhusurg/UQpy">UQpy</a>, a python package for general uncertainty quantification problems.</p>
+<div class="align-center figure">
+<a class="reference internal image-reference" href="../../../../../_images/qfem-0017.png"><img alt="../../../../../_images/qfem-0017.png" src="../../../../../_images/qfem-0017.png" style="width: 600px;" /></a>
+</div>
+<p>Consider a two-dimensional truss structure that has uncertain properties that all follow uniform distribution:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 68%" />
+<col style="width: 17%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Random Variable</p></th>
+<th class="head"><p>lower bound</p></th>
+<th class="head"><p>upper bound</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Elastic modulus, E</p></td>
+<td><p>150</p></td>
+<td><p>200</p></td>
+</tr>
+<tr class="row-odd"><td><p>Load, P</p></td>
+<td><p>15</p></td>
+<td><p>35</p></td>
+</tr>
+<tr class="row-even"><td><p>Cross sectional area of the upper three bars, Au</p></td>
+<td><p>400</p></td>
+<td><p>600</p></td>
+</tr>
+<tr class="row-odd"><td><p>Cross sectional area of the other six bars, Ao</p></td>
+<td><p>200</p></td>
+<td><p>300</p></td>
+</tr>
+</tbody>
+</table>
+<p>The goal of the exercise is to implement UQpy as a <strong>custom UQ engine</strong> and estimate the mean and standard deviation of the vertical displacement at node 3.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <a class="reference external" href="https://sites.google.com/site/jhusurg/UQpy">UQpy</a> python package is required to be installed to run this example, e.g. pip install UQpy</p>
+</div>
+<div class="section" id="uq-workflow">
+<h2><span class="section-number">4.9.1. </span>UQ Workflow<a class="headerlink" href="#uq-workflow" title="Permalink to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Start the application and the <strong>UQ</strong> Selection will be highlighted. In the panel for the UQ selection, change the UQ Engine to <strong>CustomUQ</strong>.</p></li>
+</ol>
+<div class="align-center figure">
+<img alt="../../../../../_images/CUS_UQtab.png" src="../../../../../_images/CUS_UQtab.png" />
+</div>
+<p>Next, provide the configuration input file path.  In the configuration file, users specify the interface for the parameters (type, name, values of each parameters) required for the custom UQ analysis. The provided script will generate 1 combo box to define sample types, 2 line edit fields to define the number of samples and seed, 3 spin boxes to define number of concurrent tasks, nodes, and cores per task, and 1 line edit field to specify the UQ Driver.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-number">Listing 4.9.1.1 </span><span class="caption-text">UQpySimpleExample.json</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;Parameters&quot;</span><span class="w"> </span><span class="p">:</span><span class="w">  </span><span class="p">[</span>
+<span class="w">	</span><span class="p">{</span>
+<span class="w">		</span><span class="nt">&quot;type&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ComboBox&quot;</span><span class="p">,</span>
+<span class="w">		</span><span class="nt">&quot;name&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sampling Method&quot;</span><span class="p">,</span>
+<span class="w">		</span><span class="nt">&quot;values&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;LHS&quot;</span><span class="p">]</span>
+<span class="w">	</span><span class="p">},</span>
+<span class="w">	</span><span class="p">{</span>
+<span class="w">		</span><span class="nt">&quot;type&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;LineEdit&quot;</span><span class="p">,</span>
+<span class="w">		</span><span class="nt">&quot;name&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Number of Samples&quot;</span>
+<span class="w">	</span><span class="p">},</span>
+<span class="w">	</span><span class="p">{</span>
+<span class="w">		</span><span class="nt">&quot;type&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;LineEdit&quot;</span><span class="p">,</span>
+<span class="w">		</span><span class="nt">&quot;name&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Seed&quot;</span>
+<span class="w">	</span><span class="p">},</span>
+<span class="w">	</span><span class="p">{</span>
+<span class="w">		</span><span class="nt">&quot;type&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SpinBox&quot;</span><span class="p">,</span>
+<span class="w">		</span><span class="nt">&quot;name&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Number of Concurrent Tasks&quot;</span>
+<span class="w">	</span><span class="p">},</span>
+<span class="w">	</span><span class="p">{</span>
+<span class="w">		</span><span class="nt">&quot;type&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SpinBox&quot;</span><span class="p">,</span>
+<span class="w">		</span><span class="nt">&quot;name&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Number of Nodes&quot;</span>
+<span class="w">	</span><span class="p">},</span>
+<span class="w">	</span><span class="p">{</span>
+<span class="w">		</span><span class="nt">&quot;type&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SpinBox&quot;</span><span class="p">,</span>
+<span class="w">		</span><span class="nt">&quot;name&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Cores per Task&quot;</span>
+<span class="w">	</span><span class="p">},</span>
+<span class="w">	</span><span class="p">{</span>
+<span class="w">		</span><span class="nt">&quot;type&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;LineEdit&quot;</span><span class="p">,</span>
+<span class="w">		</span><span class="nt">&quot;name&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UQ Driver&quot;</span>
+<span class="w">	</span><span class="p">}</span><span class="w">	</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Note that configuration input file specifies the front-end interfaces while the back-end interface should be modified in the backend directory (Refer the <a class="reference internal" href="../../../usage/desktop/Configuring_CustomUQ.html#lblcustomuq"><span class="std std-ref">Configuring CustomUQ Engine</span></a> section for details). As an example, UQpy has been already implemented in the customized backend where users can find at <code class="docutils literal notranslate"><span class="pre">{Backend</span> <span class="pre">Applications</span> <span class="pre">Directory}/applications/performUQ/other</span></code>, where the <code class="docutils literal notranslate"><span class="pre">{Backend</span> <span class="pre">Applications</span> <span class="pre">Directory}</span></code> is specified from the file-preference in the menu bar). Once the <code class="docutils literal notranslate"><span class="pre">UQpySimpleExample.json</span></code> is called, the following customized user interface will appear in UQ panel.</p>
+<div class="align-center figure">
+<img alt="../../../../../_images/CUS_UQtab2.png" src="../../../../../_images/CUS_UQtab2.png" />
+</div>
+<p>Let us sample 50 samples by Latin hypercube sampling (LHS). The UQ Driver field must be filled in as <strong>UQpy</strong>, as shown in the following figure.</p>
+<div class="align-center figure">
+<img alt="../../../../../_images/CUS_UQtab3.png" src="../../../../../_images/CUS_UQtab3.png" />
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Select the <strong>FEM</strong> tab from the input panel. For the main script copy the path to the <code class="docutils literal notranslate"><span class="pre">TrussModel.tcl</span></code> or select choose and navigate to the file. For the post-process script field, repeat the same procedure for the <code class="docutils literal notranslate"><span class="pre">TrussPost.tcl</span> <span class="pre">script</span></code>. (See example <a class="reference internal" href="../qfem-0001/README.html#qfem-0001"><span class="std std-ref">Two-Dimensional Truss: Sampling, Reliability and Sensitivity</span></a> for the model details)</p></li>
+</ol>
+<div class="align-center figure">
+<img alt="../../../../../_images/CUS_FEMtab.png" src="../../../../../_images/CUS_FEMtab.png" />
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Select the <strong>RV</strong> tab from the input panel. This should be pre-populated with four random variables with same names as those having <code class="docutils literal notranslate"><span class="pre">pset</span></code> in the tcl script. For each variable, from the drop down menu change them to uniform and provide the lower and upper bounds specified for the problem.</p></li>
+</ol>
+<div class="align-center figure">
+<img alt="../../../../../_images/CUS_RVtab.png" src="../../../../../_images/CUS_RVtab.png" />
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only <strong>uniform distribution</strong> is supported in this preliminary example.</p>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Next select the <strong>QoI</strong> tab. Here enter <code class="docutils literal notranslate"><span class="pre">Node_3_Disp_2</span></code> for the one variable.</p></li>
+</ol>
+<div class="align-center figure">
+<img alt="../../../../../_images/CUS_QoItab.png" src="../../../../../_images/CUS_QoItab.png" />
+</div>
+<ol class="arabic simple" start="5">
+<li><p>Next click on the <strong>Run</strong> button. This will cause the backend application to launch the CustomUQ engine which will run UQpy.</p></li>
+<li><p>When done the <strong>RES</strong> panel will be selected and the results will be displayed. The results show the values the mean and standard deviation.</p></li>
+</ol>
+<p>Summary:</p>
+<ul class="simple">
+<li><p>Mean = 5.77619</p></li>
+<li><p>Std = 2.4664</p></li>
+<li><p>Skewness = 0.456808</p></li>
+<li><p>Kurtosis = 2.7146</p></li>
+</ul>
+<p>Data Table:</p>
+<div class="align-center figure">
+<img alt="../../../../../_images/CUS_REStab.png" src="../../../../../_images/CUS_REStab.png" />
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2018-2023, The Regents of the University of California.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-158130480-4', 'auto');
+    
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+         .wy-nav-content { max-width: none; }
+  </style>
+
+<script>
+    /*
+    let selectedFilters = [];
+    const images  = document.getElementsByClassName("gallery-item");
+    const filters = [...document.querySelectorAll('.filter select')];
+    const toggles = [...document.querySelectorAll('.filter input')];
+
+    var show = function (elem) {
+        elem.style.display = 'block';
+    };
+    var hide = function (elem) {
+        elem.style.display = 'none';
+    };
+    var toggleFilter =  function(el,elid) {
+        const filter = document.getElementById(elid);
+        filter.disabled = !el.checked;
+       
+        if ("createEvent" in document) {
+            var evt = document.createEvent("HTMLEvents");
+            evt.initEvent("change", false, true);
+            filter.dispatchEvent(evt);
+        }
+        else
+            filter.fireEvent("change");
+    };
+    
+    for (const filter of filters) {
+        filter.addEventListener('change', function(event) {
+            selectedFilters = filters.map(filter => filter.disabled ? '' : filter.value).filter(Boolean);
+            console.log(selectedFilters);
+            for (const image of images) {
+                if (selectedFilters.every(filter => image.classList.contains(filter))) {
+                    show(image);
+                }
+                else {hide(image)};
+            };
+        })
+    };
+    */
+</script>
+
+
+</body>
+</html>

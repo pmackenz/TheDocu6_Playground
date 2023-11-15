@@ -1,0 +1,583 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>3.1.3.3. Gaussian Process (GP) Surrogate Modeling &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/js/lightbox-plus-jquery.min.js"></script>
+        <script src="../../../../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="3.1.3.4. Probabilistic Learning on Manifolds (PLoM)" href="SimCenterUQPLoM.html" />
+    <link rel="prev" title="3.1.3.2. Global Sensitivity Analysis" href="SimCenterUQSensitivity.html" />
+<script src="https://cdn.jsdelivr.net/npm/vega@5.12.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@4.13.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.8.0"></script>
+<style media="screen">.vega-actions a {margin-right: 5px;}</style>
+<link href="../../../../_static/css/bootstrap.css" rel="stylesheet">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #F2F2F2" >
+          
+<a href="https://simcenter.designsafe-ci.org/" style="margin-bottom: 0px;">
+  <img src="../../../../_static/img/SimCenter-Only.png" class="logo" alt="Org-Logo" />
+</a>
+<hr style="margin: 0px;">
+
+  <a href="../../../../index.html">
+
+
+
+  
+  <img src="../../../../_static/quoFEM-Logo.png" class="logo" alt="Logo"/>
+
+</a>
+
+
+  
+  
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about/quoFEM/about.html">1. About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/desktop/ack.html">2. Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/license.html">3. Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/cite.html">4. How To Cite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases/quoCapabilities.html">5. Capabilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases/quoReleaseNotes.html">6. Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases/quoPlans.html">7. Release Plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/glossary.html">8. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/abbreviations.html">9. Abbreviations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Manual</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation/desktop/installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/quoFEM/quoFEMtutorial.html">2. Getting Started Tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="usage.html">3. User Interface</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="UQ.html">3.1. UQ: Uncertainty Quantification</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="UQ.html#uq-features-at-a-glance">3.1.1. UQ Features At-a-Glance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UQ.html#dakota-uq-engine">3.1.2. Dakota UQ Engine</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="UQ.html#simcenter-uq-engine">3.1.3. SimCenter UQ Engine</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="SimCenterUQSampling.html">3.1.3.1. Forward Propagation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SimCenterUQSensitivity.html">3.1.3.2. Global Sensitivity Analysis</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">3.1.3.3. Gaussian Process (GP) Surrogate Modeling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SimCenterUQPLoM.html">3.1.3.4. Probabilistic Learning on Manifolds (PLoM)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="UQ.html#ucsd-uq-engine">3.1.4. UCSD UQ Engine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UQ.html#custom-uq-engine">3.1.5. Custom UQ Engine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UQ.html#video-resources">3.1.6. Video Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="quoFEM/FEM.html">3.2. FEM: Finite Element Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RV.html">3.3. RV: Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quoFEM/QuantitiesOfInterest.html">3.4. QoI: Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quoFEM/resQUO.html">3.5. RES: Results</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/desktop/examples.html">4. Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/desktop/troubleshooting.html">5. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reqments/reqQUOFE.html">6. Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bugs.html">7. Bugs &amp; Feature Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dcv/quoFEM/quoFEM.html">8. Running in Your Browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quoFEM/usage_video.html">9. Video Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_inputs_documentation/User_Input_Documentation_Tables.html">10. User Inputs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Technical Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../technical_manual/desktop/technical_manual.html">1. Technical Manual</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/how_to_build/desktop/how_to_build.html">1. How to Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/architecture/desktop/architecture.html">2. Software Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/verification/desktop/verification.html">4. Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/coding_style/desktop/coding_style.html">5. Coding Style</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Quantified Uncertainty with Optimization for the FEM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="usage.html"><span class="section-number">3. </span>User Interface</a> &raquo;</li>
+        
+          <li><a href="UQ.html"><span class="section-number">3.1. </span>UQ: Uncertainty Quantification</a> &raquo;</li>
+        
+      <li><span class="section-number">3.1.3.3. </span>Gaussian Process (GP) Surrogate Modeling</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../../_sources/common/user_manual/usage/desktop/SimCenterUQSurrogate.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="gaussian-process-gp-surrogate-modeling">
+<span id="lblsimsurrogate"></span><h1><span class="section-number">3.1.3.3. </span>Gaussian Process (GP) Surrogate Modeling<a class="headerlink" href="#gaussian-process-gp-surrogate-modeling" title="Permalink to this heading">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Surrogate modeling functionality of quoFEM is built upon <a class="reference external" href="https://sheffieldml.github.io/GPy/">GPy</a> library (available under BSD 3-clause license), an opensource python framework for Gaussian process modeling developed in the Sheffield machine learning group.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Train</span> <span class="pre">GP</span> <span class="pre">Surrogate</span> <span class="pre">Model</span></code> module is used to construct a Gaussian process (GP) based <strong>surrogate model</strong> that substitutes expensive computational <strong>simulation models</strong>. The challenge of surrogate modeling in earthquake engineering arrives from the stochasticity in the ground motion time history and corresponding stochastic output.</p>
+<div class="align-center figure" id="id9">
+<span id="figsimee1"></span><a class="reference internal image-reference" href="../../../../_images/Surrogate_EEUQ1.png"><img alt="../../../../_images/Surrogate_EEUQ1.png" src="../../../../_images/Surrogate_EEUQ1.png" style="width: 1000px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.1.3.3.1 </span><span class="caption-text">Surrogate Modeling in EE-UQ</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</div>
+<ul class="simple">
+<li><p><strong>Output of surrogate model</strong>: Following the performance-based earthquake engineering practice, the response estimation module in SimCenter workflow concerns only the peak responses (e.g. peak acceleration, peak drift ratio at each floor) rather than the whole time history. Therefore, the surrogate modeling algorithms in this tool are designed to predict the non-time history responses.</p></li>
+<li><p><strong>Input of surrogate model</strong>: To keep the input dimension of the surrogate model to a reasonable scale, the ground motion time history are first parameterized into a number of key features in the algorithm. This can be, for example, the sources properties (e.g. M,R) or time/frequency domain excitation property at the site of interest (e.g. intensity measures) (<a class="reference internal" href="#kyprioti2021" id="id1"><span>[Kyprioti2021]</span></a>, <a class="reference internal" href="#zhong2023" id="id2"><span>[Zhong2023]</span></a>).</p></li>
+</ul>
+<p>The surrogate prediction of EDP given the ground motion parameters typically inherits significant randomness, as the amount of information provided by these parameters are not sufficient to determine the exact model peak response. Therefore, the key task in surrogate modeling is to capture the remaining amount of uncertainty in the EDP predictions, as shown in the above figure.</p>
+<p><strong>The trained surrogate model can be saved in a portable file (.json format) and later imported</strong> in place of the original simulation model for UQ analysis or optimization purposes. See user guide <span class="xref std std-ref">section 2.2.5</span> for how to import the surrogate model in quoFEM.</p>
+<dl class="citation">
+<dt class="label" id="kyprioti2021"><span class="brackets"><a class="fn-backref" href="#id1">Kyprioti2021</a></span></dt>
+<dd><p>Kyprioti, A. P., &amp; Taflanidis, A. A. (2021). “Kriging metamodeling for seismic response distribution estimation”. <em>Earthquake Engineering &amp; Structural Dynamics</em>, 50(13), 3550-3576.</p>
+</dd>
+<dt class="label" id="zhong2023"><span class="brackets"><a class="fn-backref" href="#id2">Zhong2023</a></span></dt>
+<dd><p>Zhong, K., Navarro, J.G., Govindjee, S., and Deierlein, G.G. (2023). “Surrogate Modeling of Structural Seismic Response Using Probabilistic Learning on Manifolds,” <em>Earthquake Engineering &amp; Structural Dynamics</em>, 1-22,  <a class="reference external" href="https://doi.org/10.1002/eqe.3839">https://doi.org/10.1002/eqe.3839</a></p>
+</dd>
+</dl>
+<div class="section" id="input-description">
+<h2>Input description<a class="headerlink" href="#input-description" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="case-1-sampling-and-simulation">
+<h3>Case 1: Sampling and Simulation<a class="headerlink" href="#case-1-sampling-and-simulation" title="Permalink to this heading">¶</a></h3>
+<p>When the <strong>Training Dataset</strong> option is set to the <code class="docutils literal notranslate"><span class="pre">Sampling</span> <span class="pre">and</span> <span class="pre">Simulation</span></code>, a simulation model should be presented in the later tabs. The training points are sampled adaptively by the design of experiments.</p>
+<div class="align-center figure" id="id10">
+<span id="figsim1"></span><a class="reference internal image-reference" href="../../../../_images/Surrogate1_SimUQ.png"><img alt="../../../../_images/Surrogate1_SimUQ.png" src="../../../../_images/Surrogate1_SimUQ.png" style="width: 900px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.1.3.3.2 </span><span class="caption-text">Input panel for surrogate modeling</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</div>
+<ul>
+<li><p><strong>Maximum Number of Model Runs</strong>: When the number of simulation runs reaches the limit, the analysis will be terminated.</p></li>
+<li><p><strong>Maximum Computation Time (in minutes)</strong>: When the tolerance limit of the computation time is reached, the analysis will be terminated. There will be a few minutes of error.</p></li>
+<li><p><strong>Target Accuracy (Normalized Error)</strong>: The target accuracy is defined in terms of normalized root-mean-squared error (NRMSE) estimated by leave-out-one cross-validation (LOOCV).</p>
+<blockquote>
+<div><blockquote>
+<div><div class="math notranslate nohighlight" id="equation-nrmse">
+<span class="eqno">(3.1.3.3.3)<a class="headerlink" href="#equation-nrmse" title="Permalink to this equation">¶</a></span>\[\begin{align*}
+    \rm{NRMSE} ~ &amp;= \frac{\sqrt{\frac{1}{N} \sum^{N}_{k=1} (y_k-\hat{y}_k)^2}}{\max_{k=1,...,N}(y_k)-\min_{k=1,...,N}(y_k)}
+\end{align*}\]</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line">where</div>
+<div class="line-block">
+<div class="line"><span class="math notranslate nohighlight">\(y_k\)</span> : exact response from the model simulation</div>
+<div class="line"><span class="math notranslate nohighlight">\(\hat{y}_k\)</span>: estimated response by LOOCV surrogate model prediction</div>
+<div class="line"><span class="math notranslate nohighlight">\(N\)</span>: number of samples used to train the surrogate model</div>
+</div>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>Random Seed</strong>: Seed of the random number generator</p></li>
+<li><p><strong>Parallel execution</strong>: This engine implemented multiprocessing (local) or mpi4py (remote) python packages to run parallel execution.</p></li>
+</ul>
+<p>Note that the results from the parallel and serial run may not be exactly the same because parallel execution sets the number of batch design of experiments (DoE) in order to maximize the use of resources (Default DoE interval: 5). User can also activate the following advanced options:</p>
+<p><span class="blue">Advanced Options for Gaussian Process Model</span></p>
+<div class="align-center figure" id="id11">
+<span id="figsim2"></span><a class="reference internal image-reference" href="../../../../_images/Surrogate2_SimUQ.png"><img alt="../../../../_images/Surrogate2_SimUQ.png" src="../../../../_images/Surrogate2_SimUQ.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.1.3.3.3 </span><span class="caption-text">Sampling and Simulation - Case 1</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+</div>
+<ul class="simple">
+<li><p><strong>Kernel function</strong>: Correlation function for Gaussian process regression. Matern5/2 function is the default, and Matern3/2, Radial Basis, and Exponential functions (exponent <span class="math notranslate nohighlight">\(\gamma=1\)</span>) are additionally supported. (For details, please refer to <a class="reference external" href="http://gaussianprocess.org/gpml/chapters/RW4.pdf">chapter 4</a> of the book Gaussian Processes for Machine Learning)</p></li>
+<li><p><strong>Add Linear Trend Function</strong>: When increasing or decreasing trend is expected over the variables domain, a linear trend function may be introduced. The default is unchecked, ie. no trend function.</p></li>
+<li><p><strong>Log-space Transform of QoI</strong>: When the user can guarantee that the response quantities are always greater than 0, user may want to introduce a surrogate model in log-transformed space of QoI. The default is unchecked, ie. original physical coordinate.</p></li>
+<li><p><strong>Design of Experiments options</strong>: User may manually select the design of experiments (DoE) method and the number of the initial DoE. The default is “none” and the default number of DoE is 4 times the number of random variables.</p></li>
+<li><p><strong>Nugget Variances</strong>: User may define nugget variances or bounds of the nugget variances if needed. The default is “optimize”. See subsection titled ‘Heteroscedastic Gaussian Process’ to learn more about this feature.</p></li>
+</ul>
+<p><span class="blue">Start with Existing Dataset</span></p>
+<div class="align-center figure" id="id12">
+<span id="figsim3"></span><a class="reference internal image-reference" href="../../../../_images/Surrogate3_SimUQ.png"><img alt="../../../../_images/Surrogate3_SimUQ.png" src="../../../../_images/Surrogate3_SimUQ.png" style="width: 900px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.1.3.3.4 </span><span class="caption-text">Input panel for surrogate modeling</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+</div>
+<p>Additionally, users may populate the initial samples directly from data files by activating. The following two data files are requested:</p>
+<ul class="simple">
+<li><p><strong>Train Points (Input)</strong></p></li>
+<li><p><strong>System Responses (Output)</strong></p></li>
+</ul>
+<p>where</p>
+<ul class="simple">
+<li><p>Each text file is a numeric table with columns separated by a tab, space, or comma. Multiple headers can be presented following the symbol %.</p></li>
+<li><p>The number of rows corresponds to the number of training data samples.</p></li>
+<li><p>Train Points (Input): The number of columns should match the number of RVs presented in the <strong>RV tab</strong> and also match the required inputs of the simulation model provided in the <strong>FEM tab</strong>. <strong>The order of the columns should match those of the random variables presented in the RV tab</strong> (See <a class="reference internal" href="#figsim4"><span class="std std-numref">Fig. 3.1.3.3.5</span></a> and <a class="reference internal" href="#figsim7"><span class="std std-numref">Fig. 3.1.3.3.13</span></a> for example.)</p></li>
+<li><p>System Responses (Output): The number of columns and the order of columns should match the QoI quantities presented in <strong>QoI tab</strong>.</p></li>
+<li><p>Both files need to be provided, and the number of columns for the two files should be the same.</p></li>
+<li><p>See <a class="reference internal" href="#figsim4"><span class="std std-numref">Fig. 3.1.3.3.5</span></a> for example input data sheets.</p></li>
+</ul>
+<div class="align-center figure" id="id13">
+<span id="figsim4"></span><a class="reference internal image-reference" href="../../../../_images/Surrogate4_SimUQ.jpg"><img alt="../../../../_images/Surrogate4_SimUQ.jpg" src="../../../../_images/Surrogate4_SimUQ.jpg" style="width: 900px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.1.3.3.5 </span><span class="caption-text">Example of data input files</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>When the <strong>Start with Existing Dataset</strong> is checked, one redundant simulation will be performed in order to check the consistency between the data and the simulation model. An error will be thrown when the dataset cannot be reproduced by the simulation model.</p></li>
+<li><p>If the user wants to use the samples purely from data files and does not wish to introduce any simulation model, refer to Case 3 below.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="rv-random-variables-tab">
+<h3>RV (Random Variables) Tab<a class="headerlink" href="#rv-random-variables-tab" title="Permalink to this heading">¶</a></h3>
+<p>The bounds of RVs need to cover the domain of interest in future applications, while it should not be unnecessarily stretched. <strong>Input type</strong> and <strong>Distribution</strong> should be set to <strong>Parameters</strong> and <strong>Uniform</strong>. When a dataset is provided, make sure to match the order of RVs in the <strong>RV tab</strong> to the order of data columns. Any correlation values will be ignored.</p>
+<div class="align-center figure" id="id21">
+<span id="figsim7"></span><a class="reference internal image-reference" href="../../../../_images/Surrogate7_SimUQ.jpg"><img alt="../../../../_images/Surrogate7_SimUQ.jpg" src="../../../../_images/Surrogate7_SimUQ.jpg" style="width: 900px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.1.3.3.13 </span><span class="caption-text">Example of RV tab</span><a class="headerlink" href="#id21" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="output-description">
+<h2>Output description<a class="headerlink" href="#output-description" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="goodness-of-fit">
+<h3>Goodness-of-Fit<a class="headerlink" href="#goodness-of-fit" title="Permalink to this heading">¶</a></h3>
+<p>Once the training is completed, the following three verification measures are presented based on leave-one-out cross-validation (LOOCV) error estimation.</p>
+<ul>
+<li><p><strong>Leave-one-out cross-validation (LOOCV)</strong></p>
+<div class="line-block">
+<div class="line">LOOCV prediction <span class="math notranslate nohighlight">\(\hat{\boldsymbol{y}}_k\)</span> at each sample location <span class="math notranslate nohighlight">\(\boldsymbol{x}_k\)</span> is obatined by the following procedure: A temporary surrogate model <span class="math notranslate nohighlight">\(\hat{\boldsymbol{y}}=f^{sur}_{loo,k}(\boldsymbol{\boldsymbol{x}})\)</span> is constructed using the samples <span class="math notranslate nohighlight">\(\{\boldsymbol{x}_1,\boldsymbol{x}_2,...,\boldsymbol{x}_{k-1},\boldsymbol{x}_{k+1},...,\boldsymbol{x}_N\}\)</span> and the calibrated parameters, and the prediction <span class="math notranslate nohighlight">\(\hat{\boldsymbol{y}}_k=f^{sur}_{loo,k}(\boldsymbol{x}_k)\)</span> is compared with the exact outcome .</div>
+</div>
+</li>
+</ul>
+<p>We provide different verification measures for two different cases.</p>
+<ol class="lowerroman">
+<li><p>When nugget variance is low : The LOOCV prediction <span class="math notranslate nohighlight">\(\hat{\boldsymbol{y}}_k\)</span> is expected to match the exact outcome <span class="math notranslate nohighlight">\(\boldsymbol{y_k}=f(\boldsymbol{x}_k)\)</span> when the surrogate model is well-trained. To quantify the goodness, R2 error, normalized root-mean-squared-error (NRMSE), and correlation coefficient are provided:</p>
+<ul>
+<li><p><strong>R2 error</strong></p>
+<div class="line-block">
+<div class="line">R2 error is defined in terms of the total sum of squares over the residual sum of squares</div>
+</div>
+<blockquote>
+<div><div class="math notranslate nohighlight" id="equation-r2">
+<span class="eqno">(3.1.3.3.2)<a class="headerlink" href="#equation-r2" title="Permalink to this equation">¶</a></span>\[\begin{align*}
+    R^2 &amp;= 1 - \frac{\sum^N_{k=1} (\hat{y}_k-\mu_\hat{y})^2}{\sum^N_{k=1} (\hat{y}_k-y_k)^2}
+\end{align*}\]</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line">The surrogate model is considered well-trained when the <strong>R2 (&lt;1) approaches 1</strong></div>
+</div>
+</li>
+<li><p><strong>Normalized root-mean-squared-error (NRMSE)</strong></p>
+<blockquote>
+<div><div class="math notranslate nohighlight" id="equation-nrmse">
+<span class="eqno">(3.1.3.3.3)<a class="headerlink" href="#equation-nrmse" title="Permalink to this equation">¶</a></span>\[\begin{align*}
+    \rm{NRMSE} ~ &amp;= \frac{\sqrt{\frac{1}{N_t} \sum^{N_t}_{k=1} (y_k-\hat{y}_k)^2}}{\max_{k=1,...,N_t}(y_k)-\min_{k=1,...,N_t}(y_k)}
+\end{align*}\]</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line">The surrogate model is considered well-trained when the <strong>NRMSE (&gt;0) approaches 0</strong></div>
+</div>
+</li>
+<li><p><strong>Correlation coefficient</strong></p>
+<div class="line-block">
+<div class="line">Correlation coefficient is a statistic that measures linear correlation between two variables</div>
+</div>
+<div class="math notranslate nohighlight" id="equation-corr">
+<span class="eqno">(3.1.3.3.4)<a class="headerlink" href="#equation-corr" title="Permalink to this equation">¶</a></span>\[  \rho_{y,\hat{y}} = \frac{\sum^N_{k=1}(y_k-\mu_{y})(\hat{y}_k-\mu_{\hat{y}})} {\sigma_y \sigma_\hat{y}}\]</div>
+<div class="line-block">
+<div class="line">where</div>
+<div class="line-block">
+<div class="line"><span class="math notranslate nohighlight">\(\mu_{y}\)</span> : mean of <span class="math notranslate nohighlight">\(\{y_k\}\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(\mu_{\hat{y}}\)</span>: mean of <span class="math notranslate nohighlight">\(\{\hat{y}_k\}\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(\sigma_{y}\)</span>: standard deviation of <span class="math notranslate nohighlight">\(\{y_k\}\)</span></div>
+<div class="line"><span class="math notranslate nohighlight">\(\sigma_{\hat{y}}\)</span>: standard deviation of <span class="math notranslate nohighlight">\(\{\hat{y}_k\}\)</span></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">The surrogate model is considered well-trained when the <strong>correlation coefficient (</strong> <span class="math notranslate nohighlight">\(-1&lt;\rho&lt;1\)</span> <strong>) approaches 1</strong></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>When nugget variance is high : The distance between LOOCV prediction <span class="math notranslate nohighlight">\(\hat{\boldsymbol{y}}_k\)</span> and the exact outcome <span class="math notranslate nohighlight">\(\boldsymbol{y_k}=f(\boldsymbol{x}_k)\)</span> is expected to follow a normal distribution when the surrogate model is well-trained. To quantify the goodness, inter-quartile ratio (IQR) and Cramer-Von Mises statistics can be evaluated:</p></li>
+</ol>
+<blockquote>
+<div><ul>
+<li><p><strong>Inter-quartile ratio (IQR)</strong>: IQR provides the ratio of the sample QoIs that lies in 25-75% LOOCV prediction bounds (interquartile range). The IQR values should theoretically approach 0.5 if the prediction is accurate.</p></li>
+<li><p><strong>Cramer-Von Mises statistics</strong>: Cramer-Von Mises statistics calculate the normality score. The assumption of a GP is that the observations follow a normal distribution conditional on the input parameters. To assess the normality of the model predictions, the difference between the mean prediction <span class="math notranslate nohighlight">\(\hat{y}_k\)</span> and the sample observation  <span class="math notranslate nohighlight">\(y_k\)</span> value is divided by the standard deviation prediction from surrogate <span class="math notranslate nohighlight">\(\hat{\sigma}_{y,k}\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-normed">
+<span class="eqno">(3.1.3.3.5)<a class="headerlink" href="#equation-normed" title="Permalink to this equation">¶</a></span>\[  u_k = \frac{y_k-\hat{y}_k} {\hat{\sigma}_{y,k}}\]</div>
+</li>
+</ul>
+<blockquote>
+<div><p>If the values of <span class="math notranslate nohighlight">\({u_k}\)</span> follow the standard normal distribution, the resulting surrogate model may be considered well-constructed. The Cramer-Von Mises test is calculated using the <code class="docutils literal notranslate"><span class="pre">scipy.stats.cramervonmises</span></code> function in the Python package Scipy, and the resulting p-value is displayed. Conventionally, if the p-value exceeds a significance threshold, e.g. 0.05, the null hypothesis that the samples are from a normal distribution is not rejected, meaning the samples may be considered to follow a Gaussian distribution.</p>
+</div></blockquote>
+</div></blockquote>
+<p>Additionally, <strong>scatter plot</strong> between the predicted and exact responses is presented: Well-trained model will form a clear diagonal line in case (i), or be distributed normally around the diagonal line in case (ii). A poorly trained model will have points that are more scattered around.</p>
+<div class="align-center figure" id="id22">
+<span id="figsim8"></span><a class="reference internal image-reference" href="../../../../_images/Surrogate8_SimUQ.jpg"><img alt="../../../../_images/Surrogate8_SimUQ.jpg" src="../../../../_images/Surrogate8_SimUQ.jpg" style="width: 900px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.1.3.3.14 </span><span class="caption-text">Well-trained surrogate (left) and poorly trained surrogate (right) models</span><a class="headerlink" href="#id22" title="Permalink to this image">¶</a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since these validation measures are calculated from the cross-validation predictions, they can be <strong>biased</strong>, particularly when a highly localized nonlinear range exists in the actual response surface, and those regions are not covered by the training samples. The introduction of adaptive design of experiments helps to suppress the bias by enabling the targeted selection of simulation points around potentially faulty regions.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Note that GP-based surrogate models can be used to fit only smooth, continuous functions. When the surrogate model is poorly trained, a parametric study is highly recommended to check any possible discontinuity presented in the simulation model.</p>
+</div>
+</div>
+<div class="section" id="saving-options">
+<h3>Saving Options<a class="headerlink" href="#saving-options" title="Permalink to this heading">¶</a></h3>
+<ul>
+<li><p><strong>Save GP Model</strong>: The constructed surrogate model is saved. One main file and one auxiliary folder will be saved.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>SurroateGP Info File</strong> (default name: <code class="docutils literal notranslate"><span class="pre">SimGpModel.json</span></code>) : This file contains information required to quickly reconstruct the surrogate model and predict the response for different input realizations. This can be later imported in EEUQ.</p></li>
+<li><p><strong>Simulation template directory</strong> (default name: <code class="docutils literal notranslate"><span class="pre">tmplatedir_SIM</span></code>) : This folder contains all the scripts and commands to run the original dynamic time history analysis. This folder can later be imported into EEUQ along with the surrogate model to alternate between original simulations and surrogate predictions or compare the surrogate predictions to the response of the original model.</p></li>
+<li><p>Only for the multi-fidelity case in quoFEM, additional <strong>SurroateGP model file</strong> (default name: <code class="docutils literal notranslate"><span class="pre">SimGpModel.pkl</span></code>) will be written along with the above two.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not place above surrogate model files in your root, downloads, or desktop folder as when the application runs it will copy the contents on the directories and subdirectories containing these files multiple times. If you are like us, your root, Downloads or Documents folders contains and awful lot of files and when the backend workflow runs you will slowly find you will run out of disk space!</p>
+</div>
+<ul class="simple">
+<li><p><strong>Save GP Info</strong>: This is a report generated for user reference. It contains the GP model parameter and other information. The default file name is <code class="docutils literal notranslate"><span class="pre">GPresults.out</span></code>.</p></li>
+<li><p><strong>RV Data</strong>, <strong>QoI Data</strong>:It saves the samples of RV and QoI. The default file names are <code class="docutils literal notranslate"><span class="pre">X.txt</span></code> and <code class="docutils literal notranslate"><span class="pre">Y.txt</span></code>, respectively. <strong>IMPORTANT</strong>: To continue surrogate modeling with additional simulations, save the RV and QoI sample files using this button and import them as initial points. Refer to the ‘Start with Existing Dataset’ option in Case 1.</p></li>
+</ul>
+<div class="align-center figure" id="id23">
+<span id="figsim9"></span><a class="reference internal image-reference" href="../../../../_images/Surrogate9_SimUQ.jpg"><img alt="../../../../_images/Surrogate9_SimUQ.jpg" src="../../../../_images/Surrogate9_SimUQ.jpg" style="width: 900px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.1.3.3.15 </span><span class="caption-text">Saving options</span><a class="headerlink" href="#id23" title="Permalink to this image">¶</a></p>
+</div>
+<div class="align-center figure" id="id24">
+<span id="figsim10"></span><a class="reference internal image-reference" href="../../../../_images/Surrogate10_SimUQ.png"><img alt="../../../../_images/Surrogate10_SimUQ.png" src="../../../../_images/Surrogate10_SimUQ.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.1.3.3.16 </span><span class="caption-text">Example outputs from saving options</span><a class="headerlink" href="#id24" title="Permalink to this image">¶</a></p>
+</div>
+<dl class="citation">
+<dt class="label" id="patsialis2021"><span class="brackets"><a class="fn-backref" href="#id6">Patsialis2021</a></span></dt>
+<dd><p>Patsialis, D., and A. A. Taflanidis. (2021). Multi-fidelity Monte Carlo for seismic risk assessment applications. <em>Structural Safety</em> 93: 102129.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2018-2023, The Regents of the University of California.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-158130480-4', 'auto');
+    
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+         .wy-nav-content { max-width: none; }
+  </style>
+
+<script>
+    /*
+    let selectedFilters = [];
+    const images  = document.getElementsByClassName("gallery-item");
+    const filters = [...document.querySelectorAll('.filter select')];
+    const toggles = [...document.querySelectorAll('.filter input')];
+
+    var show = function (elem) {
+        elem.style.display = 'block';
+    };
+    var hide = function (elem) {
+        elem.style.display = 'none';
+    };
+    var toggleFilter =  function(el,elid) {
+        const filter = document.getElementById(elid);
+        filter.disabled = !el.checked;
+       
+        if ("createEvent" in document) {
+            var evt = document.createEvent("HTMLEvents");
+            evt.initEvent("change", false, true);
+            filter.dispatchEvent(evt);
+        }
+        else
+            filter.fireEvent("change");
+    };
+    
+    for (const filter of filters) {
+        filter.addEventListener('change', function(event) {
+            selectedFilters = filters.map(filter => filter.disabled ? '' : filter.value).filter(Boolean);
+            console.log(selectedFilters);
+            for (const image of images) {
+                if (selectedFilters.every(filter => image.classList.contains(filter))) {
+                    show(image);
+                }
+                else {hide(image)};
+            };
+        })
+    };
+    */
+</script>
+
+
+</body>
+</html>

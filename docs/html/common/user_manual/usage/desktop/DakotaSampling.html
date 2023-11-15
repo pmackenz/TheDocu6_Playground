@@ -1,0 +1,403 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>3.1.2.1. Forward Propagation &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/js/lightbox-plus-jquery.min.js"></script>
+        <script src="../../../../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="3.1.2.2. Global Sensitivity Analysis" href="DakotaSensitivity.html" />
+    <link rel="prev" title="3.1. UQ: Uncertainty Quantification" href="UQ.html" />
+<script src="https://cdn.jsdelivr.net/npm/vega@5.12.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@4.13.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.8.0"></script>
+<style media="screen">.vega-actions a {margin-right: 5px;}</style>
+<link href="../../../../_static/css/bootstrap.css" rel="stylesheet">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #F2F2F2" >
+          
+<a href="https://simcenter.designsafe-ci.org/" style="margin-bottom: 0px;">
+  <img src="../../../../_static/img/SimCenter-Only.png" class="logo" alt="Org-Logo" />
+</a>
+<hr style="margin: 0px;">
+
+  <a href="../../../../index.html">
+
+
+
+  
+  <img src="../../../../_static/quoFEM-Logo.png" class="logo" alt="Logo"/>
+
+</a>
+
+
+  
+  
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about/quoFEM/about.html">1. About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/desktop/ack.html">2. Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/license.html">3. Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/cite.html">4. How To Cite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases/quoCapabilities.html">5. Capabilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases/quoReleaseNotes.html">6. Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases/quoPlans.html">7. Release Plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/glossary.html">8. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/abbreviations.html">9. Abbreviations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Manual</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation/desktop/installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/quoFEM/quoFEMtutorial.html">2. Getting Started Tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="usage.html">3. User Interface</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="UQ.html">3.1. UQ: Uncertainty Quantification</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="UQ.html#uq-features-at-a-glance">3.1.1. UQ Features At-a-Glance</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="UQ.html#dakota-uq-engine">3.1.2. Dakota UQ Engine</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">3.1.2.1. Forward Propagation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DakotaSensitivity.html">3.1.2.2. Global Sensitivity Analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DakotaReliability.html">3.1.2.3. Reliability Analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DakotaDeterministicCalibration.html">3.1.2.4. Deterministic Calibration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DakotaBayesianCalibration.html">3.1.2.5. Bayesian Calibration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DakotaGradientFreeOptimization.html">3.1.2.6. Gradient-free Parameter Estimation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="UQ.html#simcenter-uq-engine">3.1.3. SimCenter UQ Engine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UQ.html#ucsd-uq-engine">3.1.4. UCSD UQ Engine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UQ.html#custom-uq-engine">3.1.5. Custom UQ Engine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UQ.html#video-resources">3.1.6. Video Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="quoFEM/FEM.html">3.2. FEM: Finite Element Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RV.html">3.3. RV: Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quoFEM/QuantitiesOfInterest.html">3.4. QoI: Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quoFEM/resQUO.html">3.5. RES: Results</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/desktop/examples.html">4. Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/desktop/troubleshooting.html">5. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reqments/reqQUOFE.html">6. Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bugs.html">7. Bugs &amp; Feature Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dcv/quoFEM/quoFEM.html">8. Running in Your Browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quoFEM/usage_video.html">9. Video Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_inputs_documentation/User_Input_Documentation_Tables.html">10. User Inputs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Technical Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../technical_manual/desktop/technical_manual.html">1. Technical Manual</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/how_to_build/desktop/how_to_build.html">1. How to Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/architecture/desktop/architecture.html">2. Software Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/verification/desktop/verification.html">4. Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/coding_style/desktop/coding_style.html">5. Coding Style</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Quantified Uncertainty with Optimization for the FEM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="usage.html"><span class="section-number">3. </span>User Interface</a> &raquo;</li>
+        
+          <li><a href="UQ.html"><span class="section-number">3.1. </span>UQ: Uncertainty Quantification</a> &raquo;</li>
+        
+      <li><span class="section-number">3.1.2.1. </span>Forward Propagation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../../_sources/common/user_manual/usage/desktop/DakotaSampling.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="forward-propagation">
+<span id="lbldakotaforward"></span><h1><span class="section-number">3.1.2.1. </span>Forward Propagation<a class="headerlink" href="#forward-propagation" title="Permalink to this heading">¶</a></h1>
+<p>The forward propagation analysis provides probabilistic understanding of output variables by producing sample realizations and statistical moments (mean, standard deviation, skewness, and kurtosis) of the quantities of interest. Currently four sampling methods are available:</p>
+<ol class="arabic simple">
+<li><p><strong>Monte Carlo Sampling (MCS)</strong></p></li>
+<li><p><strong>Latin Hypercube Sampling (LHS)</strong></p></li>
+</ol>
+<p>and sampling based on surrogate models, including:</p>
+<ol class="arabic simple" start="3">
+<li><p><strong>Gaussian Process Regression (GPR)</strong></p></li>
+<li><p><strong>Polynomial Chaos Expansion (PCE)</strong></p></li>
+</ol>
+<p>Depending on the option selected, the user must specify the appropriate input parameters. For instance, for MCS, the number of samples specifies the number of simulations to be performed, and providing a seed value for the pseudo-random number generator will produce the same sequence of random numbers allowing the user to reproduce the sampling results multiple times. The user selects the sampling method from the dropdown <code class="docutils literal notranslate"><span class="pre">Dakota</span> <span class="pre">Method</span> <span class="pre">Category</span></code> menu. Additional information regarding sampling techniques offered in Dakota can be found <a class="reference external" href="https://dakota.sandia.gov//sites/default/files/docs/6.9/html-ref/method-sampling.html">here</a>.</p>
+<div class="section" id="monte-carlo-sampling-mcs">
+<h2>Monte Carlo Sampling (MCS)<a class="headerlink" href="#monte-carlo-sampling-mcs" title="Permalink to this heading">¶</a></h2>
+<p>MCS is among the most robust and universally applicable sampling methods. Moreover, the convergence rate of MCS methods are independent of the problem dimensionality, albeit the convergence rate of such MCS methods is relatively slow at <span class="math notranslate nohighlight">\(N^{-1/2}\)</span>. In MCS, a sample drawn at any step is independent of all previous samples.</p>
+<p><a class="reference internal" href="#figmcs"><span class="std std-numref">Fig. 3.1.2.1.1</span></a> shows the input panel corresponding to the Monte Carlo Sampling setting. Two input parameters need to be specified: (1) the number of samples of the output to be produced, which is equal to the number of times the model is evaluated, and (2) the seed for the pseudo-random number generator.</p>
+<div class="align-center figure" id="id1">
+<span id="figmcs"></span><img alt="../../../../_images/fwMC.png" src="../../../../_images/fwMC.png" />
+<p class="caption"><span class="caption-number">Fig. 3.1.2.1.1 </span><span class="caption-text">Monte Carlo Sampling input panel.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="latin-hypercube-sampling-lhs">
+<h2>Latin Hypercube Sampling (LHS)<a class="headerlink" href="#latin-hypercube-sampling-lhs" title="Permalink to this heading">¶</a></h2>
+<p>Conventional Monte Carlo method generates each sample independently, which may produce undesired clusters and gaps between the samples arising from the sampling variability. On the other hand, Latin hypercube sampling (LHS) aims to prevent those gaps and clusters by ‘evenly’ spreading out the samples throughout the whole input domain. This can significantly reduce the sampling variability and facilitate faster convergence of the probabilistic statistics. In particular, LHS divides the input domain of each variable into N intervals with equal probability and locates the samples such that only one sample lies on each interval. This strategy enforces the samples to be more uniformly spread across the domain. In general, LHS encouraged over MCS as it provides unbiased estimation with smaller standard error. For example, <a class="reference external" href="https://old.analytica.com/blog/latin-hypercube-vs.-monte-carlo-sampling">this article</a> suggests that the convergence rate of a sample mean is about quadratically faster with LHS than with Monte Carlo simulation. However, it is noted that one drawback of LHS is that there is no closed-form expression to quantify the error level of the estimators. This means that the user may need to perform the multiple batch samplings to quantify the error from the sample variability</p>
+<div class="align-center figure" id="id2">
+<span id="figlhs1"></span><a class="reference internal image-reference" href="../../../../_images/Sampling_LHS1.png"><img alt="../../../../_images/Sampling_LHS1.png" src="../../../../_images/Sampling_LHS1.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.1.2.1.2 </span><span class="caption-text">Monte Carlo sampling vs. Latin hypercube sampling</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p><a class="reference internal" href="#figlhs2"><span class="std std-numref">Fig. 3.1.2.1.3</span></a> shows the input panel corresponding to the Latin hypercube sampling (LHS) scheme. Two input parameters need to be specified: (1) the number of samples of the output to be produced, which is equal to the number of times the model is evaluated, and (2) the seed for the pseudo-random number generator.</p>
+<div class="align-center figure" id="id3">
+<span id="figlhs2"></span><img alt="../../../../_images/fwLHS.png" src="../../../../_images/fwLHS.png" />
+<p class="caption"><span class="caption-number">Fig. 3.1.2.1.3 </span><span class="caption-text">Latin Hypercube Sampling input panel.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="gaussian-process-regression-gpr">
+<h2>Gaussian Process Regression (GPR)<a class="headerlink" href="#gaussian-process-regression-gpr" title="Permalink to this heading">¶</a></h2>
+<p>For the problems in which computationally expensive models are involved, conventional sampling schemes such as LHS and MCS can be extremely time-consuming. In such case, a surrogate model can be constructed based on a smaller number of simulation runs, and then the surrogate model can be used to efficiently generate a larger number of samples replacing the expensive simulations.</p>
+<p>Gaussian Process Regression (GPR), also known as Kriging is one of the well-established surrogate techniques, which constructs an approximated response surface based on Gaussian process modeling and covariance matrix optimizations. <a class="reference internal" href="#figgpr"><span class="std std-numref">Fig. 3.1.2.1.4</span></a> shows the input panel for the GPR model that consists of training and sampling panels.</p>
+<div class="align-center figure" id="id4">
+<span id="figgpr"></span><img alt="../../../../_images/fwGP.png" src="../../../../_images/fwGP.png" />
+<p class="caption"><span class="caption-number">Fig. 3.1.2.1.4 </span><span class="caption-text">GPR forward propagation input panel.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<p>In the <strong>Surrogate Training Data</strong> panel, the users specify the number of samples of the output of the computationally expensive model to be  select either Monte Carlo Sampling or Latin Hypercube Sampling to generate sample output values from the computationally expensive model, which, along with the corresponding input values are used to train the surrogate models.</p>
+<p>Other surrogate models, different from Gaussian process regression are also available in the drop-down menu titled <strong>Surface Fitting Method</strong>. All thse surrogate models utilize either Monte Carlo Sampling or Latin Hypercube Sampling to generate sample output values, which, along with the corresponding input values are used to train the surrogate models.</p>
+</div>
+<div class="section" id="polynomial-chaos-expansion-pce">
+<h2>Polynomial Chaos Expansion (PCE)<a class="headerlink" href="#polynomial-chaos-expansion-pce" title="Permalink to this heading">¶</a></h2>
+<p>Polynomial Chaos Expansion (PCE) is another surrogate model that can replace the expensive simulation model. Similar to the input GPR panel, the input panel for PCE model shown in <a class="reference internal" href="#figpce"><span class="std std-numref">Fig. 3.1.2.1.5</span></a> consists of training and sampling parts. The input parameters in the <em>surrogate training data</em> set specify the dataset used for training the surrogate model, while the parameters in the <em>surrogate sampling data</em> are related to the samples generated using the surrogate. Extreme care must be taken in specifying the parameters of the training dataset to result in an accurate approximation.</p>
+<div class="align-center figure" id="id5">
+<span id="figpce"></span><img alt="../../../../_images/fwPCE.png" src="../../../../_images/fwPCE.png" />
+<p class="caption"><span class="caption-number">Fig. 3.1.2.1.5 </span><span class="caption-text">PCE forward propagation input panel.</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<p>If the user is not familiar with the training parameters of the surrogates, it is recommended to refrain from using the surrogates (PCE in particular) and instead use conventional sampling approaches such as MCS and LHS, despite a higher computational cost.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2018-2023, The Regents of the University of California.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-158130480-4', 'auto');
+    
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+         .wy-nav-content { max-width: none; }
+  </style>
+
+<script>
+    /*
+    let selectedFilters = [];
+    const images  = document.getElementsByClassName("gallery-item");
+    const filters = [...document.querySelectorAll('.filter select')];
+    const toggles = [...document.querySelectorAll('.filter input')];
+
+    var show = function (elem) {
+        elem.style.display = 'block';
+    };
+    var hide = function (elem) {
+        elem.style.display = 'none';
+    };
+    var toggleFilter =  function(el,elid) {
+        const filter = document.getElementById(elid);
+        filter.disabled = !el.checked;
+       
+        if ("createEvent" in document) {
+            var evt = document.createEvent("HTMLEvents");
+            evt.initEvent("change", false, true);
+            filter.dispatchEvent(evt);
+        }
+        else
+            filter.fireEvent("change");
+    };
+    
+    for (const filter of filters) {
+        filter.addEventListener('change', function(event) {
+            selectedFilters = filters.map(filter => filter.disabled ? '' : filter.value).filter(Boolean);
+            console.log(selectedFilters);
+            for (const image of images) {
+                if (selectedFilters.every(filter => image.classList.contains(filter))) {
+                    show(image);
+                }
+                else {hide(image)};
+            };
+        })
+    };
+    */
+</script>
+
+
+</body>
+</html>

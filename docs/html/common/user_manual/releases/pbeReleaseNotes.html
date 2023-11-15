@@ -1,0 +1,549 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Release Notes &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/js/lightbox-plus-jquery.min.js"></script>
+        <script src="../../../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+<script src="https://cdn.jsdelivr.net/npm/vega@5.12.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@4.13.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.8.0"></script>
+<style media="screen">.vega-actions a {margin-right: 5px;}</style>
+<link href="../../../_static/css/bootstrap.css" rel="stylesheet">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #F2F2F2" >
+          
+<a href="https://simcenter.designsafe-ci.org/" style="margin-bottom: 0px;">
+  <img src="../../../_static/img/SimCenter-Only.png" class="logo" alt="Org-Logo" />
+</a>
+<hr style="margin: 0px;">
+
+  <a href="../../../index.html">
+
+
+
+  
+  <img src="../../../_static/quoFEM-Logo.png" class="logo" alt="Logo"/>
+
+</a>
+
+
+  
+  
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/quoFEM/about.html">1. About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../front-matter/desktop/ack.html">2. Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../front-matter/license.html">3. Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../front-matter/cite.html">4. How To Cite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quoCapabilities.html">5. Capabilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quoReleaseNotes.html">6. Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quoPlans.html">7. Release Plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../front-matter/glossary.html">8. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../front-matter/abbreviations.html">9. Abbreviations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation/desktop/installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/quoFEM/quoFEMtutorial.html">2. Getting Started Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/desktop/usage.html">3. User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/desktop/examples.html">4. Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/desktop/troubleshooting.html">5. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reqments/reqQUOFE.html">6. Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bugs.html">7. Bugs &amp; Feature Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dcv/quoFEM/quoFEM.html">8. Running in Your Browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/desktop/quoFEM/usage_video.html">9. Video Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_inputs_documentation/User_Input_Documentation_Tables.html">10. User Inputs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Technical Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../technical_manual/desktop/technical_manual.html">1. Technical Manual</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../developer_manual/how_to_build/desktop/how_to_build.html">1. How to Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer_manual/architecture/desktop/architecture.html">2. Software Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer_manual/how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer_manual/verification/desktop/verification.html">4. Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer_manual/coding_style/desktop/coding_style.html">5. Coding Style</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Quantified Uncertainty with Optimization for the FEM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Release Notes</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../_sources/common/user_manual/releases/pbeReleaseNotes.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="release-notes">
+<span id="lbl-release-pbe"></span><h1>Release Notes<a class="headerlink" href="#release-notes" title="Permalink to this heading">¶</a></h1>
+<div class="section" id="version-3">
+<h2>Version 3<a class="headerlink" href="#version-3" title="Permalink to this heading">¶</a></h2>
+<blockquote>
+<div><details class="sphinx-bs dropdown card mb-3" open="open">
+<summary class="summary-title card-header">
+Version 3.2 (<span class="blue">Current</span>)<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<p class="card-text"><strong>Release date:</strong> Sept 2023</p>
+<p class="card-text"><strong>Major updates:</strong></p>
+<ul>
+<li><p class="card-text">Post-disaster Performance and Recovery Simulation</p>
+<blockquote>
+<div><ul class="simple">
+<li><p class="card-text">Extended the PBE simulation workflow with a Performance (PRF) step. Applications in this step use the Damage and Loss (DL) results in models that estimate the post-disaster performance and recovery of an asset</p></li>
+<li><p class="card-text">Integrated the <a class="reference external" href="https://sgavrilovicarup.github.io/REDi-docs/#">ARUP REDi Seismic Downtime Model</a> using the open-source <a class="reference external" href="https://github.com/arup-group/REDi">PyREDI package</a> as the first tool in the PBE App to support functional recovery calculations.</p></li>
+<li><p class="card-text">Example 3 is added to illustrate this new functionality.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="card-text">All features of EE-UQ up to v3.4, including:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p class="card-text">Multi Fidelity Monte Carlo (MFMC) method for modeling building response</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</details><details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+Version 3.1<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<p class="card-text"><strong>Release date:</strong> May 2023</p>
+<p class="card-text"><strong>Major updates:</strong></p>
+<ul>
+<li><p class="card-text">Damage and Loss Database (DBDL)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p class="card-text">A collection of parameters and metadata for damage and loss models for performance based engineering. The DBDL is available and updated regularly in the <a class="reference external" href="https://github.com/NHERI-SimCenter/DB_DamageAndLoss">DB_DamageAndLoss</a> GitHub Repository.</p></li>
+<li><dl class="simple">
+<dt>The initial release of the database includes the damage and repair consequence models from the following publications:</dt><dd><ul>
+<li><p class="card-text">FEMA P-58 Second Edition</p></li>
+<li><p class="card-text">Hazus Earthquake Model for Buildings</p></li>
+<li><p class="card-text">Hazus Earthquake Model for Transportation Assets</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="card-text">This and future releases of the PBE tool have the latest version of DBDL at the time of their release bundled with them.</p></li>
+<li><p class="card-text">Included in documentation</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="card-text">Environmental Impacts as per FEMA P-58 included in DBDL and available in the new release.</p></li>
+<li><p class="card-text">New Outputs tab allows users to select the outputs they need (across asset, demand, damage, and loss information) and if they prefer them in CSV or JSON format.</p></li>
+<li><p class="card-text">Support automatic combination of built-in and user-defined databases for damage and loss models.</p></li>
+<li><p class="card-text">Support running calculations for only a subset of available consequence types.</p></li>
+<li><p class="card-text">All features of EE-UQ up to v3.3, including:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p class="card-text">Multi-model uncertainty propagation options that allow multiple candidates for structural models and simulation settings.</p></li>
+<li><p class="card-text">Program Output Window provides detailed information about calculations and helps find errors.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</details><details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+Version 3.0<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<p class="card-text"><strong>Release date:</strong> September 2022</p>
+<p class="card-text"><strong>Major updates:</strong></p>
+<ul>
+<li><p class="card-text">Built on v4.0 of SimCenter’s backend application framework. Major updates in the backend:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p class="card-text">Redesigned and generalized UQ architecture</p></li>
+<li><p class="card-text">Generalized workflow managers support non-building assets</p></li>
+<li><p class="card-text">Surrogate modeling capabilities for characterizing events and earthquake response</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="card-text">Redesigned user interface for Performance Assessment with Pelicun 3:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p class="card-text">Takes advantage of the new databases developed for Pelicun 3 to allow users to use custom components, demands, damage processes, and consequence functions.</p></li>
+<li><p class="card-text">Decouples and generalizes demand, damage, and loss calculations.</p></li>
+<li><p class="card-text">Enables performance assessment under any type of natural hazard event</p></li>
+<li><p class="card-text">Supports modeling cascading damages</p></li>
+<li><p class="card-text">Supports custom mapping between damage states and consequence functions</p></li>
+<li><p class="card-text">Supports global consequences with uncertainty (e.g., uncertain replacement cost)</p></li>
+<li><p class="card-text">Substantial improvement in computational efficiency for large performance models</p></li>
+<li><p class="card-text">Two redesigned examples demonstrate capabilities</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="card-text">All features of EE-UQ up to v3.2.0, including:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p class="card-text">Advanced options for PEER NGA Event selection</p></li>
+<li><p class="card-text">Site-specific seismic disaggregation</p></li>
+<li><p class="card-text">Steel and concrete building model generators</p></li>
+<li><p class="card-text">MDOF-LU approximate shear column model generator</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</details><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Major releases break compatibility. Input files used for PBE 2.x will need to be converted to work with the PBE 3.x versions.</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="version-2">
+<h2>Version 2<a class="headerlink" href="#version-2" title="Permalink to this heading">¶</a></h2>
+<blockquote>
+<div><details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+Version 2.0.0<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<p class="card-text"><strong>Release date:</strong> October 2019</p>
+<p class="card-text">Major updates:</p>
+<ul>
+<li><p class="card-text">Update DL interface:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p class="card-text">General settings are organized around Damage, Response, and Loss Models</p></li>
+<li><p class="card-text">Components tab got a completely new look that facilitates the definition of component groups for each fragility group.</p></li>
+<li><p class="card-text">Dependencies moved to a new, fourth tab that will eventually house all advanced functionality</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="card-text">Support for loading and saving performance model (i.e., component definitions) using standard csv files.</p></li>
+<li><p class="card-text">Support for loading external EDP files using standard csv files. This enables the user to run a loss assessment without running the response estimation inside PBE.</p></li>
+<li><p class="card-text">Added damage and loss data from FEMA P58 second edition to the database.</p></li>
+<li><p class="card-text">Migrated to a new, more readable and flexible damage and loss model description in saved json files - not compatible with earlier versions.</p></li>
+<li><p class="card-text">All updates in EE-UQ up to v2.0, including:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p class="card-text">Record selection from PEER NGA ground motion database</p></li>
+<li><p class="card-text">Nonlinear soil models in site response</p></li>
+<li><p class="card-text">Additional stochastic ground motion model</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</details><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Major releases break compatibility. Input files used for PBE 1.x will need to be converted to work with the PBE 2.x versions.</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="version-1">
+<h2>Version 1<a class="headerlink" href="#version-1" title="Permalink to this heading">¶</a></h2>
+<blockquote>
+<div><details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+Version 1.2<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<p class="card-text"><strong>Release date:</strong> June 2019</p>
+<p class="card-text">Major updates:</p>
+<ul>
+<li><p class="card-text">Updates to user interface for Damage and Loss assessment</p></li>
+<li><p class="card-text">All updates in EE-UQ up to v1.2, including:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p class="card-text">2D motions for site response</p></li>
+<li><p class="card-text">Improvements in connections to DesignSafe</p></li>
+<li><p class="card-text">Preferences window provides convenient access to settings</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</details><details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+Version 1.1<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<p class="card-text"><strong>Release date:</strong> April 2019</p>
+<p class="card-text">Major updates:</p>
+<ul>
+<li><p class="card-text">Damage and loss estimation using the Hazus Earthquake Model</p></li>
+<li><p class="card-text">All updates in EE-UQ up to v1.1, including:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p class="card-text">Idealized Multiple Degrees of Freedom model for structural analysis</p></li>
+<li><p class="card-text">Stochastic Ground Motions</p></li>
+<li><p class="card-text">Site Response Analysis</p></li>
+<li><p class="card-text">User-defined EDPs in structural analyses</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</details><details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+Version 1.0<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<p class="card-text"><strong>Release date:</strong> October 2018</p>
+<p class="card-text">Initial release with FEMA P-58 damage and loss assessment functionality.</p>
+<p class="card-text">All features of EE-UQ v1.0 are available for structural response estimation.</p>
+</div>
+</details></div></blockquote>
+<p>Users are welcome to contact us on the <a class="reference external" href="http://simcenter-messageboard.designsafe-ci.org/smf/index.php?board=6.0">Message Board</a> for new feature requests.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2018-2023, The Regents of the University of California.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-158130480-4', 'auto');
+    
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+         .wy-nav-content { max-width: none; }
+  </style>
+
+<script>
+    /*
+    let selectedFilters = [];
+    const images  = document.getElementsByClassName("gallery-item");
+    const filters = [...document.querySelectorAll('.filter select')];
+    const toggles = [...document.querySelectorAll('.filter input')];
+
+    var show = function (elem) {
+        elem.style.display = 'block';
+    };
+    var hide = function (elem) {
+        elem.style.display = 'none';
+    };
+    var toggleFilter =  function(el,elid) {
+        const filter = document.getElementById(elid);
+        filter.disabled = !el.checked;
+       
+        if ("createEvent" in document) {
+            var evt = document.createEvent("HTMLEvents");
+            evt.initEvent("change", false, true);
+            filter.dispatchEvent(evt);
+        }
+        else
+            filter.fireEvent("change");
+    };
+    
+    for (const filter of filters) {
+        filter.addEventListener('change', function(event) {
+            selectedFilters = filters.map(filter => filter.disabled ? '' : filter.value).filter(Boolean);
+            console.log(selectedFilters);
+            for (const image of images) {
+                if (selectedFilters.every(filter => image.classList.contains(filter))) {
+                    show(image);
+                }
+                else {hide(image)};
+            };
+        })
+    };
+    */
+</script>
+
+
+</body>
+</html>

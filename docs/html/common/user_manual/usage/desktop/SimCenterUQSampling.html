@@ -1,0 +1,416 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>3.1.3.1. Forward Propagation &mdash; Quantified Uncertainty with Optimization for the FEM  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/css/lightbox.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../_static/sphinxcontrib-images/LightBox2/lightbox2/dist/js/lightbox-plus-jquery.min.js"></script>
+        <script src="../../../../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="3.1.3.2. Global Sensitivity Analysis" href="SimCenterUQSensitivity.html" />
+    <link rel="prev" title="3.1.2.6. Gradient-free Parameter Estimation" href="DakotaGradientFreeOptimization.html" />
+<script src="https://cdn.jsdelivr.net/npm/vega@5.12.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@4.13.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.8.0"></script>
+<style media="screen">.vega-actions a {margin-right: 5px;}</style>
+<link href="../../../../_static/css/bootstrap.css" rel="stylesheet">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #F2F2F2" >
+          
+<a href="https://simcenter.designsafe-ci.org/" style="margin-bottom: 0px;">
+  <img src="../../../../_static/img/SimCenter-Only.png" class="logo" alt="Org-Logo" />
+</a>
+<hr style="margin: 0px;">
+
+  <a href="../../../../index.html">
+
+
+
+  
+  <img src="../../../../_static/quoFEM-Logo.png" class="logo" alt="Logo"/>
+
+</a>
+
+
+  
+  
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about/quoFEM/about.html">1. About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/desktop/ack.html">2. Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/license.html">3. Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/cite.html">4. How To Cite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases/quoCapabilities.html">5. Capabilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases/quoReleaseNotes.html">6. Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases/quoPlans.html">7. Release Plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/glossary.html">8. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../front-matter/abbreviations.html">9. Abbreviations</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Manual</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation/desktop/installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/quoFEM/quoFEMtutorial.html">2. Getting Started Tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="usage.html">3. User Interface</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="UQ.html">3.1. UQ: Uncertainty Quantification</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="UQ.html#uq-features-at-a-glance">3.1.1. UQ Features At-a-Glance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UQ.html#dakota-uq-engine">3.1.2. Dakota UQ Engine</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="UQ.html#simcenter-uq-engine">3.1.3. SimCenter UQ Engine</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">3.1.3.1. Forward Propagation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SimCenterUQSensitivity.html">3.1.3.2. Global Sensitivity Analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SimCenterUQSurrogate.html">3.1.3.3. Gaussian Process (GP) Surrogate Modeling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SimCenterUQPLoM.html">3.1.3.4. Probabilistic Learning on Manifolds (PLoM)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="UQ.html#ucsd-uq-engine">3.1.4. UCSD UQ Engine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UQ.html#custom-uq-engine">3.1.5. Custom UQ Engine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UQ.html#video-resources">3.1.6. Video Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="quoFEM/FEM.html">3.2. FEM: Finite Element Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RV.html">3.3. RV: Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quoFEM/QuantitiesOfInterest.html">3.4. QoI: Quantities of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quoFEM/resQUO.html">3.5. RES: Results</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/desktop/examples.html">4. Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/desktop/troubleshooting.html">5. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reqments/reqQUOFE.html">6. Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bugs.html">7. Bugs &amp; Feature Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dcv/quoFEM/quoFEM.html">8. Running in Your Browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quoFEM/usage_video.html">9. Video Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_inputs_documentation/User_Input_Documentation_Tables.html">10. User Inputs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Technical Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../technical_manual/desktop/technical_manual.html">1. Technical Manual</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/how_to_build/desktop/how_to_build.html">1. How to Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/architecture/desktop/architecture.html">2. Software Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/how_to_extend/desktop/how_to_extend.html">3. How to Extend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/verification/desktop/verification.html">4. Verification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_manual/coding_style/desktop/coding_style.html">5. Coding Style</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Quantified Uncertainty with Optimization for the FEM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="usage.html"><span class="section-number">3. </span>User Interface</a> &raquo;</li>
+        
+          <li><a href="UQ.html"><span class="section-number">3.1. </span>UQ: Uncertainty Quantification</a> &raquo;</li>
+        
+      <li><span class="section-number">3.1.3.1. </span>Forward Propagation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../../_sources/common/user_manual/usage/desktop/SimCenterUQSampling.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="forward-propagation">
+<span id="lblsimforward"></span><h1><span class="section-number">3.1.3.1. </span>Forward Propagation<a class="headerlink" href="#forward-propagation" title="Permalink to this heading">¶</a></h1>
+<p>The forward propagation provides a probabilistic understanding of output variables by producing sample realizations and statistical moments (mean, standard deviation, skewness, and kurtosis). Currently, only the Monte Carlo Sampling (MCS) method is available in the SimCenterUQ engine and the other sampling methods (Latin hypercube sampling, Surrogate model-based efficient sampling) are available in the Dakota engine.</p>
+<div class="section" id="sampling-from-dataset">
+<h2>Sampling from dataset<a class="headerlink" href="#sampling-from-dataset" title="Permalink to this heading">¶</a></h2>
+<p>SimCenterUQ uniquely provides an option to define the distribution of random variables (RVs) directly from the samples of the RVs (See <a class="reference internal" href="RV.html#rv"><span class="std std-ref">RV: Random Variables</span></a>). This feature is useful when the user does not know the actual distribution of an RV but has sample realizations. When a dataset is provided, quoFEM either treats the data as a discrete distribution (when <code class="docutils literal notranslate"><span class="pre">Discrete</span></code> distribution option is selected) or fits a parametric distribution to the data (when another distribution option is selected). For the former case, quoFEM uniformly samples the discrete index of the dataset provided by the user and uses the value corresponding to the index for the forward propagation analysis. The index is sampled either <strong>with</strong> replacement if the data size is smaller than the number of samples to draw or <strong>without</strong> replacement if the data size is larger than the number of samples to draw. Further, when the user provides coupled samples of <em>correlated</em> RVs, vector-wise resampling can be performed instead of independent resampling. In particular, a single index is sampled and shared in multiple variables for each realization.</p>
+<div class="align-center figure" id="figsimsamp3">
+<a class="reference internal image-reference" href="../../../../_images/SimUQ_sampling3.png"><img alt="../../../../_images/SimUQ_sampling3.png" src="../../../../_images/SimUQ_sampling3.png" style="width: 1200px;" /></a>
+</div>
+<p>Click the check box to import correlated datasets</p>
+<p>To enable this feature, the user can explicitly define the group of RVs that will share the index samples in the UQ tab using the <code class="docutils literal notranslate"><span class="pre">Resample</span> <span class="pre">RVs</span> <span class="pre">from</span> <span class="pre">correlated</span> <span class="pre">dataset</span></code>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The actual datasets of the RVs written in this field should be imported in the RV tab, through <code class="docutils literal notranslate"><span class="pre">parameters</span></code>-<code class="docutils literal notranslate"><span class="pre">discrete</span></code> option.</p></li>
+<li><p>The RVs inside each group should be provided with the same length of the samples (e.g. in <code class="xref std std-numref docutils literal notranslate"><span class="pre">figSimSamp3</span></code>, <span class="math notranslate nohighlight">\(w\)</span> and <span class="math notranslate nohighlight">\(wR\)</span> should have the same sample size <span class="math notranslate nohighlight">\(N_1\)</span> and <span class="math notranslate nohighlight">\(alp\)</span> and <span class="math notranslate nohighlight">\(F_y\)</span> should have the same sample size <span class="math notranslate nohighlight">\(N_2\)</span>)</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Any correlation values for this coupled datasets <strong>additionally specified in the RV tab</strong> will be <strong>ignored</strong>. Note that the correlation of the data is already reflected in the analysis by introducing the same resampling index.</p>
+</div>
+<p>For example, consider the case where two variables <span class="math notranslate nohighlight">\(w\)</span> and <span class="math notranslate nohighlight">\(wR\)</span> are provided as 10 discrete data points in the RV tab as in <a class="reference internal" href="#figsimsamp4"><span class="std std-numref">Fig. 3.1.3.1.1</span></a>.</p>
+<div class="align-center figure" id="id3">
+<span id="figsimsamp4"></span><a class="reference internal image-reference" href="../../../../_images/SimUQ_sampling4.png"><img alt="../../../../_images/SimUQ_sampling4.png" src="../../../../_images/SimUQ_sampling4.png" style="width: 1200px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.1.3.1.1 </span><span class="caption-text">Example RV tab. The RVs <span class="math notranslate nohighlight">\(w\)</span> and <span class="math notranslate nohighlight">\(wR\)</span> have the same sample size when they are specified to be coupled as shown in <code class="xref std std-numref docutils literal notranslate"><span class="pre">figSimSamp3</span></code>.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<p>Below is an example of 100 realizations of the two variables when they are considered to be <em>independent</em>, i.e. without checking the “Resample RVs from correlated dataset” option.</p>
+<div class="align-center figure" id="id4">
+<span id="figsimsamp1"></span><a class="reference internal image-reference" href="../../../../_images/SimUQ_sampling2.png"><img alt="../../../../_images/SimUQ_sampling2.png" src="../../../../_images/SimUQ_sampling2.png" style="width: 1200px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.1.3.1.2 </span><span class="caption-text">Example of correlated samples (when the “Resample …” option in the UQ tab is enabled).</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<p>On the other hand, if the two datasets are considered correlated, i.e. if “Resample RVs from correlated dataset” are checked and the group {w,wR} is reported in the field as shown in <code class="xref std std-numref docutils literal notranslate"><span class="pre">figSimSamp3</span></code>, 100 realization pairs of the RVs will be stacked on top of the provided 10 data points.</p>
+<div class="align-center figure" id="id5">
+<span id="figsimsamp2"></span><a class="reference internal image-reference" href="../../../../_images/SimUQ_sampling1.png"><img alt="../../../../_images/SimUQ_sampling1.png" src="../../../../_images/SimUQ_sampling1.png" style="width: 1200px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.1.3.1.3 </span><span class="caption-text">Example of uncorrelated samples (when the “Resample …” option in the UQ tab is enabled).</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<p>This feature is especially useful when the user wants to perform a forward UQ analysis directly using the posterior samples obtained from Markov Chain Monte Carlo or other Bayesian sampling approaches.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Summary of capabilities and limitations</p>
+<ul class="simple">
+<li><p><span class="sphinx-bs badge badge-primary">o</span> Run Monte Carlo simulation for 12 different kinds of probability distributions with correlations.</p></li>
+<li><p><span class="sphinx-bs badge badge-primary">o</span> Use data samples as discrete distribution (especially useful when propagating samples from Bayesian updating)</p></li>
+<li><p><span class="sphinx-bs badge badge-danger">x</span> Run advanced sampling algorithms including Latin hypercube and surrogate-aided sampling. <strong>[Available in Dakota engine]</strong></p></li>
+</ul>
+</div>
+<div class="section" id="multi-fidelity-monte-carlo">
+<span id="lblsimforwardmf"></span><h3>Multi-fidelity Monte Carlo<a class="headerlink" href="#multi-fidelity-monte-carlo" title="Permalink to this heading">¶</a></h3>
+<p>SimCenter UQ supports a multi-fidelity Monte Carlo option, where the user can import both high-fidelity and low-fidelity simulation models to estimate the statistics of high-fidelity models. See more information in the technical manual.</p>
+<div class="align-center figure" id="id6">
+<a class="reference internal image-reference" href="../../../../_images/Sampling_MF1.png"><img alt="../../../../_images/Sampling_MF1.png" src="../../../../_images/Sampling_MF1.png" style="width: 900px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.1.3.1.4 </span><span class="caption-text">Multi-fidelity Monte Carlo</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<p>The users should define <strong>Max Computation time</strong> and <strong>Seed</strong></p>
+<ul class="simple">
+<li><p><strong>Max Computation Time (minutes)</strong>: The target computation time for the analysis. Note that this is a “soft” target, meaning the analysis may not necessarily complemented within the specified time limit. The total number of simulations is decided after a few pilot runs of simulations considering the remaining budgets (time), and the process is not enforced to finish even if the target time is exceeded. Therefore, there could be a few minutes of estimation error in the max computation time. Note that, even if the specific time is exceeded, the analysis will not end until the minimum number of specified simulations (default is 40) is reached.</p></li>
+<li><p><strong>Seed</strong>: a positive integer that is used to reproduce the exact sequence of the pseudo-random number generator. The seed is to ensure the reproducibility of the results.</p></li>
+</ul>
+<p>Additionally, advanced options can be selected by checking the option at the bottom</p>
+<div class="align-center figure" id="id7">
+<a class="reference internal image-reference" href="../../../../_images/Sampling_MF2_quoFEM.png"><img alt="../../../../_images/Sampling_MF2_quoFEM.png" src="../../../../_images/Sampling_MF2_quoFEM.png" style="width: 900px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.1.3.1.5 </span><span class="caption-text">Advanced options</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+<p>Using the advanced options, the user can define the minimum number of simulations per model and an option to Perform log-transform</p>
+<ul class="simple">
+<li><p><strong>Minimum # simulations per model</strong>: The number of pilot samples. The pilot samples are used to estimate the correlations between the high- and low-fidelity models and decide the optimal number of simulations given the time limit. See here for more details. By default, the minimum number of simulations 40.</p></li>
+<li><p><strong>Perform log-transform</strong>: Estimate the mean and variance of the log-transformed value (natural logarithm or <span class="math notranslate nohighlight">\(ln()\)</span> instead of <span class="math notranslate nohighlight">\(log_{10}()\)</span>). In quoFEM, the default is unchecked.</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2018-2023, The Regents of the University of California.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-158130480-4', 'auto');
+    
+    ga('send', 'pageview');
+    </script>
+
+    
+    
+
+  <style>
+         .wy-nav-content { max-width: none; }
+  </style>
+
+<script>
+    /*
+    let selectedFilters = [];
+    const images  = document.getElementsByClassName("gallery-item");
+    const filters = [...document.querySelectorAll('.filter select')];
+    const toggles = [...document.querySelectorAll('.filter input')];
+
+    var show = function (elem) {
+        elem.style.display = 'block';
+    };
+    var hide = function (elem) {
+        elem.style.display = 'none';
+    };
+    var toggleFilter =  function(el,elid) {
+        const filter = document.getElementById(elid);
+        filter.disabled = !el.checked;
+       
+        if ("createEvent" in document) {
+            var evt = document.createEvent("HTMLEvents");
+            evt.initEvent("change", false, true);
+            filter.dispatchEvent(evt);
+        }
+        else
+            filter.fireEvent("change");
+    };
+    
+    for (const filter of filters) {
+        filter.addEventListener('change', function(event) {
+            selectedFilters = filters.map(filter => filter.disabled ? '' : filter.value).filter(Boolean);
+            console.log(selectedFilters);
+            for (const image of images) {
+                if (selectedFilters.every(filter => image.classList.contains(filter))) {
+                    show(image);
+                }
+                else {hide(image)};
+            };
+        })
+    };
+    */
+</script>
+
+
+</body>
+</html>
